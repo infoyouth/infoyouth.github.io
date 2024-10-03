@@ -10,10 +10,9 @@ description: "Youth Innovations: A non-profit organization focused on helping yo
 <link rel="stylesheet" href="../assets/css/style.css"> <!-- Ensure this path is correct -->
 
 # 🌟 Welcome to Youth Innovations! 🌟
-![Youth Innovations Logo](/assets/images/your-logo.png){: .logo-img }
+![Youth Innovations Logo](/assets/images/youth-logo.png)
 
 > **Our Mission**: Empowering young engineers to achieve their potential through mentorship, innovative activities, and career guidance. As a **non-profit organization**, we are dedicated to nurturing talent and creating a community where young innovators thrive. 💡
-{: .mission-highlight }
 
 ## 🤝 Our Core Values
 At **Youth Innovations**, we believe in providing more than just knowledge—we offer a platform for growth, collaboration, and real-world impact:
