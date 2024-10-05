@@ -5,9 +5,7 @@ icon: fas fa-lightbulb
 order: 1
 description: "Youth Innovations"
 ---
-<!-- markdownlint-disable-next-line -->
-<div align="center">
-
+---
 # <span style="color: #003cb3; font-family: 'Arial Black', Gadget, sans-serif;">🎉 Youth Innovations! 🎉</span>
 
 ### <span style="color: #007ACC; font-family: 'Comic Sans MS', cursive, sans-serif;">**Empowering Aspiring Engineers to Shape Tomorrow's World!** 💡🚀</span>
@@ -18,20 +16,17 @@ Our mission is to provide **skills, resources**, and a **strong network** to hel
 
 Through our initiatives, we aim to **bridge the gap between education and innovation**, creating a supportive environment where aspiring engineers can develop the **confidence** and **expertise** to transform their ideas into reality.
 
-<img src="../assets/images/youth-logo.png" alt="Youth Innovations Banner" style="width: 10%; border: 2px solid #000; border-radius: 10px;"/>
-
-</div>
 ---
 
 
-### ✨ <span style="color: #000080;">About the Project ✨</span> 
+### ✨ <span style="color: #00e6e6;">About the Project ✨</span> 
 
 Youth Innovations Hub serves as your **launchpad for a thriving tech career**!  
 <span style="color: #DAA520;">Driven by a focus on <strong>community-based learning</strong> and <strong>hands-on experiences</strong>, we offer a unique blend of educational content to fuel your curiosity and ambition.</span> From in-depth tutorials and insightful articles to **showcasing your projects** and career advice, we are here to **support you every step of the way**! 💻📚
 
 ---
 
-### ✨ <span style="color: #000080;">Why Choose Youth Innovations Hub? ✨</span>
+### ✨ <span style="color: #00e6e6;">Why Choose Youth Innovations Hub? ✨</span>
 
 1. <span style="color: #32CD32;">**Completely Free Resources** 📚</span>: Gain access to step-by-step guides, video tutorials, and code snippets—all at no cost!  
 2. <span style="color: #DC143C;">**Practical Projects** 🔨</span>: Embrace the joy of learning by building **real-world projects** that help you master new skills.  
@@ -41,7 +36,7 @@ Youth Innovations Hub serves as your **launchpad for a thriving tech career**!
 
 ---
 
-### ✨ <span style="color: #000080;">Our Commitment ✨</span>  
+### ✨ <span style="color: #00e6e6;">Our Commitment ✨</span>  
 
 We are dedicated to:  
 - Providing **high-quality content** and resources without any cost  
@@ -51,11 +46,11 @@ We are dedicated to:
 
 ---
 
-### ✨ <span style="color: #000080;">Get Involved & Make an Impact ✨</span> 
+### ✨ <span style="color: #00e6e6;">Get Involved & Make an Impact ✨</span> 
 
 Join us on this incredible journey!  
 Whether you're a complete beginner or a seasoned expert, **your contribution matters** in shaping the future of tech. We welcome you to fork, modify, and enhance our project—just remember to honor the original repository and licensing terms.
 
-### ✨ <span style="color: #000080;">Let's Build a Brighter Tech Future Together! ✨</span>
+### ✨ <span style="color: #00e6e6;">Let's Build a Brighter Tech Future Together! ✨</span>
 
 Ready to contribute? Check out our [**GitHub Repository**](https://github.com/infoyouth/infoyouth.github.io/) to get started! 🧑‍💻👩‍💻
