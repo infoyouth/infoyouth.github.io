@@ -1,5 +1,4 @@
 ---
-# Page Configuration for Youth Innovations
 layout: page
 title: "About Us"
 icon: fas fa-lightbulb
@@ -19,12 +18,11 @@ Our mission is to provide **skills, resources**, and a **strong network** to hel
 
 Through our initiatives, we aim to **bridge the gap between education and innovation**, creating a supportive environment where aspiring engineers can develop the **confidence** and **expertise** to transform their ideas into reality.
 
-
-<img src="../assets/images/youth-logo.png" alt="Youth Innovations Banner" style="width🕙%; border: 2px solid #000; border-radius: 10px;"/>
+<img src="../assets/images/youth-logo.png" alt="Youth Innovations Banner" style="width: 10%; border: 2px solid #000; border-radius: 10px;"/>
 
 </div>
-
 ---
+
 
 ### ✨ <span style="color: #000080;">About the Project ✨</span> 
 
