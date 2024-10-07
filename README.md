@@ -1,43 +1,59 @@
-# Chirpy Starter
+<!-- markdownlint-disable-next-line -->
+<div align="justify" style="background-color: #E0F7FA; color: #00796B; padding: 20px; border-radius: 8px;">
 
-[![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy)][gem]&nbsp;
-[![GitHub license](https://img.shields.io/github/license/cotes2020/chirpy-starter.svg?color=blue)][mit]
+  <!-- markdownlint-disable-next-line -->
+  # 🌟 Welcome to **Youth Innovations Tech-Hub** 🚀
 
-When installing the [**Chirpy**][chirpy] theme through [RubyGems.org][gem], Jekyll can only read files in the folders
-`_data`, `_layouts`, `_includes`, `_sass` and `assets`, as well as a small part of options of the `_config.yml` file
-from the theme's gem. If you have ever installed this theme gem, you can use the command
-`bundle info --path jekyll-theme-chirpy` to locate these files.
+  ✨ Discover content that helps you **unlock your potential** and succeed in the **ever-evolving world of technology**! 🌍💡
 
-The Jekyll team claims that this is to leave the ball in the user’s court, but this also results in users not being
-able to enjoy the out-of-the-box experience when using feature-rich themes.
+  This project is built upon the awesome [**Chirpy Starter Theme**](https://github.com/cotes2020/chirpy-starter),  
+  providing a robust foundation for a professional and visually appealing site. 🎨
 
-To fully use all the features of **Chirpy**, you need to copy the other critical files from the theme's gem to your
-Jekyll site. The following is a list of targets:
+  [![GitHub license](https://img.shields.io/github/license/cotes2020/jekyll-theme-chirpy?color=blue)][license]&nbsp;
+  [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy?&logo=RubyGems&logoColor=ghostwhite&label=gem&color=teal)][gem]&nbsp;
+  [![Contributors](https://img.shields.io/github/contributors/infoyouth/infoyouth.github.io?color=green&logo=github)](https://github.com/infoyouth/infoyouth.github.io/graphs/contributors)
 
-```shell
-.
-├── _config.yml
-├── _plugins
-├── _tabs
-└── index.html
-```
+</div>
 
-To save you time, and also in case you lose some files while copying, we extract those files/configurations of the
-latest version of the **Chirpy** theme and the [CD][CD] workflow to here, so that you can start writing in minutes.
+  ### 🤝 **Get Involved!**
 
-## Usage
+  We invite you to be a part of our community! Your insights, suggestions, and contributions can help us grow.  
+  If you encounter any bugs or have ideas for improvements, please **create an issue**! Every suggestion counts! 💡  
+  Let’s work together to make this project even better!
 
-Check out the [theme's docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki).
+  [![Create an Issue](https://img.shields.io/badge/Create%20an%20Issue-Click%20Here-brightgreen?style=flat&logo=github&logoColor=white)](https://github.com/infoyouth/infoyouth.github.io/issues)
 
-## Contributing
+  ### 🛠️ **Getting Started: Commands to Contribute**
 
-This repository is automatically updated with new releases from the theme repository. If you encounter any issues or want to contribute to its improvement, please visit the [theme repository][chirpy] to provide feedback.
+  To start contributing to this project, follow these simple steps:
 
+  ```bash
+  # Clone the repository
+  git clone https://github.com/infoyouth/infoyouth.github.io.git
+
+  # Navigate into the project directory
+  cd infoyouth.github.io
+
+  # Install the required gems/dependencies
+  bundle install
+
+  # Start the Jekyll server for a local preview
+  bundle exec jekyll serve
+
+  # Visit your local site at http://localhost:4000 
+  ```
 ## License
 
-This work is published under [MIT][mit] License.
+This project is published under [MIT License][license].  
+
+Feel free to fork, modify, and enhance this project, but please maintain proper attribution to the original theme repository and license terms.
+
+## Contributors
+
+A big thank you to all the contributors involved in the development of this project!  
+
+[![Contributors](https://contrib.rocks/image?repo=infoyouth/infoyouth.github.io&columns=16)](https://github.com/infoyouth/infoyouth.github.io/graphs/contributors)
+<sub> — Made with [contrib.rocks](https://contrib.rocks)</sub>
 
 [gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[chirpy]: https://github.com/cotes2020/jekyll-theme-chirpy/
-[CD]: https://en.wikipedia.org/wiki/Continuous_deployment
-[mit]: https://github.com/cotes2020/chirpy-starter/blob/master/LICENSE
+[license]: https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE

@@ -6,7 +6,7 @@ order: 1
 description: "Youth Innovations"
 ---
 ---
-# <span style="color: #003cb3; font-family: 'Arial Black', Gadget, sans-serif;">🎉 Youth Innovations! 🎉</span>
+# <span style="color: #003cb3; font-family: 'Arial Black', Gadget, sans-serif;">Youth Innovations!</span>
 
 ### <span style="color: #007ACC; font-family: 'Comic Sans MS', cursive, sans-serif;">**Empowering Aspiring Engineers to Shape Tomorrow's World!** 💡🚀</span>
 
