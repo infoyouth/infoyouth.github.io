@@ -51,18 +51,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-      - name: Notify Discord on Success
-        if: success()
-        uses: wagoid/discord-github-action@v1.0.0
-        with:
-          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          message: |
-            **Deployment successful for** `${{ github.repository }}`
-            **Commit:** `${{ github.sha }}`
-            **Branch:** `${{ github.ref }}`
-
-      - name: Notify Discord on Failure
-        uses: johnnyhuy/actions-discord-git-webhook@v1.0.1
-        with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        
