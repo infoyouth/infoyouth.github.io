@@ -40,11 +40,7 @@ jobs:
 
       - name: Notify Discord on Failure
         if: failure()
-        uses: wagoid/discord-github-action@v1.0.0
+        uses: johnnyhuy/actions-discord-git-webhook@main
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          message: |
-            **Build and Test failed for** `${{ github.repository }}`
-            **Pull Request:** [#${{ github.event.pull_request.number }}](${{ github.event.pull_request.html_url }})
-            **Commit:** `${{ github.sha }}`
-            **Branch:** `${{ github.ref }}`
+          
