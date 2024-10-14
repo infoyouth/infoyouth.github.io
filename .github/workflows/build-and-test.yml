@@ -1,0 +1,49 @@
+name: "Build and Test"
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3
+          bundler-cache: true
+
+      - name: Install Dependencies
+        run: bundle install
+
+      - name: Build Site with Jekyll
+        run: bundle exec jekyll build -d "_site"
+
+      - name: Run HTMLProofer
+        run: |
+          bundle exec htmlproofer _site \
+            --disable-external \
+            --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
+
+      - name: Lint Ruby Code
+        run: |
+          chmod +x _plugins/posts-lastmod-hook.rb
+          bundle exec rubocop
+
+      - name: Notify Discord on Failure
+        uses: johnnyhuy/actions-discord-git-webhook@v1.0.1
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+
+          
