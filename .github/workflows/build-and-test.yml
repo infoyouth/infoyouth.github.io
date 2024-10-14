@@ -1,4 +1,4 @@
-name: "Build and Test"
+name: "🚧 Build and Test Workflow"
 
 on:
   pull_request:
@@ -14,36 +14,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: 📥 Checkout Repository
         uses: actions/checkout@v4
+        # ✅ Ensures the latest code is checked out
 
-      - name: Setup Ruby
+      - name: 💎 Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3
           bundler-cache: true
+        # ✅ Set up the Ruby environment with bundler caching enabled
 
-      - name: Install Dependencies
+      - name: 📦 Install Dependencies
         run: bundle install
+        # ✅ Install required gems for the project
 
-      - name: Build Site with Jekyll
+      - name: 🛠️ Build Site with Jekyll
         run: bundle exec jekyll build -d "_site"
+        # ✅ Build the static site using Jekyll
 
-      - name: Run HTMLProofer
+      - name: 🔍 Run HTMLProofer
         run: |
           bundle exec htmlproofer _site \
             --disable-external \
             --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
+        # ✅ Check for broken internal links in the built site
 
-      - name: Lint Ruby Code
+      - name: 🧹 Lint Ruby Code
         run: |
           chmod +x _plugins/posts-lastmod-hook.rb
           bundle exec rubocop
+        # ✅ Ensure Ruby code quality using RuboCop
 
-      - name: Notify Discord on Failure
+      - name: 🚨 Notify Discord on Failure
         uses: johnnyhuy/actions-discord-git-webhook@v1.0.1
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-
-
-          
+        # ⚠️ Send a notification to Discord if the workflow fails
