@@ -55,16 +55,15 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
-          name: github-pages-artifact  # Unique artifact name
 
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Download Site Artifact
-        uses: actions/download-pages-artifact@v3
-        with:
-          name: github-pages-artifact  # Must match the upload step
-
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
+        
