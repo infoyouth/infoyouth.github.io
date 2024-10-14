@@ -37,16 +37,13 @@ jobs:
 
       - name: Lint Ruby Code
         run: |
-          chmod +x _plugins/posts-lastmod-hook.rb \
+          chmod +x _plugins/posts-lastmod-hook.rb
           bundle exec rubocop
 
       - name: Notify Discord on Failure
-        if: failure()
         uses: johnnyhuy/actions-discord-git-webhook@v1.0.1
         with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          censor-username: false
-          hide-links: false
-          color: 0x7dbbe6  # It's advisable to use hexadecimal format for colors
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }
           
+
           
