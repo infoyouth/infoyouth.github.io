@@ -47,8 +47,10 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
+          name: github-pages-artifact  # Specify a unique artifact name
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        
+        with:
+          artifact_name: github-pages-artifact  # Reference the unique artifact name
