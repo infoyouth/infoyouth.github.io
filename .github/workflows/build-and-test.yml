@@ -42,5 +42,5 @@ jobs:
         if: failure()
         uses: johnnyhuy/actions-discord-git-webhook@main
         with:
-          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
           
