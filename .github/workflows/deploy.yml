@@ -1,5 +1,3 @@
-name: "🚀 Build and Deploy to GitHub Pages"
-
 on:
   push:
     branches:
@@ -19,60 +17,54 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: 📥 Checkout Repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-        # ✅ Fetch the repository
 
-      - name: 📄 Setup Pages
+      - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
-        # ✅ Setup GitHub Pages environment
 
-      - name: 💎 Setup Ruby
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3
           bundler-cache: true
-        # ✅ Setup Ruby environment with bundler caching
 
-      - name: 📦 Install Dependencies
+      - name: Install Dependencies
         run: bundle install
-        # ✅ Install Ruby dependencies
 
-      - name: 🛠️ Build Site with Jekyll
+      - name: Build Site
         run: bundle exec jekyll build -d "_site${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: "production"
-        # ✅ Build the static site with Jekyll in production mode
 
-      - name: 🔍 Test Site with HTMLProofer
+      - name: Test Site
         run: |
           bundle exec htmlproofer _site${{ steps.pages.outputs.base_path }} \
             --disable-external \
             --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
-        # ✅ Validate the built site for broken links or issues
-      - name: 📤 Upload Site Artifact
+          
+      - name: Upload Site Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
-          name: github-pages-artifact
-        # ✅ Upload the built site as an artifact
+          name: github-pages-artifact  # Unique artifact name
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: 📥 Download Site Artifact
+      - name: Download Site Artifact
         uses: actions/download-pages-artifact@v3
         with:
           name: github-pages-artifact  # Must match the upload step
-        # ✅ Download the uploaded site artifact
 
-      - name: 🌐 Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
-        # ✅ Deploy the site to GitHub Pages
