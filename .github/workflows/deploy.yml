@@ -63,11 +63,6 @@ jobs:
             **Branch:** `${{ github.ref }}`
 
       - name: Notify Discord on Failure
-        if: failure()
-        uses: wagoid/discord-github-action@v1.0.0
+        uses: johnnyhuy/actions-discord-git-webhook@v1.0.1
         with:
-          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          message: |
-            **Deployment failed for** `${{ github.repository }}`
-            **Commit:** `${{ github.sha }}`
-            **Branch:** `${{ github.ref }}`
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
