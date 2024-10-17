@@ -1,0 +1,47 @@
+name: 🤖 Sync with Chirpy Starter 💫
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'  # ⏰ Runs weekly at midnight on Monday
+  workflow_dispatch:  # 🚀 Allows manual run of the workflow
+
+jobs:
+  update:
+    runs-on: ubuntu-latest  # 🖥️ Uses the latest Ubuntu runner
+
+    steps:
+      # Step 1: Checkout your repository
+      - name: 🛠️ Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # 📜 Ensure all history is fetched
+
+      # Step 2: Configure git to pull from upstream chirpy-starter
+      - name: 🔗 Set up Upstream Repository
+        run: |
+          git remote add upstream https://github.com/cotes2020/chirpy-starter.git
+          git fetch upstream  # 🚚 Fetch updates from upstream
+
+      # Step 3: Create a new branch for the update
+      - name: 🌿 Create Update Branch
+        run: |
+          git checkout -b update-chirpy-starter  # 🌱 Create a new branch for updates
+          git merge upstream/master --no-edit  # 🔀 Merge upstream changes
+
+      # Step 4: Push the update branch to your repository
+      - name: 📤 Push Update Branch
+        run: |
+          git push origin update-chirpy-starter  # 🌐 Push the new branch to origin
+
+      # Step 5: Create a Pull Request with a Code Review Request
+      - name: 📋 Create Pull Request and Request Code Review 👀
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main  # 🔧 Target branch (main or master)
+          head: update-chirpy-starter  # 🌿 PR source branch
+          title: '🚀 Update from upstream chirpy-starter'
+          body: '✨ This is an automated update from the chirpy-starter repository. Please review the changes and merge when ready.'
+          reviewers: infoyouth  # 🔎 Request code review from @infoyouth
+          draft: false  # 🔒 Create a non-draft pull request (ready to review)
+
