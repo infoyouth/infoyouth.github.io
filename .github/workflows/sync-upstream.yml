@@ -1,47 +1,41 @@
-name: 🤖 Sync with Chirpy Starter 💫
+name: Sync Upstream Updates
 
 on:
   schedule:
-    - cron: '0 0 * * 1'  # ⏰ Runs weekly at midnight on Monday
-  workflow_dispatch:  # 🚀 Allows manual run of the workflow
+    - cron: '0 0 * * 1'  # Every Monday at midnight
+  workflow_dispatch:  # Allow manual triggering
 
 jobs:
-  update:
-    runs-on: ubuntu-latest  # 🖥️ Uses the latest Ubuntu runner
+  sync:
+    runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout your repository
-      - name: 🛠️ Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # 📜 Ensure all history is fetched
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      # Step 2: Configure git to pull from upstream chirpy-starter
-      - name: 🔗 Set up Upstream Repository
+      - name: Set up Git
         run: |
-          git remote add upstream https://github.com/cotes2020/chirpy-starter.git
-          git fetch upstream  # 🚚 Fetch updates from upstream
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
 
-      # Step 3: Create a new branch for the update
-      - name: 🌿 Create Update Branch
-        run: |
-          git checkout -b update-chirpy-starter  # 🌱 Create a new branch for updates
-          git merge upstream/master --no-edit  # 🔀 Merge upstream changes
+      - name: Add upstream remote
+        run: git remote add upstream https://github.com/cotes2020/chirpy-starter.git
 
-      # Step 4: Push the update branch to your repository
-      - name: 📤 Push Update Branch
-        run: |
-          git push origin update-chirpy-starter  # 🌐 Push the new branch to origin
+      - name: Create new branch
+        run: git checkout -b update-chirpy-starter
 
-      # Step 5: Create a Pull Request with a Code Review Request
-      - name: 📋 Create Pull Request and Request Code Review 👀
+      - name: Fetch upstream changes
+        run: git fetch upstream
+
+      - name: Merge upstream changes
+        run: git merge upstream/main --no-edit  # Merge from 'main'
+
+      - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          base: main  # 🔧 Target branch (main or master)
-          head: update-chirpy-starter  # 🌿 PR source branch
+          base: main
+          head: update-chirpy-starter
           title: '🚀 Update from upstream chirpy-starter'
-          body: '✨ This is an automated update from the chirpy-starter repository. Please review the changes and merge when ready.'
-          reviewers: infoyouth  # 🔎 Request code review from @infoyouth
-          draft: false  # 🔒 Create a non-draft pull request (ready to review)
-
+          body: '✨ Automated update from chirpy-starter. Please review and merge.'
+          reviewers: infoyouth
