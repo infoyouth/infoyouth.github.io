@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-
+gem 'jekyll_bootstrap5_tabs', '~> 1.1', '>= 1.1.2'
+gem 'jekyll-github-metadata', '~> 2.16', '>= 2.16.1'
+gem 'jekyll-paginate', '~> 1.1'
 gem 'jekyll-theme-chirpy', '~> 7.1', '>= 7.1.1'
-
+gem 'jekyll-ultraviolet', '~> 0.0.3'
 group :test do
   gem 'html-proofer', '~> 5.0'
 end
