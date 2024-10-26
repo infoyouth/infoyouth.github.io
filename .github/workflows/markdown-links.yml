@@ -1,12 +1,22 @@
-name: Spellcheck Action
-on: push
+# .github/workflows/spellcheck.yml
+name: Spell Check
+
+on:
+  push:
+    paths:
+      - _posts/**/*.md
+  pull_request:
+    paths:
+      - _posts/**/*.md
 
 jobs:
-  build:
-    name: Spellcheck
+  spell-check:
     runs-on: ubuntu-latest
     steps:
-    # The checkout step
-    - uses: actions/checkout@v3
-    - uses: rojopolis/spellcheck-github-actions@0.44.0
-      name: Spellcheck
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Spell Check
+        uses: rojopolis/spellcheck-github-actions@0.44.0
+        with:
+          config_path: './spellcheck.yml'  # Ensure exact path is specified
