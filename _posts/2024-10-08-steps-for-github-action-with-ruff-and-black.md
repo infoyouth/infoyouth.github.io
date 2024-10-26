@@ -14,6 +14,7 @@ mermaid: true
 
 Reusable GitHub Actions help you <span style="color: #4CAF50; font-weight: bold;">**save time**</span> and avoid repeating work. They make your coding process easier and help everyone follow the <span style="color: #2196F3; font-style: italic;">*best practices*</span>. This guide will show you how to create a GitHub Action for checking and formatting Python code using <span style="color: #FF5722; font-weight: bold;">**Ruff**</span> and <span style="color: #FF5722; font-weight: bold;">**Black**</span>.
 
+
 ## In this guide, you will learn:
 
 - 🔍 **What reusable GitHub Actions are** and why they are useful
