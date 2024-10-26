@@ -1,0 +1,33 @@
+# spellcheck.yml
+matrix:
+  # File patterns to check
+  files:
+    - _posts/*.md
+
+pipeline:
+  - name: Markdown
+    sources:
+      # Include only markdown files in _posts folder
+      - _posts/*.md
+    # Define spelling language
+    dictionary:
+      language: en_US
+
+    # Define custom word list to ignore common terms, abbreviations, or custom words
+    # This file should be a plain text file where each line is a word to be ignored
+    exclude:
+      wordlist: .wordlist.txt
+
+    # Define filters for processing markdown files
+    filters:
+      - pyspelling.filters.markdown:
+          # Include markdown block code fences
+          code_language: true
+          # Ignore markdown headers
+          header: true
+          # Strip markdown HTML tags
+          html: true
+
+# Optional: Run spellcheck only on markdown files modified in recent commits
+git:
+  latest: true
