@@ -1,13 +1,19 @@
+# spellcheck.yml for pyspelling
 pipeline:
-  - name: Markdown
+  - name: Markdown Files
     sources:
       - _posts/*.md
     dictionary:
       language: en_US
+
+    # Optional: Exclude custom word list if you have one
     exclude:
       wordlist: .wordlist.txt
+
+    # Apply the markdown filter to parse and spellcheck Markdown content
     filters:
       - pyspelling.filters.markdown:
           code_language: true
           header: true
           html: true
+
