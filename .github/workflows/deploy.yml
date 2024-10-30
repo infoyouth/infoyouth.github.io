@@ -40,36 +40,20 @@ jobs:
           bundler-cache: true
 
       - name: 📦 Install Dependencies
-        run: |
-          echo "Installing dependencies..."
-          bundle install
+        run: bundle install
 
       - name: 🛠️ Build Site
-        run: |
-          echo "Building site..."
-          bundle exec jekyll build -d "_site${{ steps.pages.outputs.base_path }}"
+        run: bundle exec jekyll build -d "_site${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: "production"
 
       - name: 🔍 Test Site
         run: |
-          echo "Testing built site for broken links and other issues..."
           bundle exec htmlproofer _site${{ steps.pages.outputs.base_path }} \
             --disable-external \
             --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
 
-      - name: 📄 Identify New Posts
-        id: new_posts
-        run: |
-          echo "Identifying new posts..."
-          NEW_POSTS=$(git diff --name-only HEAD^ HEAD | grep -E '^_posts/.*\.md' || true)
-          echo "NEW_POSTS=${NEW_POSTS}" >> $GITHUB_ENV
-          echo "Detected new posts: $NEW_POSTS"
-        shell: bash
-
       - name: 📤 Upload Site Artifact
-        run: |
-          echo "Uploading site artifact for deployment..."
         uses: actions/upload-pages-artifact@v3.0.1
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
@@ -80,16 +64,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
-    if: env.NEW_POSTS != ''
     steps:
-      - name: 🚀 Deploy to GitHub Pages
+      - name: 🚀 Deploy to GitHub
         id: deployment
         uses: actions/deploy-pages@v4.0.5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "Starting deployment..."
-          echo "Deployment URL: ${{ steps.deployment.outputs.page_url }}"
 
       - name: 📢 Notify Discord of New Posts
         if: env.NEW_POSTS != ''
@@ -100,13 +78,12 @@ jobs:
           description: |
             🚀 **Exciting News from Youth Innovations!** 🚀
             We have just published new blog posts on our site! 🎉
+
             **Check out the latest topics:**
             ${{ env.NEW_POSTS }}
+
             📖 Visit us at [Youth Innovations](https://infoyouth.github.io) for more insightful articles and innovations!
+
             Thank you for your continued support! 💖
           include_image: 'true'
           username: 'Youth Innovations'
-        run: |
-          echo "Sending Discord notification with the following details:"
-          echo "NEW_POSTS=${{ env.NEW_POSTS }}"
-          echo "Webhook URL: ${{ secrets.DISCORD_WEBHOOK_URL }}"
