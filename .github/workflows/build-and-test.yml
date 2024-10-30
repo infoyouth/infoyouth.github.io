@@ -1,10 +1,14 @@
-name: "🚧 Build and Test Workflow"
+name: "🚧 Build and Test the site"
 
 on:
   pull_request:
     branches:
       - main
       - master
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 permissions:
   contents: read
@@ -45,10 +49,4 @@ jobs:
           chmod +x _plugins/posts-lastmod-hook.rb
           bundle exec rubocop
         # ✅ Ensure Ruby code quality using RuboCop
-
-      - name: 🚨 Notify Discord on Failure
-        uses: johnnyhuy/actions-discord-git-webhook@v1.0.1
-        with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        continue-on-error: true
 
