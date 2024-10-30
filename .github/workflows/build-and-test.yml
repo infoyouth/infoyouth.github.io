@@ -46,9 +46,16 @@ jobs:
           bundle exec rubocop
         # ✅ Ensure Ruby code quality using RuboCop
 
-      - name: 🚨 Notify Discord on Failure
-        uses: johnnyhuy/actions-discord-git-webhook@v1.0.1
+      - name: 🚨 Notify Discord
+        uses: cabrera-evil/discord-notify-action@1.0.1
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        continue-on-error: true
+          title: 'GitHub Action'
+          description: 'A new commit has been pushed.'
+          include_image: 'true'
+          username: 'GitHub'
+          title_url: 'https://github.com/${{ github.repository }}/commit/${{ github.sha }}'
+          #continue-on-error: true
+          
+
 
