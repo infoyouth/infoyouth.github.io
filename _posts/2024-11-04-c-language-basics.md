@@ -1,7 +1,7 @@
 ---
 title: "C Programming Basics"
 description: "An introductory guide to C programming, covering essential concepts and syntax for beginners."
-author: "Youth Innovations"
+author: infoyouth
 date: 2024-11-04 02:00:00 +0000 
 categories: [Programming, C Language, Beginner]
 tags: [C, programming, C basics, C coding, C Part 1]
