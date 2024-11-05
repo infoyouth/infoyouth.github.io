@@ -1,4 +1,4 @@
-name: Markdown Linting
+name: Markdown Linting and Formatting
 on: [push, pull_request]
 jobs:
   lint:
@@ -6,8 +6,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      
       - name: Install markdownlint-cli
         run: npm install -g markdownlint-cli
+
       - name: Lint Markdown files
         run: markdownlint '**/*.md'
+        
+      - name: Install Prettier
+        run: npm install -g prettier
 
+      - name: Format Markdown files
+        run: prettier --write '**/*.md'
