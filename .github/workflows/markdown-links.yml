@@ -1,22 +1,13 @@
-# .github/workflows/spellcheck.yml
-name: Spell Check
-
-on:
-  push:
-    paths:
-      - _posts/**/*.md
-  pull_request:
-    paths:
-      - _posts/**/*.md
-
+name: Markdown Linting
+on: [push, pull_request]
 jobs:
-  spell-check:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Install markdownlint-cli
+        run: npm install -g markdownlint-cli
+      - name: Lint Markdown files
+        run: markdownlint '**/*.md'
 
-      - name: Run Spell Check
-        uses: rojopolis/spellcheck-github-actions@0.44.0
-        with:
-          config_path: './spellcheck.yml'  # Ensure exact path is specified
