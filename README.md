@@ -6,10 +6,11 @@
 
   ✨ Discover content that helps you **unlock your potential** and succeed in the **ever-evolving world of technology**! 🌍💡
 
-  This project is built upon the awesome [**Chirpy Starter Theme**](https://github.com/cotes2020/chirpy-starter), providing a robust foundation for a professional and visually appealing site. 🎨
+  This project is built upon the awesome [**Chirpy Starter Theme**](https://github.com/cotes2020/chirpy-starter),  
+  providing a robust foundation for a professional and visually appealing site. 🎨
 
-  [![GitHub license](https://img.shields.io/github/license/cotes2020/jekyll-theme-chirpy?color=blue)][license]&nbsp;
-  [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy?&logo=RubyGems&logoColor=ghostwhite&label=gem&color=teal)][gem]&nbsp;
+  [![GitHub license](https://img.shields.io/github/license/cotes2020/jekyll-theme-chirpy?color=blue)][license]&nbsp;  
+  [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy?&logo=RubyGems&logoColor=ghostwhite&label=gem&color=teal)][gem]&nbsp;  
   [![Contributors](https://img.shields.io/github/contributors/infoyouth/infoyouth.github.io?color=green&logo=github)](https://github.com/infoyouth/infoyouth.github.io/graphs/contributors)
 
 </div>
@@ -27,6 +28,7 @@ Let’s work together to make this project even better!
 To start contributing to this project, follow these simple steps:
 
 ```bash
+
 # Clone the repository
 git clone https://github.com/infoyouth/infoyouth.github.io.git
 
