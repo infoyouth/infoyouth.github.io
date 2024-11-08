@@ -1,17 +1,12 @@
-name: Generate Course for today
+name: Course Content Generation
 
 on:
-  workflow_dispatch:  # Trigger manually
+  workflow_dispatch:  # Allows manual triggering
   schedule:
-    - cron: '0 9 * * *'  # Run daily at 9 AM UTC, adjust as needed
+    - cron: "0 0 * * *"  # Scheduled for daily at midnight
 
 jobs:
-  call-reusable-action:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout infoyouth.github.io repo
-      uses: actions/checkout@v3
-
-    - name: Call course content action from course-content-action repo
-      uses: infoyouth/course-content-action/.github/workflows/course_content_action.yml@main  # Call the reusable action from AA
+  run-course-content:
+    uses: infoyouth/course-content-action/.github/workflows/todays-course-finder.yml@main
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Provide the token to authenticate with private AA
