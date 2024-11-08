@@ -1,0 +1,17 @@
+name: Generate Course for today
+
+on:
+  workflow_dispatch:  # Trigger manually
+  schedule:
+    - cron: '0 9 * * *'  # Run daily at 9 AM UTC, adjust as needed
+
+jobs:
+  call-reusable-action:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout infoyouth.github.io repo
+      uses: actions/checkout@v3
+
+    - name: Call course content action from course-content-action repo
+      uses: infoyouth/course-content-action/.github/workflows/course_content_action.yml@main  # Call the reusable action from AA
