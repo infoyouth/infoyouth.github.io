@@ -1,17 +1,21 @@
 name: 🎓 Daily Course Generator
 on:
-  workflow_dispatch:  # Manual trigger with a nice UI button
+  workflow_dispatch:
     inputs:
       reason:
         description: 'Reason for manual trigger'
         required: false
         default: 'Manual content generation'
   schedule:
-    - cron: '0 3 * * *'  # Runs daily at midnight UTC
+    - cron: '0 3 * * *'
 
 permissions:
-  contents: write  # Changed to write since we'll be generating content
+  contents: write
   pull-requests: write
+
+env:
+  GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
 jobs:
   generate-content:
@@ -20,7 +24,7 @@ jobs:
     steps:
       - name: 🔍 Checkout Main Repository
         uses: actions/checkout@v3
-        
+
       - name: 🔐 Checkout Private Content Repo
         uses: actions/checkout@v3
         with:
@@ -29,16 +33,17 @@ jobs:
           token: ${{ secrets.PAT_TOKEN }}
           path: ./temp
 
-      - name: 🐍 Setup Python
-        uses: actions/setup-python@v4
+      - name: 📦 Cache Python dependencies
+        uses: actions/cache@v3
         with:
-          python-version: '3.10'
-
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ matrix.python-version }}-custom
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: 📦 Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install transformers markdownify torch requests
-
       - name: 🚀 Generate Course Content
         working-directory: ./temp
         run: |
@@ -47,47 +52,55 @@ jobs:
           mkdir -p $GITHUB_WORKSPACE/_posts
           echo "🎯 Starting content generation process..."
           chmod a+x *.py
-          python3 todays_course_finder.py || echo "Failed to run the Python script"
-          ls -lrth
-          pwd
-          cp *.md $GITHUB_WORKSPACE/_posts && cd ..
+          # Run the Python script to generate content and set the TOPIC value in the script
+          python3 todays_course_finder.py || { echo "Failed to generate content, exiting with error code"; exit 1; }
+      
+          # Initialize a flag for content generation
+          CONTENT_GENERATED=false
+      
+          # Check if any .md files were generated
+          if ls *.md 1> /dev/null 2>&1; then
+            echo "📄 Found generated markdown files, copying them..."
+            cp *.md $GITHUB_WORKSPACE/_posts
+            CONTENT_GENERATED=true
+          else
+            echo "🚫 No content generated for today. Skipping file copy."
+          fi
+      
+          # Export the CONTENT_GENERATED flag so it can be used in later steps
+          echo "CONTENT_GENERATED=${CONTENT_GENERATED}" >> $GITHUB_ENV
+      
+          # Clean up
+          cd ..
           rm -rf ./temp
-          pwd
-          ls -lrth
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          
-  
-      # Step 2: Check status of content generation process
+      
       - name: 📋 Process Status
-        if: always()  # This will run even if the previous steps fail
+        if: always()
         run: |
           if [ "${{ job.status }}" == "success" ]; then
             echo "✅ Content generation completed successfully!"
-            git status
           else
             echo "❌ Content generation encountered issues"
             exit 1
           fi
-
-      # Step 3: Set up branch name and current datetime for the PR
-      - name: Set up branch and datetime
+      
+      - name: Create Branch Name and Set Date
+        if: ${{ env.CONTENT_GENERATED == 'true' }}
         run: |
-          echo "TOPIC value is: ${TOPIC}"
           CURRENT_DATETIME=$(date '+%Y-%m-%d')
-          BRANCH_NAME="${TOPIC}-${CURRENT_DATETIME}"
           echo "CURRENT_DATETIME=${CURRENT_DATETIME}" >> $GITHUB_ENV
+          BRANCH_NAME="${{ env.TOPIC }}-${CURRENT_DATETIME}"
           echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
-          echo "Generated BRANCH_NAME: ${BRANCH_NAME}"
-        env:
-          TOPIC: ${{ env.TOPIC }}
-
-      - name: Create Pull Request
+      
+      - name: Create Pull Request using action
+        if: ${{ env.CONTENT_GENERATED == 'true' }}
         uses: peter-evans/create-pull-request@v7.0.5
         with:
           title: "Notes generated for ${{ env.TOPIC }} on ${{ env.CURRENT_DATETIME }}"
           body: "This PR contains generated notes on ${{ env.CURRENT_DATETIME }}."
+          committer: "Youth Innovations <info.youthinno@gmail.com>"
+          author: "Youth Innovations <info.youthinno@gmail.com>"
+          assignees: "project-owner"
           base: main
           branch: ${{ env.BRANCH_NAME }}
           commit-message: "New blog post generated for ${{ env.TOPIC }} on ${{ env.CURRENT_DATETIME }}"
