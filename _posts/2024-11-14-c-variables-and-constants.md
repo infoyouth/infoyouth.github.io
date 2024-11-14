@@ -1,10 +1,16 @@
 ---
-title: 
-description: 
+title: "C Variables and Constants"
+description: "🌟 Dive into C programming basics! Discover variables, constants, and how to manage data effectively."
 author: infoyouth
-date: 2024-11-14
-categories: []
-tags: []
+date: 2024-11-14 02:00:00 +0000 
+categories:
+  - Programming
+  - C Language
+  - Basics
+tags:
+  - "Ch 02 C Variables and Constants"
+  - "C Programming Basics"
+  - "Variables in C"
 pin: true
 math: false
 mermaid: true
@@ -131,13 +137,21 @@ int main() {
 ## <span style="color:#2980b9">Flowchart for Variable Usage</span>
 
 ```mermaid
-graph LR
+  graph LR
     A[Declare Variables] --> B{Assign Values}
     B --> C[Perform Calculations]
     C --> D[Display Results]
     D --> E{End Program}
-```
 
+    style A fill:#ffcccb,stroke:#ff6347,stroke-width:3px;
+    style B fill:#add8e6,stroke:#1e90ff,stroke-width:3px;
+    style C fill:#d3f9b5,stroke:#32cd32,stroke-width:3px;
+    style D fill:#f9d3b5,stroke:#ff8c00,stroke-width:3px;
+    style E fill:#dcdcdc,stroke:#696969,stroke-width:3px;
+
+    classDef startEnd fill:#f5f5f5,stroke:#000000,stroke-width:2px;
+    class A,E startEnd;
+```
 Variables are fundamental building blocks in C programming. By understanding their different types, how to declare them, and how to use them, you can start creating complex and interesting programs!
 
 # <span style="color:#e67e22">Constants in C: The Foundation of Reliable Code</span> 
@@ -463,10 +477,20 @@ graph LR
   A[Need a constant?] --> B{Simple value?}
   B -- Yes --> C{Type checking?}
   B -- No --> D{Fixed set of values?}
-  C -- Yes --> E{Use `const`}
-  C -- No --> E{Use `#define`}
-  D -- Yes --> F{Use `enum`}
-  D -- No --> E{Use `#define` or `const`}
+  C -- Yes --> E{Use <span style="color:#1c3d5a;">`const`</span>}
+  C -- No --> E{Use <span style="color:#7f1c1c;">`#define`</span>}
+  D -- Yes --> F{Use <span style="color:#2c6b2f;">`enum`</span>}
+  D -- No --> E{Use <span style="color:#7f1c1c;">`#define` or `const`</span>}
+  
+  style A fill:#ffdd99,stroke:#e67e22,stroke-width:2px;
+  style B fill:#ffe6e6,stroke:#e74c3c,stroke-width:2px;
+  style C fill:#eaf7ff,stroke:#3498db,stroke-width:2px;
+  style D fill:#fff7d4,stroke:#f1c40f,stroke-width:2px;
+  style E fill:#eaffea,stroke:#2ecc71,stroke-width:2px;
+  style F fill:#dff0d8,stroke:#2ecc71,stroke-width:2px;
+  classDef default fill:#fff,stroke:#000,stroke-width:2px,color:#333;
+
+
 ```
 
 By understanding the pros and cons of each method, you can choose the most suitable approach for your C programs.  This ensures that your code is efficient, readable, and less prone to errors.
@@ -589,6 +613,15 @@ graph LR
   D[my_function] --> E{local_var = 30}
   D --> C{global_var = 10}
   A --> D
+
+  style A fill:#f0f8ff,stroke:#4682b4,stroke-width:2px;
+  style B fill:#ffe4e1,stroke:#ff6347,stroke-width:2px;
+  style C fill:#e0f7fa,stroke:#00bcd4,stroke-width:2px;
+  style D fill:#e8f5e9,stroke:#4caf50,stroke-width:2px;
+  style E fill:#fff3e0,stroke:#ff9800,stroke-width:2px;
+
+  classDef default fill:#fff,stroke:#000,stroke-width:2px,color:#333;
+
 ```
 
 **Explanation:**
@@ -751,14 +784,25 @@ Think of global variables as **publicly accessible data containers** within your
 ```mermaid
 graph LR
     subgraph Program
-      A[Function 1] --> B[Function 2]
-      A --> C[Function 3]
-      B --> C
+        A[Function 1] --> B[Function 2]
+        A --> C[Function 3]
+        B --> C
     end
-    global(Global Variable)
+    global[Global Variable]
+    
     A --> global
     B --> global
     C --> global
+
+    style A fill:#e3f2fd,stroke:#1e88e5,stroke-width:2px;
+    style B fill:#e8f5e9,stroke:#4caf50,stroke-width:2px;
+    style C fill:#fff3e0,stroke:#ffb74d,stroke-width:2px;
+    style global fill:#ffebee,stroke:#e57373,stroke-width:2px;
+    
+    style Program fill:#e3f2f,stroke:#1e88e5,stroke-width:2px,stroke-dasharray: 5, 5;
+    
+    classDef default fill:#fff,stroke:#000,stroke-width:2px,color:#333;
+
 ```
 
 ### <span style="color:#8e44ad">Declaring Global Variables</span>
@@ -886,7 +930,7 @@ Value of shared_data: 5
 
 <h1><span style='color:#e67e22'>Conclusion</span></h1>
 
-We've covered a lot of ground today, exploring the ins and outs of [topic].  It's been a journey, and hopefully, you've learned a thing or two! 😉
+We've covered a lot of ground today, exploring the ins and outs of `C Variables and Constants`.  It's been a journey, and hopefully, you've learned a thing or two! 😉
 
 ## <span style="color:#2980b9">Your Turn!</span>
 
