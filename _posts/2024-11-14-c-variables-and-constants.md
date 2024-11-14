@@ -477,11 +477,11 @@ graph LR
   A[Need a constant?] --> B{Simple value?}
   B -- Yes --> C{Type checking?}
   B -- No --> D{Fixed set of values?}
-  C -- Yes --> E{Use <span style="color:#1c3d5a;">`const`</span>}
-  C -- No --> E{Use <span style="color:#7f1c1c;">`#define`</span>}
-  D -- Yes --> F{Use <span style="color:#2c6b2f;">`enum`</span>}
-  D -- No --> E{Use <span style="color:#7f1c1c;">`#define` or `const`</span>}
-  
+  C -- Yes --> E{Use <b>const</b>}
+  C -- No --> E{Use <b>#define</b>}
+  D -- Yes --> F{Use <b>enum</b>}
+  D -- No --> E{Use <b>#define or const</b>}
+
   style A fill:#ffdd99,stroke:#e67e22,stroke-width:2px;
   style B fill:#ffe6e6,stroke:#e74c3c,stroke-width:2px;
   style C fill:#eaf7ff,stroke:#3498db,stroke-width:2px;
