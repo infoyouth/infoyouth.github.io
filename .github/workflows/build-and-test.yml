@@ -1,10 +1,14 @@
-name: "🚧 Build and Test Workflow"
+name: "🚧 Build and Test the site"
 
 on:
   pull_request:
     branches:
       - main
       - master
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 permissions:
   contents: read
