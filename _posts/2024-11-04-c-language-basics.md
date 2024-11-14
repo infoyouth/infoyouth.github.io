@@ -1,10 +1,15 @@
 ---
 title: "C Programming Basics"
-description: "An introductory guide to C programming, covering essential concepts and syntax for beginners."
+description: "🚀 An introductory guide to C programming, covering essential concepts and syntax for beginners. 🖥️📘."
 author: infoyouth
 date: 2024-11-04 02:00:00 +0000 
-categories: [Programming, C Language, Beginner]
-tags: [C, programming, C basics, C coding, C Part 1]
+categories:
+  - Programming
+  - C Language
+  - Beginner
+tags:
+  - Ch 01 C Programming Basics
+  - C Basics
 pin: true
 math: false
 mermaid: true
@@ -57,10 +62,10 @@ C remains relevant today due to its:
 
 ```mermaid
 graph LR
-    A[B Language] --> B{{<span style="color:#e74c3c">C Language</span>}}
-    B --> C{{<span style="color:#3498db">Unix Development</span>}}
-    C --> D{{<span style="color:#f1c40f">Widespread Adoption</span>}}
-    D --> E{{<span style="color:#2ecc71">Influence on C++, Java, Python</span>}}
+    A[B Language] --> B[<span style="color:#e74c3c">C Language</span>]
+    B --> C[<span style="color:#3498db">Unix Development</span>]
+    C --> D[<span style="color:#f1c40f">Widespread Adoption</span>]
+    D --> E[<span style="color:#2ecc71">Influence on C++, Java, Python</span>]
     
     style A fill:#ffdd99,stroke:#e67e22,stroke-width:2px;
     style B fill:#ffe6e6,stroke:#e74c3c,stroke-width:2px;
