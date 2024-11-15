@@ -2,55 +2,64 @@
 <div align="justify" style="background-color: #E0F7FA; color: #00796B; padding: 20px; border-radius: 8px;">
 
   <!-- markdownlint-disable-next-line -->
-  # 🌟 Welcome to **Youth Innovations Tech-Hub** 🚀
 
-  ✨ Discover content that helps you **unlock your potential** and succeed in the **ever-evolving world of technology**! 🌍💡
+# 🌟 Welcome to **Youth Innovations Tech-Hub** 🚀
 
-  This project is built upon the awesome [**Chirpy Starter Theme**](https://github.com/cotes2020/chirpy-starter),  
-  providing a robust foundation for a professional and visually appealing site. 🎨
+✨ Discover content that helps you **unlock your potential** and succeed in the
+**ever-evolving world of technology**! 🌍💡
 
-  [![GitHub license](https://img.shields.io/github/license/cotes2020/jekyll-theme-chirpy?color=blue)][license]&nbsp;
-  [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy?&logo=RubyGems&logoColor=ghostwhite&label=gem&color=teal)][gem]&nbsp;
-  [![Contributors](https://img.shields.io/github/contributors/infoyouth/infoyouth.github.io?color=green&logo=github)](https://github.com/infoyouth/infoyouth.github.io/graphs/contributors)
+This project is built upon the awesome
+[**Chirpy Starter Theme**](https://github.com/cotes2020/chirpy-starter),  
+ providing a robust foundation for a professional and visually appealing site.
+🎨
+
+[![GitHub license](https://img.shields.io/github/license/cotes2020/jekyll-theme-chirpy?color=blue)][license]&nbsp;
+[![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy?&logo=RubyGems&logoColor=ghostwhite&label=gem&color=teal)][gem]&nbsp;
+[![Contributors](https://img.shields.io/github/contributors/infoyouth/infoyouth.github.io?color=green&logo=github)](https://github.com/infoyouth/infoyouth.github.io/graphs/contributors)
 
 </div>
 
-  ### 🤝 **Get Involved!**
+## 🤝 **Get Involved!**
 
-  We invite you to be a part of our community! Your insights, suggestions, and contributions can help us grow.  
-  If you encounter any bugs or have ideas for improvements, please **create an issue**! Every suggestion counts! 💡  
-  Let’s work together to make this project even better!
+We invite you to be a part of our community! Your insights, suggestions, and
+contributions can help us grow.  
+ If you encounter any bugs or have ideas for improvements, please **create an
+issue**! Every suggestion counts! 💡  
+ Let’s work together to make this project even better!
 
-  [![Create an Issue](https://img.shields.io/badge/Create%20an%20Issue-Click%20Here-brightgreen?style=flat&logo=github&logoColor=white)](https://github.com/infoyouth/infoyouth.github.io/issues)
+[![Create an Issue](https://img.shields.io/badge/Create%20an%20Issue-Click%20Here-brightgreen?style=flat&logo=github&logoColor=white)](https://github.com/infoyouth/infoyouth.github.io/issues)
 
-  ### 🛠️ **Getting Started: Commands to Contribute**
+### 🛠️ **Getting Started: Commands to Contribute**
 
-  To start contributing to this project, follow these simple steps:
+To start contributing to this project, follow these simple steps:
 
-  ```bash
-  # Clone the repository
-  git clone https://github.com/infoyouth/infoyouth.github.io.git
+```bash
+# Clone the repository
+git clone https://github.com/infoyouth/infoyouth.github.io.git
 
-  # Navigate into the project directory
-  cd infoyouth.github.io
+# Navigate into the project directory
+cd infoyouth.github.io
 
-  # Install the required gems/dependencies
-  bundle install
+# Install the required gems/dependencies
+bundle install
 
-  # Start the Jekyll server for a local preview
-  bundle exec jekyll serve
+# Start the Jekyll server for a local preview
+bundle exec jekyll serve
 
-  # Visit your local site at http://localhost:4000 
-  ```
+# Visit your local site at http://localhost:4000
+```
+
 ## License
 
-This project is published under [MIT License][license].  
+This project is published under [MIT License][license].
 
-Feel free to fork, modify, and enhance this project, but please maintain proper attribution to the original theme repository and license terms.
+Feel free to fork, modify, and enhance this project, but please maintain proper
+attribution to the original theme repository and license terms.
 
 ## Contributors
 
-A big thank you to all the contributors involved in the development of this project!  
+A big thank you to all the contributors involved in the development of this
+project!
 
 [![Contributors](https://contrib.rocks/image?repo=infoyouth/infoyouth.github.io&columns=16)](https://github.com/infoyouth/infoyouth.github.io/graphs/contributors)
 <sub> — Made with [contrib.rocks](https://contrib.rocks)</sub>
