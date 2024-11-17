@@ -97,16 +97,56 @@ jobs:
           BRANCH_NAME="${{ env.TOPIC }}-${CURRENT_DATETIME}"
           echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
       
-      - name: Create Pull Request using action
-        if: ${{ env.CONTENT_GENERATED == 'true' }}
+      - name: 🚀 Open Pull Request
+        if: env.CONTENT_GENERATED == 'true'
+        id: create_pull_request
         uses: peter-evans/create-pull-request@v7.0.5
         with:
-          title: "Notes generated for ${{ env.TOPIC }} on ${{ env.CURRENT_DATETIME }}"
-          body: "This PR contains generated notes on ${{ env.CURRENT_DATETIME }}."
+          title: "📝 New Course Notes for ${{ env.TOPIC }} on ${{ env.CURRENT_DATETIME }}"
+          body: "This PR includes generated notes created on ${{ env.CURRENT_DATETIME }}."
           committer: "Youth Innovations <info.youthinno@gmail.com>"
           author: "Youth Innovations <info.youthinno@gmail.com>"
           assignees: "project-owner"
           base: main
           branch: ${{ env.BRANCH_NAME }}
-          commit-message: "New blog post generated for ${{ env.TOPIC }} on ${{ env.CURRENT_DATETIME }}"
+          commit-message: "📝 Course content generated for ${{ env.TOPIC }} on ${{ env.CURRENT_DATETIME }}"
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Debug Outputs
+        run: |
+          echo "Pull Request Branch: ${{ steps.create_pull_request.outputs.pull-request-branch }}"
+          echo "Pull Request Operation: ${{ steps.create_pull_request.outputs.pull-request-operation }}"
+          echo "Pull Request Head SHA: ${{ steps.create_pull_request.outputs.pull-request-head-sha }}"
+          echo "Pull Request Number: ${{ steps.create_pull_request.outputs.pull-request-number }}"
+          echo "Pull Request URL: ${{ steps.create_pull_request.outputs.pull-request-url }}"
+      - name: 🚨 Notify Discord
+        if: steps.create_pull_request.outputs.pull-request-operation == 'created'
+        uses: cabrera-evil/discord-notify-action@1.0.1
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: '📢 ** ${{ env.TOPIC }} **'
+          description: |
+            🎉 **Exciting News!** 🎉
+      
+            🚀 A new Pull Request has been created for today’s course!  
+            Dive in, explore the content, and help shape the future of open-source learning! 
+      
+            🔖 **Branch Name:** **${{ steps.create_pull_request.outputs.pull-request-branch }}**
+            
+            🔢 **PR Number:** **${{ steps.create_pull_request.outputs.pull-request-number }}**  
+            
+            🔗 **PR Link:** [View and Review the Pull Request](${{ steps.create_pull_request.outputs.pull-request-url }})
+            
+      
+            📝 **Topic:** **${{ env.TOPIC }}**  
+            
+            📅 **Date:** **${{ env.CURRENT_DATETIME }}**
+      
+            💡 **Get Involved:**  
+            - Review the changes 📋  
+            - Share feedback 💬  
+            - Join the open-source community 🌐  
+      
+            Your contributions make a difference—let’s grow together! 💖  
+          include_image: 'true'
+          username: 'Youth Innovations'
+          title_url: ${{ steps.create_pull_request.outputs.pull-request-url }}
