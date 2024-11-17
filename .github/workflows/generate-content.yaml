@@ -40,12 +40,10 @@ jobs:
           key: ${{ runner.os }}-pip-${{ matrix.python-version }}-custom
           restore-keys: |
             ${{ runner.os }}-pip-
-
-      - name: 📦 Install Dependencies
+      - name: 📦 Install Pre Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install transformers markdownify torch requests aiohttp python-dotenv tenacity colorlog
-
+          pip install aiofiles==24.1.0 colorlog==6.9.0
       - name: 🚀 Generate Course Content
         working-directory: ./temp
         run: |
@@ -81,7 +79,6 @@ jobs:
           echo "TOPIC=${TOPIC}"
           echo "CONTENT_GENERATED=${CONTENT_GENERATED}"
           echo "CURRENT_DATETIME=${CURRENT_DATETIME}"
-
       - name: 📋 Process Status
         if: always()
         run: |
