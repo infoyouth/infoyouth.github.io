@@ -22,4 +22,3 @@ gem 'wdm', '~> 0.1.1', platforms: %i[mingw x64_mingw mswin]
 group :development do
   gem 'rubocop', '~> 1.34', require: false
 end
-
