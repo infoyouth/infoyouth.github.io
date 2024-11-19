@@ -1,12 +1,1 @@
-name: Course Content Generation
 
-on:
-  workflow_dispatch:  # Allows manual triggering
-  schedule:
-    - cron: "0 0 * * *"  # Scheduled for daily at midnight
-
-jobs:
-  run-course-content:
-    uses: infoyouth/course-content-action/.github/workflows/todays-course-finder.yml@main
-    secrets:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Provide the token to authenticate with private AA
