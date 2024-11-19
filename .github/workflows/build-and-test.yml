@@ -25,7 +25,9 @@ jobs:
         run: bundle install
         
       - name: 🧹 Lint Ruby Code
-        run: bundle exec rubocop      
+        run: |
+          chmod +x _plugins/posts-lastmod-hook.rb
+          run: bundle exec rubocop      
 
       - name: 🛠️ Build Site with Jekyll
         run: bundle exec jekyll build -d "_site"
