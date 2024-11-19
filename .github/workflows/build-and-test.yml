@@ -9,24 +9,8 @@ permissions:
   contents: read
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: 📥 Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: 💎 Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.3
-
-      - name: 🧹 Lint Ruby Code
-        run: bundle exec rubocop
-
   build-and-test:
     runs-on: ubuntu-latest
-    needs: lint
 
     steps:
       - name: 📥 Checkout Repository
@@ -37,9 +21,11 @@ jobs:
         with:
           ruby-version: 3.3
           bundler-cache: true
-
       - name: 📦 Install Dependencies
         run: bundle install
+        
+      - name: 🧹 Lint Ruby Code
+        run: bundle exec rubocop      
 
       - name: 🛠️ Build Site with Jekyll
         run: bundle exec jekyll build -d "_site"
@@ -62,9 +48,4 @@ jobs:
           name: built-site
           path: _site
 
-      - name: 🧹 Lint Ruby Code
-        run: |
-          chmod +x _plugins/posts-lastmod-hook.rb
-          bundle exec rubocop
-        # ✅ Ensure Ruby code quality using RuboCop
 
