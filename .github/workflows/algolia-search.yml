@@ -1,0 +1,24 @@
+name: 🚀 Algolia Search Indexing
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  algolia-search:
+    name: 🌐 Update Algolia Search Index
+    runs-on: ubuntu-latest
+
+    env:
+      JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: ⚡ Run Algolia Jekyll Action
+        uses: dieghernan/algolia-jekyll-action@v2.1
+        with:
+          APIKEY: ${{ secrets.ALGOLIA_API_KEY }}
+
