@@ -9,6 +9,13 @@ on:
       - .gitignore
       - README.md
       - LICENSE
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
   workflow_dispatch:
 
 permissions:
