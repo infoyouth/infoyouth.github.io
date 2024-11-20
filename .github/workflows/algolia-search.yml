@@ -15,10 +15,10 @@ jobs:
 
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.2.2
 
       - name: 💎 Setup Ruby
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@v1.202.0
         with:
           ruby-version: 3.1 # Ensure the required Ruby version is used
           bundler-cache: true
@@ -44,10 +44,10 @@ jobs:
 
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.2.2
 
       - name: 💎 Setup Ruby
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@v1.202.0
         with:
           ruby-version: 3.1 # Ensure this matches requirements
           bundler-cache: true
@@ -55,4 +55,5 @@ jobs:
       - name: ⚡ Run Algolia Jekyll Action
         uses: dieghernan/algolia-jekyll-action@main
         with:
+          ruby-version: 3.1
           APIKEY: ${{ secrets.ALGOLIA_API_KEY }}
