@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v4
 
       - name: 💎 Setup Ruby
         uses: ruby/setup-ruby@v1.202.0
@@ -44,7 +44,7 @@ jobs:
 
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v4
 
       - name: 💎 Setup Ruby
         uses: ruby/setup-ruby@v1.202.0
