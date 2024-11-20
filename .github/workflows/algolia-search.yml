@@ -1,14 +1,43 @@
-name: 🚀 Algolia Search Indexing
+name: "Algolia Search Indexing"
 
 on:
-  push:
+  pull_request: # For pre-qualifying checks
+    branches:
+      - main
+  push: # For running the actual indexing
     branches:
       - main
 
 jobs:
-  algolia-search:
-    name: 🌐 Update Algolia Search Index
+  pre-checks:
+    name: 🔍 Pre-qualifying Checks
     runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 💎 Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1 # Ensure the required Ruby version is used
+          bundler-cache: true
+
+      - name: 📦 Install Dependencies
+        run: |
+          gem update --system # Update RubyGems to avoid compatibility issues
+          bundle install # Ensure dependencies can be installed
+
+      - name: ✅ Verify Dependencies
+        run: |
+          bundle exec jekyll --version
+          echo "All dependencies are valid and compatible."
+
+  algolia-search:
+    name: ⚡ Run Algolia Jekyll Action
+    needs: pre-checks # Ensure pre-checks pass before running
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' # Only run on pushes to main
 
     env:
       JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -17,8 +46,13 @@ jobs:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v3
 
+      - name: 💎 Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1 # Ensure this matches requirements
+          bundler-cache: true
+
       - name: ⚡ Run Algolia Jekyll Action
-        uses: dieghernan/algolia-jekyll-action@v2.1
+        uses: dieghernan/algolia-jekyll-action@main
         with:
           APIKEY: ${{ secrets.ALGOLIA_API_KEY }}
-
