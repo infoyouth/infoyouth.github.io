@@ -1,0 +1,35 @@
+version: 2
+updates:
+  # 👷 GitHub Actions: Update reusable actions in workflows
+  - package-ecosystem: "github-actions"
+    directory: "/" # Location of GitHub Actions workflows
+    schedule:
+      interval: "weekly" # Check for updates every week
+      day: "monday" # Optional: Set the day to Monday
+      time: "04:00" # Optional: Set the time to 4:00 AM
+      timezone: "UTC" # Optional: Use UTC as the timezone
+    commit-message:
+      prefix: "deps"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    reviewers:
+      - "infoyouth"
+    open-pull-requests-limit: 10
+
+  # 📦 Ruby Bundler: Update dependencies in Gemfile
+  - package-ecosystem: "bundler"
+    directory: "/" # Location of Gemfile
+    schedule:
+      interval: "weekly" # Check for updates every week
+      day: "monday"
+      time: "04:30"
+      timezone: "UTC"
+    commit-message:
+      prefix: "deps"
+    labels:
+      - "dependencies"
+      - "ruby"
+    reviewers:
+      - "infoyouth"
+    open-pull-requests-limit: 5
