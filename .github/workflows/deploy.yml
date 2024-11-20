@@ -64,7 +64,6 @@ jobs:
         run: |
           chmod +x _plugins/posts-lastmod-hook.rb
           bundle exec rubocop
-        # ✅ Ensure Ruby code quality using RuboCop
 
       - name: 📤 Upload Site Artifact
         uses: actions/upload-pages-artifact@v3.0.1
@@ -77,8 +76,14 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    if: github.ref == 'refs/heads/main'  # Only run deploy when pushing to main
     steps:
-      - name: 🚀 Deploy to GitHub
+      - name: 📥 Download Site Artifact
+        uses: actions/download-pages-artifact@v3.0.1
+        with:
+          path: "_site"  # The path where the artifact will be downloaded
+
+      - name: 🚀 Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4.0.5
 
