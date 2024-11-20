@@ -28,6 +28,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Build job
   build:
     runs-on: ubuntu-latest
     steps:
@@ -70,6 +71,7 @@ jobs:
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
 
+  # Deployment job
   deploy:
     environment:
       name: 🌐 Youth Innovations
@@ -78,11 +80,6 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/main'  # Only run deploy when pushing to main
     steps:
-      - name: 📥 Download Site Artifact
-        uses: actions/download-pages-artifact@v3.0.1
-        with:
-          path: "_site"  # The path where the artifact will be downloaded
-
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4.0.5
