@@ -118,9 +118,27 @@ consume memory.
 
 ```mermaid
 graph LR
-A[int (4 bytes)] --> B(Stores whole numbers)
-C[float (4 bytes)] --> D(Stores decimal numbers)
-E[char (1 byte)] --> F(Stores single characters)
+    A["int (4 bytes)"] --> B["Stores whole numbers"];
+    C["float (4 bytes)"] --> D["Stores decimal numbers"];
+    E["char (1 byte)"] --> F["Stores single characters"];
+
+    classDef typeNode fill:#cce5ff,stroke:#004085,stroke-width:2px,color:#000,font-weight:bold;
+    classDef descriptionNode fill:#ffeeba,stroke:#f0ad4e,stroke-width:2px,color:#000,font-weight:bold;
+    classDef hoverEffect fill:#ffffff,stroke:#333,stroke-width:3px,color:#000,font-weight:bold;
+
+    class A,C,E typeNode;
+    class B,D,F descriptionNode;
+
+    linkStyle 0 stroke:#333,stroke-width:2px;
+    linkStyle 1 stroke:#f0ad4e,stroke-width:2px;
+    linkStyle 2 stroke:#333,stroke-width:2px;
+
+    style A hoverEffect;
+    style B hoverEffect;
+    style C hoverEffect;
+    style D hoverEffect;
+    style E hoverEffect;
+    style F hoverEffect;
 ```
 
 This diagram visually represents the memory allocation differences between basic
