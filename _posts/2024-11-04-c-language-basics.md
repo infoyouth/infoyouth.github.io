@@ -1,5 +1,5 @@
 ---
-title: "C Programming Basics"
+title: "01. C Programming Basics"
 description:
   "🚀 An introductory guide to C programming, covering essential concepts and
   syntax for beginners. 🖥️📘."

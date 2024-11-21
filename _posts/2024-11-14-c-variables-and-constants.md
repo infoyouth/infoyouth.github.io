@@ -1,5 +1,5 @@
 ---
-title: "C Variables and Constants"
+title: "02. C Variables and Constants"
 description:
   "🌟 Dive into C programming basics! Discover variables, constants, and how to
   manage data effectively."
@@ -13,6 +13,7 @@ tags:
   - "Ch 02 C Variables and Constants"
   - "C Programming Basics"
   - "Variables in C"
+  - "Constants in C"
 pin: true
 math: false
 mermaid: true
