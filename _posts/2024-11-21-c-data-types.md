@@ -1,5 +1,5 @@
 ---
-title: "03. Data Types in C "
+title: "03. C Data Types "
 description:
   "📊 Explore C data types -integers, floats 🌊, chars 🔤, pointers 🧭, and
   custom types for efficient coding! 🚀"
