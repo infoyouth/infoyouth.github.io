@@ -10,14 +10,22 @@
 
 This project is built upon the awesome
 [**Chirpy Starter Theme**](https://github.com/cotes2020/chirpy-starter),  
- providing a robust foundation for a professional and visually appealing site.
-🎨
+ providing a robust foundation for a professional and visually appealing site. 🎨
 
 [![GitHub license](https://img.shields.io/github/license/cotes2020/jekyll-theme-chirpy?color=blue)][license]&nbsp;
 [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy?&logo=RubyGems&logoColor=ghostwhite&label=gem&color=teal)][gem]&nbsp;
-[![Contributors](https://img.shields.io/github/contributors/infoyouth/infoyouth.github.io?color=green&logo=github)](https://github.com/infoyouth/infoyouth.github.io/graphs/contributors)
+[![Contributors](https://img.shields.io/github/contributors/infoyouth/infoyouth.github.io?color=green&logo=github)](https://github.com/infoyouth/infoyouth.github.io/graphs/contributors)&nbsp;
+[![Last Commit](https://img.shields.io/github/last-commit/infoyouth/infoyouth.github.io?label=last%20commit&logo=github&color=orange)](https://github.com/infoyouth/infoyouth.github.io/commits/main)&nbsp;
+[![Issues](https://img.shields.io/github/issues/infoyouth/infoyouth.github.io?color=red&logo=github)](https://github.com/infoyouth/infoyouth.github.io/issues)&nbsp;
+[![Pull Requests](https://img.shields.io/github/issues-pr/infoyouth/infoyouth.github.io?color=yellow&logo=github)](https://github.com/infoyouth/infoyouth.github.io/pulls)&nbsp;
 
 </div>
+
+## 🚀 **Deployed Live on GitHub Pages!** 🎉
+
+🔗 **Visit the live site here:** [**Youth Innovations**](https://infoyouth.github.io)
+
+🌍 Explore, learn, and be part of the tech journey!
 
 ## 🤝 **Get Involved!**
 
