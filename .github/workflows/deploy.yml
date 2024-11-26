@@ -1,5 +1,4 @@
-name: "🚧 Build Test and Deploy"
-
+name: "Build and Deploy"
 on:
   push:
     branches:
@@ -9,13 +8,8 @@ on:
       - .gitignore
       - README.md
       - LICENSE
-  pull_request:
-    branches:
-      - main
-    types:
-      - opened
-      - synchronize
-      - reopened
+
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 permissions:
@@ -23,82 +17,57 @@ permissions:
   pages: write
   id-token: write
 
+# Allow one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: true
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: 📥 Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # submodules: true
+          # If using the 'assets' git submodule from Chirpy Starter, uncomment above
+          # (See: https://github.com/cotes2020/chirpy-starter/tree/main/assets)
 
-      - name: ⚙️ Setup Pages
+      - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v4
 
-      - name: 💎 Setup Ruby
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3
           bundler-cache: true
 
-      - name: 📦 Install Dependencies
-        run: bundle install
-
-      - name: 🛠️ Build Site
-        run: bundle exec jekyll build -d "_site${{ steps.pages.outputs.base_path }}"
+      - name: Build site
+        run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: "production"
 
-      - name: 🔍 Test Site
+      - name: Test site
         run: |
-          bundle exec htmlproofer _site${{ steps.pages.outputs.base_path }} \
-            --disable-external \
-            --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
+          bundle exec htmlproofer _site \
+            \-\-disable-external \
+            \-\-ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
 
-      - name: 🧹 Lint Ruby Code
-        run: |
-          chmod +x _plugins/posts-lastmod-hook.rb
-          bundle exec rubocop
-
-      - name: 📤 Upload Site Artifact
-        uses: actions/upload-pages-artifact@v3.0.1
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
 
-  # Deployment job
   deploy:
     environment:
-      name: 🌐 Youth Innovations
+      name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
-    if: github.ref == 'refs/heads/main'  # Only run deploy when pushing to main
     steps:
-      - name: 🚀 Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4.0.5
-
-      - name: 📢 Notify Discord of New Posts
-        if: env.NEW_POSTS != ''
-        uses: cabrera-evil/discord-notify-action@1.0.2
-        with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          title: "🎉 New Posts Published on Youth Innovations!"
-          description: |
-            🚀 **Exciting News from Youth Innovations!** 🚀
-            We have just published new blog posts on our site! 🎉
-
-            **Check out the latest topics:**
-            ${{ env.NEW_POSTS }}
-
-            📖 Visit us at [Youth Innovations](https://infoyouth.github.io) for more insightful articles and innovations!
-
-            Thank you for your continued support! 💖
-          include_image: 'true'
-          username: 'Youth Innovations'
+        uses: actions/deploy-pages@v4
