@@ -1036,8 +1036,7 @@ int main() {
 
 ## <span style="color:#2980b9">Visualizing the Difference</span>
 
-Here's a Mermaid flowchart illustrating the difference between pre- and
-post-increment:
+Here's a flowchart illustrating the difference between pre- and post-increment:
 
 ```mermaid
 graph TD
@@ -1393,7 +1392,7 @@ parentheses:
 
 `(10 + 5) * 2 = 30`
 
-## <span style="color:#2980b9">Visual Representation with Mermaid.js 📊</span>
+## <span style="color:#2980b9">Flow chart Representation 📊</span>
 
 ```mermaid
 graph TD

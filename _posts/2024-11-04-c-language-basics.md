@@ -216,7 +216,7 @@ environment on popular platforms.
 6. **Compile and Run:** Use the command line or IDE's build tools to compile and
    execute your program.
 
-<h2><span style="color:#2980b9">Example Flowchart (Using Mermaid)</span></h2>
+<h2><span style="color:#2980b9"> Example Flowchart</span></h2>
 
 ```mermaid
 graph LR
