@@ -1,7 +1,8 @@
 ---
 title: "04. C Input & Output Statements"
-description: 
-  "💡 Master C programming's input and output functions like scanf, printf, and file I/O operations. Learn how to handle data effectively! 🚀"
+description:
+  "💡 Master C programming's input and output functions like scanf, printf, and
+  file I/O operations. Learn how to handle data effectively! 🚀"
 author: infoyouth
 date: 2024-11-25 02:00:00 +0000
 categories:
