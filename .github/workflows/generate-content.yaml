@@ -90,20 +90,22 @@ jobs:
           echo "CURRENT_DATETIME=${CURRENT_DATETIME}" >> $GITHUB_ENV
           BRANCH_NAME="${{ env.TOPIC }}-${CURRENT_DATETIME}"
           echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
+          TOPIC_WITH_SPACE=$(echo "${{ env.TOPIC }}" | sed 's/_/ /g')
+          echo "TOPIC_WITH_SPACE=${TOPIC_WITH_SPACE}" >> $GITHUB_ENV
       
       - name: 🚀 Open Pull Request
         if: env.CONTENT_GENERATED == 'true'
         id: create_pull_request
         uses: peter-evans/create-pull-request@v7.0.5
         with:
-          title: "📝 ${{ env.TOPIC.replace('_', ' ') }} - Comprehensive Notes with New Insights (${ { env.CURRENT_DATETIME }}) 📥"
+          title: "📝 ${{ env.TOPIC_WITH_SPACE }} - Comprehensive Notes with New Insights (${{ env.CURRENT_DATETIME }}) 📥"
           body: "This PR includes generated notes created on ${{ env.CURRENT_DATETIME }}."
           committer: "Youth Innovations <info.youthinno@gmail.com>"
           author: "Youth Innovations <info.youthinno@gmail.com>"
           assignees: "project-owner"
           base: main
           branch: ${{ env.BRANCH_NAME }}
-          commit-message: "📝 Freshly Generated Course Content for '${{ env.TOPIC.replace('_', ' ') }}' on ${{ env.CURRENT_DATETIME }} 📚✨ | Ready to Dive In!"
+          commit-message: "📝 Freshly Generated Course Content for '${{ env.TOPIC_WITH_SPACE }}' on ${{ env.CURRENT_DATETIME }} 📚✨ | Ready to Dive In!"
 
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Debug Outputs
@@ -122,7 +124,7 @@ jobs:
           description: |
             🎉 **New PR Alert!** 🚀
             
-            📝 **Topic:** ${{ env.TOPIC.replace('_', ' ') }}
+            📝 **Topic:** ${{ env.TOPIC_WITH_SPACE }}
             
             📅 **Date:** ${{ env.CURRENT_DATETIME }}
             
