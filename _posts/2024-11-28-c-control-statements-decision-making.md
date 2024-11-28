@@ -1,15 +1,27 @@
 ---
-title: 
-description: 
+title: "06. C Control Statements and Decision Making"
+description:
+  "✨ Unlock the power of C control statements! Explore decision-making with if,
+  else, switch, and loop constructs to manage program flow efficiently. 🚀"
 author: infoyouth
-date: 2024-11-28
-categories: []
-tags: []
+date: 2024-11-28 03:00:00 +0000
+categories:
+  - Programming
+  - C Language
+  - Control Statements
+tags:
+  - "C Control Statements"
+  - "C Decision Making"
+  - "C Loops"
+  - "if else switch"
+  - "C Programming Basics"
 pin: true
 math: false
 mermaid: true
 ---
+
 # <span style="color:#e67e22;">What we will learn in this post?</span>
+
 <ul style='list-style-type: none; padding-left: 0;'>
 <li><span style='color: #2980b9; font-size: 20px; font-weight: bold;'>👉</span> <span style='color: #2ecc71; font-size: 18px; font-weight: bold;'>Decision-Making in C</span></li>
 <li><span style='color: #2980b9; font-size: 20px; font-weight: bold;'>👉</span> <span style='color: #2ecc71; font-size: 18px; font-weight: bold;'>C if Statement</span></li>
@@ -30,30 +42,38 @@ mermaid: true
 
 # <span style="color:#e67e22">Decision-Making in C Programming 🧠</span>
 
-C programming, like many other languages, wouldn't be very useful without the ability to make decisions.  This allows your program to respond dynamically to different situations and input, creating more complex and useful applications.  We achieve this through *conditional statements*.
-
+C programming, like many other languages, wouldn't be very useful without the
+ability to make decisions. This allows your program to respond dynamically to
+different situations and input, creating more complex and useful applications.
+We achieve this through _conditional statements_.
 
 ## <span style="color:#2980b9">The Importance of Conditional Statements 🚦</span>
 
-Conditional statements control the flow of execution in your program.  Instead of simply running code line by line, they allow you to choose which block of code to run based on whether a certain condition is true or false.  This is fundamental to building programs that can adapt and respond to user input or changing data.
-
+Conditional statements control the flow of execution in your program. Instead of
+simply running code line by line, they allow you to choose which block of code
+to run based on whether a certain condition is true or false. This is
+fundamental to building programs that can adapt and respond to user input or
+changing data.
 
 ### <span style="color:#8e44ad">Why is this important?</span>
 
-* **Flexibility:** Create programs that behave differently based on various inputs or circumstances.
-* **Error Handling:** Prevent crashes by checking for invalid inputs or situations.
-* **Interactive Programs:** Build programs that react to user actions and choices.
-* **Complex Logic:** Implement algorithms that involve multiple conditions and decisions.
-
+- **Flexibility:** Create programs that behave differently based on various
+  inputs or circumstances.
+- **Error Handling:** Prevent crashes by checking for invalid inputs or
+  situations.
+- **Interactive Programs:** Build programs that react to user actions and
+  choices.
+- **Complex Logic:** Implement algorithms that involve multiple conditions and
+  decisions.
 
 ## <span style="color:#2980b9">Types of Conditional Statements 🔀</span>
 
 C offers several ways to implement conditional logic:
 
-
 ### <span style="color:#8e44ad">`if` Statement</span>
 
-The most basic conditional statement. It executes a block of code only if a specified condition is true.
+The most basic conditional statement. It executes a block of code only if a
+specified condition is true.
 
 ```c
 #include <stdio.h>
@@ -67,12 +87,12 @@ int main() {
 }
 ```
 
-**Commented Output:**  `You are an adult!`
-
+**Output:** `You are an adult!`
 
 ### <span style="color:#8e44ad">`if-else` Statement</span>
 
-Allows you to specify alternative actions based on whether the condition is true or false.
+Allows you to specify alternative actions based on whether the condition is true
+or false.
 
 ```c
 #include <stdio.h>
@@ -88,12 +108,12 @@ int main() {
 }
 ```
 
-**Commented Output:** `You are a minor!`
-
+**Output:** `You are a minor!`
 
 ### <span style="color:#8e44ad">`if-else if-else` Statement</span>
 
-Handles multiple conditions sequentially.  The first condition that evaluates to true will have its associated block executed; the rest are skipped.
+Handles multiple conditions sequentially. The first condition that evaluates to
+true will have its associated block executed; the rest are skipped.
 
 ```c
 #include <stdio.h>
@@ -113,12 +133,12 @@ int main() {
 }
 ```
 
-**Commented Output:** `B`
-
+**Output:** `B`
 
 ### <span style="color:#8e44ad">`switch` Statement</span>
 
-A more efficient way to handle multiple conditions based on the value of a single *integer* or *character* expression.
+A more efficient way to handle multiple conditions based on the value of a
+single _integer_ or _character_ expression.
 
 ```c
 #include <stdio.h>
@@ -142,30 +162,41 @@ int main() {
 }
 ```
 
-**Commented Output:** `Option B selected`
-
+**Output:** `Option B selected`
 
 ## <span style="color:#2980b9">Flowchart Example: `if-else` Statement 📊</span>
 
 ```mermaid
 graph TD
-    A[Start] --> B{Is age >= 18?};
-    B -- Yes --> C[Print "Adult"];
-    B -- No --> D[Print "Minor"];
-    C --> E[End];
+    A([🎬 Start]) --> B{👤 Is age >= 18?};
+    B -- Yes --> C[✔️ Adult];
+    B -- No --> D[❗ Minor];
+    C --> E([🏁 End]);
     D --> E;
-```
 
+    style A fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#FFFFFF,font-size:16px,stroke-dasharray: 5
+    style B fill:#FFC107,stroke:#FFA000,stroke-width:3px,color:#000000,font-size:14px
+    style C fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style D fill:#FF5722,stroke:#D84315,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style E fill:#8BC34A,stroke:#558B2F,stroke-width:2px,color:#FFFFFF,font-size:16px
+
+```
 
 ## <span style="color:#2980b9">Conclusion 🎉</span>
 
-Mastering conditional statements is crucial for writing effective and versatile C programs. They allow you to create dynamic, responsive, and robust applications by controlling the flow of execution based on various conditions. Remember to choose the right type of conditional statement for the specific logic you need to implement.  Experiment with these examples and build upon them to create your own programs!
-
+Mastering conditional statements is crucial for writing effective and versatile
+C programs. They allow you to create dynamic, responsive, and robust
+applications by controlling the flow of execution based on various conditions.
+Remember to choose the right type of conditional statement for the specific
+logic you need to implement. Experiment with these examples and build upon them
+to create your own programs!
 
 # <span style="color:#e67e22">The Mighty `if` Statement in C 👑</span>
 
-The `if` statement is a fundamental control flow statement in C.  It allows your program to make decisions and execute different blocks of code based on whether a condition is true or false. Think of it as a branching path in your program's execution.
-
+The `if` statement is a fundamental control flow statement in C. It allows your
+program to make decisions and execute different blocks of code based on whether
+a condition is true or false. Think of it as a branching path in your program's
+execution.
 
 ## <span style="color:#2980b9">Syntax and Structure 🧱</span>
 
@@ -177,9 +208,13 @@ if (condition) {
 }
 ```
 
-* **`condition`**: This is an expression that evaluates to either true (non-zero) or false (zero).  This can involve comparisons (e.g., `x > 5`, `y == 10`), logical operators (`&&` for AND, `||` for OR, `!` for NOT), or any other expression that results in a numerical value.
-* **`{ ... }`**:  The curly braces enclose the block of code that will be executed *only* if the `condition` is true.  If the condition is false, this code is skipped.
-
+- **`condition`**: This is an expression that evaluates to either true
+  (non-zero) or false (zero). This can involve comparisons (e.g., `x > 5`,
+  `y == 10`), logical operators (`&&` for AND, `||` for OR, `!` for NOT), or any
+  other expression that results in a numerical value.
+- **`{ ... }`**: The curly braces enclose the block of code that will be
+  executed _only_ if the `condition` is true. If the condition is false, this
+  code is skipped.
 
 ### <span style="color:#8e44ad">Example: Checking a Number</span>
 
@@ -199,16 +234,16 @@ int main() {
 }
 ```
 
-**Commented Output:**
+**Output:**
 
 ```
 The number is greater than 5! 🎉
 ```
 
-
 ## <span style="color:#2980b9">Adding an `else` Clause 🔀</span>
 
-You can extend the `if` statement with an `else` clause to specify what should happen if the condition is *false*:
+You can extend the `if` statement with an `else` clause to specify what should
+happen if the condition is _false_:
 
 ```c
 if (condition) {
@@ -236,17 +271,16 @@ int main() {
 }
 ```
 
-**Commented Output:**
+**Output:**
 
 ```
 The number is odd.
 ```
 
-
 ## <span style="color:#2980b9">Nested `if` Statements 嵌套</span>
 
-You can nest `if` statements inside each other to create more complex decision-making logic.
-
+You can nest `if` statements inside each other to create more complex
+decision-making logic.
 
 ### <span style="color:#8e44ad">Example: Nested `if` for Grades 📚</span>
 
@@ -270,12 +304,11 @@ int main() {
 }
 ```
 
-**Commented Output:**
+**Output:**
 
 ```
 B Grade! 🥈
 ```
-
 
 ## <span style="color:#2980b9">Flowchart Representation 📊</span>
 
@@ -283,21 +316,31 @@ Here's a flowchart illustrating a simple `if-else` statement:
 
 ```mermaid
 graph TD
-    A[Start] --> B{Condition?};
-    B -- True --> C[Execute if True];
-    B -- False --> D[Execute if False];
-    C --> E[End];
+    A([🎬 Start]) --> B{❓ Condition?};
+    B -- 👍 True --> C[✔️ Execute if True];
+    B -- 👎 False --> D[❌ Execute if False];
+    C --> E([🏁 End]);
     D --> E;
+
+    style A fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#FFFFFF,font-size:16px
+    style B fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:14px
+    style C fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style D fill:#FF5722,stroke:#D84315,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style E fill:#8BC34A,stroke:#558B2F,stroke-width:2px,color:#FFFFFF,font-size:16px
+
 ```
 
-
-This visual representation clearly shows the branching paths based on the condition's truth value.  Remember, the power of `if` statements lies in their ability to control the flow of your program, making it dynamic and responsive to different inputs and situations.
-
+This visual representation clearly shows the branching paths based on the
+condition's truth value. Remember, the power of `if` statements lies in their
+ability to control the flow of your program, making it dynamic and responsive to
+different inputs and situations.
 
 # <span style="color:#e67e22">The Mighty `if else` Statement in C 👑</span>
 
-The `if else` statement is a fundamental control flow structure in C. It allows your program to make decisions and execute different blocks of code based on whether a condition is true or false.  Think of it as a branching path in your program's journey! 🛣️
-
+The `if else` statement is a fundamental control flow structure in C. It allows
+your program to make decisions and execute different blocks of code based on
+whether a condition is true or false. Think of it as a branching path in your
+program's journey! 🛣️
 
 ## <span style="color:#2980b9">Syntax and Structure 🧱</span>
 
@@ -311,10 +354,14 @@ if (condition) {
 }
 ```
 
-* **`if (condition)`:** This part evaluates a *boolean* expression (an expression that results in either `true` or `false`).  If the condition is true, the code inside the first curly braces `{}` is executed.
-* **`else`:** This keyword introduces the alternative block of code to be executed *only* if the condition in the `if` statement is false.
-* **Curly braces `{}`:**  These are crucial! They define the scope of the code blocks associated with `if` and `else`.  This is especially important when you have multiple statements within each block.
-
+- **`if (condition)`:** This part evaluates a _boolean_ expression (an
+  expression that results in either `true` or `false`). If the condition is
+  true, the code inside the first curly braces `{}` is executed.
+- **`else`:** This keyword introduces the alternative block of code to be
+  executed _only_ if the condition in the `if` statement is false.
+- **Curly braces `{}`:** These are crucial! They define the scope of the code
+  blocks associated with `if` and `else`. This is especially important when you
+  have multiple statements within each block.
 
 ### <span style="color:#8e44ad">Example: Checking for Even Numbers 🧮</span>
 
@@ -335,7 +382,7 @@ int main() {
 }
 ```
 
-**Commented Output:**
+**Output:**
 
 ```
 The number 10 is even.
@@ -347,24 +394,30 @@ If we change `number` to 7, the output would be:
 The number 7 is odd.
 ```
 
-
 ## <span style="color:#2980b9">Visualizing the Flow 🌊</span>
 
-Here's a Mermaid flowchart illustrating the `if else` execution flow:
+Here's a flowchart illustrating the `if else` execution flow:
 
 ```mermaid
 graph TD
-    A[Start] --> B{Condition?};
-    B -- True --> C[If block];
-    B -- False --> D[Else block];
-    C --> E[End];
+    A([🎬 Start]) --> B{❓ Is the condition true?};
+    B -- 👍 Yes --> C[✔️ Execute If block];
+    B -- 👎 No --> D[❌ Execute Else block];
+    C --> E([🏁 End]);
     D --> E;
-```
 
+    style A fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#FFFFFF,font-size:16px
+    style B fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:14px
+    style C fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style D fill:#FF5722,stroke:#D84315,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style E fill:#8BC34A,stroke:#558B2F,stroke-width:2px,color:#FFFFFF,font-size:16px
+
+```
 
 ## <span style="color:#2980b9">Nested `if else` Statements 嵌套</span>
 
-You can nest `if else` statements within each other to create more complex decision-making structures.  This allows for multiple levels of conditions.
+You can nest `if else` statements within each other to create more complex
+decision-making structures. This allows for multiple levels of conditions.
 
 ### <span style="color:#8e44ad">Example: Grading System 🎓</span>
 
@@ -387,37 +440,48 @@ int main() {
 }
 ```
 
-**Commented Output:**
+**Output:**
 
 ```
 Grade: B
 ```
 
-
 ## <span style="color:#2980b9">`if else if else` Chain ⛓️</span>
 
-The `else if` construct is a convenient way to chain multiple conditions together.  It only checks the next condition if the previous one is false.  This is more efficient than deeply nested `if else` statements in many cases.
-
+The `else if` construct is a convenient way to chain multiple conditions
+together. It only checks the next condition if the previous one is false. This
+is more efficient than deeply nested `if else` statements in many cases.
 
 ## <span style="color:#2980b9">Important Considerations 🤔</span>
 
-* **Indentation:** While not strictly required by the compiler, proper indentation makes your code significantly more readable and understandable.  Always indent your code blocks consistently!
-* **Boolean Expressions:** Ensure your conditions are correctly formulated to evaluate to `true` or `false`.
-* **Operator Precedence:** Be mindful of operator precedence when writing complex boolean expressions. Use parentheses `()` to enforce the desired order of operations.
+- **Indentation:** While not strictly required by the compiler, proper
+  indentation makes your code significantly more readable and understandable.
+  Always indent your code blocks consistently!
+- **Boolean Expressions:** Ensure your conditions are correctly formulated to
+  evaluate to `true` or `false`.
+- **Operator Precedence:** Be mindful of operator precedence when writing
+  complex boolean expressions. Use parentheses `()` to enforce the desired order
+  of operations.
 
-
-By mastering the `if else` statement, you gain crucial control over the flow of your C programs, enabling you to create dynamic and responsive applications. Remember to practice and experiment to solidify your understanding! 🎉
-
+By mastering the `if else` statement, you gain crucial control over the flow of
+your C programs, enabling you to create dynamic and responsive applications.
+Remember to practice and experiment to solidify your understanding! 🎉
 
 # <span style="color:#e67e22">The `if-else-if` Ladder in C 🪜</span>
 
-This document explains the `if-else-if` ladder in C, a fundamental programming construct used for making decisions based on multiple conditions.  We'll explore its functionality, illustrate it with examples, and highlight its importance in creating flexible and robust programs.
-
+This document explains the `if-else-if` ladder in C, a fundamental programming
+construct used for making decisions based on multiple conditions. We'll explore
+its functionality, illustrate it with examples, and highlight its importance in
+creating flexible and robust programs.
 
 ## <span style="color:#2980b9">Understanding the `if-else-if` Ladder</span>
 
-The `if-else-if` ladder allows you to check a series of conditions sequentially.  Once a condition evaluates to *true*, the corresponding block of code is executed, and the rest of the ladder is skipped. If *none* of the conditions are true, the optional `else` block at the end is executed.  Think of it like a staircase – you climb step-by-step until you find the right step (condition) and then you stop.
-
+The `if-else-if` ladder allows you to check a series of conditions sequentially.
+Once a condition evaluates to _true_, the corresponding block of code is
+executed, and the rest of the ladder is skipped. If _none_ of the conditions are
+true, the optional `else` block at the end is executed. Think of it like a
+staircase – you climb step-by-step until you find the right step (condition) and
+then you stop.
 
 ### <span style="color:#8e44ad">Syntax</span>
 
@@ -439,24 +503,33 @@ if (condition1) {
 
 ```mermaid
 graph TD
-    A[Start] --> B{Condition 1?};
-    B -- Yes --> C[Execute code block 1];
-    B -- No --> D{Condition 2?};
-    D -- Yes --> E[Execute code block 2];
-    D -- No --> F{Condition 3?};
-    F -- Yes --> G[Execute code block 3];
-    F -- No --> H[Execute else block];
-    C --> I[End];
+    A([🎬 Start]) --> B{❓ Is Condition 1 True?};
+    B -- 👍 Yes --> C[✔️ Execute Code Block 1];
+    B -- 👎 No --> D{❓ Is Condition 2 True?};
+    D -- 👍 Yes --> E[✔️ Execute Code Block 2];
+    D -- 👎 No --> F{❓ Is Condition 3 True?};
+    F -- 👍 Yes --> G[✔️ Execute Code Block 3];
+    F -- 👎 No --> H[❌ Execute Else Block];
+    C --> I([🏁 End]);
     E --> I;
     G --> I;
     H --> I;
-```
 
+    style A fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#FFFFFF,font-size:16px
+    style B fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:14px
+    style C fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style D fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:14px
+    style E fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style F fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:14px
+    style G fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style H fill:#FF5722,stroke:#D84315,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style I fill:#8BC34A,stroke:#558B2F,stroke-width:2px,color:#FFFFFF,font-size:16px
+
+```
 
 ## <span style="color:#2980b9">Illustrative Examples ✨</span>
 
 Let's look at some examples to solidify our understanding.
-
 
 ### <span style="color:#8e44ad">Example 1: Grading System</span>
 
@@ -522,21 +595,29 @@ int main() {
 }
 ```
 
-
 ## <span style="color:#2980b9">Key Considerations 🤔</span>
 
-* **Order Matters:** The order of conditions is crucial.  The first condition that evaluates to `true` will be executed, and the rest will be ignored.
-* **`else` is Optional:** You can have an `if-else-if` ladder without an `else` block.  In this case, if none of the conditions are met, no code within the ladder will be executed.
-* **Readability:** For very long ladders, consider refactoring your code into functions to improve readability and maintainability.  Using `switch` statements might also be a better alternative in some cases.
+- **Order Matters:** The order of conditions is crucial. The first condition
+  that evaluates to `true` will be executed, and the rest will be ignored.
+- **`else` is Optional:** You can have an `if-else-if` ladder without an `else`
+  block. In this case, if none of the conditions are met, no code within the
+  ladder will be executed.
+- **Readability:** For very long ladders, consider refactoring your code into
+  functions to improve readability and maintainability. Using `switch`
+  statements might also be a better alternative in some cases.
 
-
-By understanding and using the `if-else-if` ladder effectively, you can create more sophisticated and adaptable C programs. Remember to choose the most readable and maintainable approach based on the complexity of your conditions.
-
+By understanding and using the `if-else-if` ladder effectively, you can create
+more sophisticated and adaptable C programs. Remember to choose the most
+readable and maintainable approach based on the complexity of your conditions.
 
 # <span style="color:#e67e22">The `switch` Statement in C: A Comprehensive Guide 🎉</span>
 
-The `switch` statement in C is a powerful control flow statement that offers a more concise way to handle multiple conditions compared to nested `if-else` statements.  It's particularly useful when you need to check the value of a single variable against several different possibilities. Think of it as a supercharged, efficient version of a long series of `if-else if-else` statements!
-
+The `switch` statement in C is a powerful control flow statement that offers a
+more concise way to handle multiple conditions compared to nested `if-else`
+statements. It's particularly useful when you need to check the value of a
+single variable against several different possibilities. Think of it as a
+supercharged, efficient version of a long series of `if-else if-else`
+statements!
 
 ## <span style="color:#2980b9">Syntax and Structure ⚙️</span>
 
@@ -560,24 +641,30 @@ switch (expression) {
 }
 ```
 
-* **`expression`**: This is an integer expression (or an expression that can be implicitly converted to an integer) that is evaluated once at the beginning of the `switch` statement.
-* **`case constant1`, `case constant2`, ..., `case constantN`**: These are *constant* integer expressions that the `expression` is compared against.  If a match is found, the code following that `case` label is executed.
-* **`break`**: The `break` statement is crucial. It prevents the code from "falling through" to the next `case` after a match.  If you omit `break`, the code will execute sequentially until a `break` or the end of the `switch` is reached.
-* **`default`**: This is an optional clause.  The code within the `default` block executes if the `expression` doesn't match any of the `case` constants.
-
+- **`expression`**: This is an integer expression (or an expression that can be
+  implicitly converted to an integer) that is evaluated once at the beginning of
+  the `switch` statement.
+- **`case constant1`, `case constant2`, ..., `case constantN`**: These are
+  _constant_ integer expressions that the `expression` is compared against. If a
+  match is found, the code following that `case` label is executed.
+- **`break`**: The `break` statement is crucial. It prevents the code from
+  "falling through" to the next `case` after a match. If you omit `break`, the
+  code will execute sequentially until a `break` or the end of the `switch` is
+  reached.
+- **`default`**: This is an optional clause. The code within the `default` block
+  executes if the `expression` doesn't match any of the `case` constants.
 
 ### <span style="color:#8e44ad">Important Considerations 💡</span>
 
-*   The `expression` must result in an integer type (like `int`, `char`, `enum`).
-*   `case` labels must be unique constants within the same `switch` statement.
-*   The `default` case is optional but recommended for handling unexpected values.
-
+- The `expression` must result in an integer type (like `int`, `char`, `enum`).
+- `case` labels must be unique constants within the same `switch` statement.
+- The `default` case is optional but recommended for handling unexpected values.
 
 ## <span style="color:#2980b9">Switch vs. If-Else: A Comparison 📊</span>
 
 Let's illustrate the difference with examples:
 
-**Example 1:  Checking the day of the week using `if-else`**
+**Example 1: Checking the day of the week using `if-else`**
 
 ```c
 #include <stdio.h>
@@ -644,29 +731,39 @@ int main() {
 }
 ```
 
-As you can see, the `switch` statement provides a cleaner and more readable solution for this type of multiple-condition check.
-
+As you can see, the `switch` statement provides a cleaner and more readable
+solution for this type of multiple-condition check.
 
 ## <span style="color:#2980b9">Flowchart illustrating the `switch` statement 🗺️</span>
 
 ```mermaid
 graph TD
-    A[Start] --> B{Evaluate Expression};
-    B -- Expression == constant1 --> C[Execute case 1];
-    B -- Expression == constant2 --> D[Execute case 2];
-    B -- Expression == constantN --> E[Execute case N];
-    B -- No Match --> F[Execute default];
-    C --> G[break];
+    A([🎬 Start]) --> B{❓ Evaluate Expression};
+    B -- 💡 Expression == constant1 --> C[🔹 Execute Case 1];
+    B -- 💡 Expression == constant2 --> D[🔹 Execute Case 2];
+    B -- 💡 Expression == constantN --> E[🔹 Execute Case N];
+    B -- 🚫 No Match --> F[⚪ Execute Default];
+    C --> G[🔚 Break];
     D --> G;
     E --> G;
     F --> G;
-    G --> H[End];
+    G --> H([🏁 End]);
+
+    style A fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#FFFFFF,font-size:16px
+    style B fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:14px
+    style C fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style D fill:#03A9F4,stroke:#0288D1,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style E fill:#673AB7,stroke:#512DA8,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style F fill:#FF5722,stroke:#D84315,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style G fill:#8BC34A,stroke:#558B2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style H fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#FFFFFF,font-size:16px
+
 ```
 
+## <span style="color:#2980b9">Falling Through Cases ⚠️</span>
 
-## <span style="color:#2980b9">Falling Through Cases  ⚠️</span>
-
-If you *intentionally* omit the `break` statement, the code will "fall through" to the next case:
+If you _intentionally_ omit the `break` statement, the code will "fall through"
+to the next case:
 
 ```c
 #include <stdio.h>
@@ -690,19 +787,25 @@ int main() {
 }
 ```
 
-Use this feature cautiously, as it can make your code harder to understand and debug if not carefully planned.
+Use this feature cautiously, as it can make your code harder to understand and
+debug if not carefully planned.
 
-
-This guide provides a comprehensive overview of the `switch` statement in C. Remember to choose the most appropriate control flow statement based on your specific needs for readability and maintainability.  Happy coding! 🎉
-
+This guide provides a comprehensive overview of the `switch` statement in C.
+Remember to choose the most appropriate control flow statement based on your
+specific needs for readability and maintainability. Happy coding! 🎉
 
 # <span style="color:#e67e22">Limitations of `switch` Statements for Range Checks in C</span> ⚠️
 
-C's `switch` statement is a powerful tool for conditional branching, but it has inherent limitations when dealing with range checks.  Let's explore these limitations and find better alternatives.
+C's `switch` statement is a powerful tool for conditional branching, but it has
+inherent limitations when dealing with range checks. Let's explore these
+limitations and find better alternatives.
 
 ## <span style="color:#2980b9">The Problem: `switch` and Ranges</span> 🧮
 
-The `switch` statement excels at comparing a single variable against a list of *discrete* values.  However, checking if a variable falls within a *range* of values requires cumbersome workarounds.  Consider this scenario: you want to categorize a test score into letter grades (A, B, C, D, F).
+The `switch` statement excels at comparing a single variable against a list of
+_discrete_ values. However, checking if a variable falls within a _range_ of
+values requires cumbersome workarounds. Consider this scenario: you want to
+categorize a test score into letter grades (A, B, C, D, F).
 
 **Example:**
 
@@ -725,11 +828,15 @@ switch (score) {
 printf("Your grade is: %c\n", grade); //This will not compile correctly.
 ```
 
-The above code attempts to use ranges (e.g., `90 ... 100`), which is *not* supported by standard C `switch` statements.  Each case must specify a single, distinct value.
+The above code attempts to use ranges (e.g., `90 ... 100`), which is _not_
+supported by standard C `switch` statements. Each case must specify a single,
+distinct value.
 
 ### <span style="color:#8e44ad">Why This Doesn't Work</span> 🤔
 
-The `switch` statement fundamentally relies on a jump table or similar optimization technique to quickly locate the matching case.  Ranges introduce complexity that breaks this optimization.
+The `switch` statement fundamentally relies on a jump table or similar
+optimization technique to quickly locate the matching case. Ranges introduce
+complexity that breaks this optimization.
 
 ## <span style="color:#2980b9">Alternatives and Workarounds</span> 💡
 
@@ -737,7 +844,8 @@ Several elegant methods can handle range checks effectively:
 
 ### <span style="color:#8e44ad">1. `if-else if-else` Ladder</span> 🪜
 
-This is the most straightforward alternative.  It's readable and easily understandable, especially for simpler ranges.
+This is the most straightforward alternative. It's readable and easily
+understandable, especially for simpler ranges.
 
 ```c
 int score = 78;
@@ -758,10 +866,10 @@ if (score >= 90) {
 printf("Your grade is: %c\n", grade); // Output: Your grade is: C
 ```
 
+### <span style="color:#8e44ad">2. Array Lookup (For Equally Spaced Ranges)</span> 📚
 
-### <span style="color:#8e44ad">2.  Array Lookup (For Equally Spaced Ranges)</span> 📚
-
-If the ranges are equally spaced, an array lookup offers a compact and efficient solution:
+If the ranges are equally spaced, an array lookup offers a compact and efficient
+solution:
 
 ```c
 int score = 78;
@@ -772,12 +880,13 @@ char grades[] = {'F', 'F', 'D', 'C', 'B', 'A'}; //Note: we skip A+ and other gra
 printf("Your grade is: %c\n", grades[gradeIndex]); // Output: Your grade is: C
 ```
 
-*Note: This assumes 10-point grade intervals.  Adjust accordingly for other intervals.*
-
+_Note: This assumes 10-point grade intervals. Adjust accordingly for other
+intervals._
 
 ### <span style="color:#8e44ad">3. Using a function to improve code readability</span> 🧱
 
-We can improve the readability and maintainability of our code using a separate function.  This is particularly useful when dealing with complex logic.
+We can improve the readability and maintainability of our code using a separate
+function. This is particularly useful when dealing with complex logic.
 
 ```c
 char getGrade(int score){
@@ -804,45 +913,67 @@ int main(){
 }
 ```
 
-
-## <span style="color:#2980b9">Flowchart Illustrating `if-else if-else`</span>  flowchart
+## <span style="color:#2980b9">Flowchart Illustrating `if-else if-else`</span> flowchart
 
 ```mermaid
 graph TD
-    A[Start] --> B{score >= 90?};
-    B -- Yes --> C[grade = 'A'];
-    B -- No --> D{score >= 80?};
-    D -- Yes --> E[grade = 'B'];
-    D -- No --> F{score >= 70?};
-    F -- Yes --> G[grade = 'C'];
-    F -- No --> H{score >= 60?};
-    H -- Yes --> I[grade = 'D'];
-    H -- No --> J[grade = 'F'];
-    C --> K[End];
+    A([🎬 Start]) --> B{❓ Is score ≥ 90?};
+    B -- ✅ Yes --> C[🏆 grade = 'A'];
+    B -- ❌ No --> D{❓ Is score ≥ 80?};
+    D -- ✅ Yes --> E[🥈 grade = 'B'];
+    D -- ❌ No --> F{❓ Is score ≥ 70?};
+    F -- ✅ Yes --> G[🥉 grade = 'C'];
+    F -- ❌ No --> H{❓ Is score ≥ 60?};
+    H -- ✅ Yes --> I[📉 grade = 'D'];
+    H -- ❌ No --> J[❌ grade = 'F'];
+    C --> K([🏁 End]);
     E --> K;
     G --> K;
     I --> K;
     J --> K;
+
+    style A fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#FFFFFF,font-size:16px
+    style B fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:14px
+    style D fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:14px
+    style F fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:14px
+    style H fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:14px
+    style C fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style E fill:#03A9F4,stroke:#0288D1,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style G fill:#673AB7,stroke:#512DA8,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style I fill:#8BC34A,stroke:#558B2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style J fill:#FF5722,stroke:#D84315,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style K fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#FFFFFF,font-size:16px
+
 ```
 
-This flowchart visually represents the branching logic of the `if-else if-else` approach, making it easier to understand the code's flow.
+This flowchart visually represents the branching logic of the `if-else if-else`
+approach, making it easier to understand the code's flow.
 
-
-In conclusion, while `switch` statements are excellent for discrete value comparisons,  `if-else if-else` chains or array lookups (for equally-spaced ranges) provide more flexible and efficient ways to handle range checks in C.  Choose the method that best suits your specific needs and coding style, prioritizing readability and maintainability. Remember to always handle edge cases and potential errors, such as out-of-range inputs.
-
+In conclusion, while `switch` statements are excellent for discrete value
+comparisons, `if-else if-else` chains or array lookups (for equally-spaced
+ranges) provide more flexible and efficient ways to handle range checks in C.
+Choose the method that best suits your specific needs and coding style,
+prioritizing readability and maintainability. Remember to always handle edge
+cases and potential errors, such as out-of-range inputs.
 
 # <span style="color:#e67e22">Loops in C Programming 🔄</span>
 
-Loops are fundamental in programming. They let your code repeat a block of instructions multiple times, saving you from writing the same code over and over. Think of it like a washing machine – it repeats the wash, rinse, and spin cycle until the clothes are clean!  This significantly reduces code length and improves efficiency.
+Loops are fundamental in programming. They let your code repeat a block of
+instructions multiple times, saving you from writing the same code over and
+over. Think of it like a washing machine – it repeats the wash, rinse, and spin
+cycle until the clothes are clean! This significantly reduces code length and
+improves efficiency.
 
 ## <span style="color:#2980b9">Why Use Loops? 🤔</span>
 
-Imagine you need to print numbers from 1 to 10. Without loops, you'd have to write `printf()` ten times!  Loops automate this repetition. They are essential for tasks like:
+Imagine you need to print numbers from 1 to 10. Without loops, you'd have to
+write `printf()` ten times! Loops automate this repetition. They are essential
+for tasks like:
 
-*   Processing arrays and lists.
-*   Iterating through files.
-*   Repeating calculations until a condition is met.
-*   Creating patterns and structures in your output.
+- Processing arrays and lists.
+- Iterating through files.
+- Repeating calculations until a condition is met.
+- Creating patterns and structures in your output.
 
 ## <span style="color:#2980b9">Types of Loops in C 🌀</span>
 
@@ -850,7 +981,8 @@ C offers three main types of loops:
 
 ### <span style="color:#8e44ad">1. `for` Loop 🔁</span>
 
-The `for` loop is perfect when you know *exactly* how many times you want to repeat a block of code.
+The `for` loop is perfect when you know _exactly_ how many times you want to
+repeat a block of code.
 
 ```c
 #include <stdio.h>
@@ -868,23 +1000,32 @@ int main() {
 
 **Explanation:**
 
-*   `int i = 1;`:  Initializes a counter variable `i` to 1. This happens only once at the start.
-*   `i <= 5;`:  This is the *condition*. The loop continues as long as `i` is less than or equal to 5.
-*   `i++`: This *increments* `i` by 1 after each iteration.
-
+- `int i = 1;`: Initializes a counter variable `i` to 1. This happens only once
+  at the start.
+- `i <= 5;`: This is the _condition_. The loop continues as long as `i` is less
+  than or equal to 5.
+- `i++`: This _increments_ `i` by 1 after each iteration.
 
 ```mermaid
 graph TD
-    A[Initialization: i=1] --> B{Condition: i <= 5?};
-    B -- Yes --> C[Code Block: printf("%d ", i)];
-    C --> D[Increment: i++];
+    A([🔄 Initialization: i = 1]) --> B{❓ Condition: i ≤ 5?};
+    B -- ✅ Yes --> C[🖨️ Code Block: print i];
+    C --> D[🔼 Increment: i++];
     D --> B;
-    B -- No --> E[Loop Ends];
+    B -- ❌ No --> E([🏁 Loop Ends]);
+
+    style A fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#FFFFFF,font-size:16px
+    style B fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:14px
+    style C fill:#03A9F4,stroke:#0288D1,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style D fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style E fill:#673AB7,stroke:#512DA8,stroke-width:2px,color:#FFFFFF,font-size:16px
+
 ```
 
 ### <span style="color:#8e44ad">2. `while` Loop 🔄</span>
 
-Use a `while` loop when you want to repeat a block of code as long as a certain *condition* is true. You don't know beforehand how many times it will run.
+Use a `while` loop when you want to repeat a block of code as long as a certain
+_condition_ is true. You don't know beforehand how many times it will run.
 
 ```c
 #include <stdio.h>
@@ -904,21 +1045,26 @@ int main() {
 
 **Explanation:**
 
-The loop continues as long as `count` is less than 5.  The `count++` is crucial; without it, the loop would run forever (an *infinite loop* – avoid this!).
-
+The loop continues as long as `count` is less than 5. The `count++` is crucial;
+without it, the loop would run forever (an _infinite loop_ – avoid this!).
 
 ```mermaid
 graph TD
     A[Initialization: count = 0] --> B{Condition: count < 5?};
-    B -- Yes --> C[Code Block: printf("%d ", count); count++];
+    B -- Yes --> C[Code Block: print count; count++];
     C --> B;
     B -- No --> D[Loop Ends];
-```
 
+    style A fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#FFFFFF,font-size:16px
+    style B fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:14px
+    style C fill:#03A9F4,stroke:#0288D1,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style D fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+```
 
 ### <span style="color:#8e44ad">3. `do-while` Loop 🔁</span>
 
-Similar to `while`, but the condition is checked *after* the code block executes. This guarantees the code block runs *at least once*.
+Similar to `while`, but the condition is checked _after_ the code block
+executes. This guarantees the code block runs _at least once_.
 
 ```c
 #include <stdio.h>
@@ -938,41 +1084,45 @@ int main() {
 
 **Explanation:**
 
-The code inside the `do` block runs first.  Then, the condition `i < 5` is checked. If true, the loop continues; otherwise, it ends.
-
+The code inside the `do` block runs first. Then, the condition `i < 5` is
+checked. If true, the loop continues; otherwise, it ends.
 
 ```mermaid
 graph TD
-    A[Code Block: printf("%d ", i); i++] --> B{Condition: i < 5?};
-    B -- Yes --> A;
-    B -- No --> C[Loop Ends];
+    A[🔄 Code Block: i = i + 1] --> B{❓ Condition: i < 5?};
+    B -- ✅ Yes --> A;
+    B -- ❌ No --> C[🏁 Loop Ends];
+
+    style A fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#FFFFFF,font-size:16px
+    style B fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:14px
+    style C fill:#03A9F4,stroke:#0288D1,stroke-width:2px,color:#FFFFFF,font-size:14px
+
+
 ```
 
 ## <span style="color:#2980b9">Choosing the Right Loop 🤔</span>
 
 The best loop type depends on your specific needs:
 
-*   Use `for` when you know the number of iterations.
-*   Use `while` when the number of iterations is determined by a condition.
-*   Use `do-while` when the code block *must* execute at least once.
+- Use `for` when you know the number of iterations.
+- Use `while` when the number of iterations is determined by a condition.
+- Use `do-while` when the code block _must_ execute at least once.
 
-
-Remember to always be mindful of infinite loops – they can crash your program!  Properly incrementing or decrementing your counter variables is key to avoiding them.  Happy looping! 🎉
-
+Remember to always be mindful of infinite loops – they can crash your program!
+Properly incrementing or decrementing your counter variables is key to avoiding
+them. Happy looping! 🎉
 
 Error: Invalid response structure for 'C for Loop'.
 
 # <span style="color:#e67e22">The Wonderful World of `while` Loops in C 🌎</span>
 
-
-The `while` loop in C is a fundamental control flow statement that allows you to repeatedly execute a block of code as long as a specified condition remains true.  Think of it as a tireless worker, continuing its task until told to stop!
-
+The `while` loop in C is a fundamental control flow statement that allows you to
+repeatedly execute a block of code as long as a specified condition remains
+true. Think of it as a tireless worker, continuing its task until told to stop!
 
 ## <span style="color:#2980b9">Syntax and Execution ⚙️</span>
 
-
 The basic syntax of a `while` loop is straightforward:
-
 
 ```c
 while (condition) {
@@ -980,33 +1130,38 @@ while (condition) {
 }
 ```
 
-* **`condition`**: This is a Boolean expression (an expression that evaluates to either `true` or `false`). The code within the curly braces `{}` will only execute if the `condition` is `true`.
-* **Code Block**:  The statements enclosed within the curly braces are executed repeatedly as long as the `condition` evaluates to `true`.
+- **`condition`**: This is a Boolean expression (an expression that evaluates to
+  either `true` or `false`). The code within the curly braces `{}` will only
+  execute if the `condition` is `true`.
+- **Code Block**: The statements enclosed within the curly braces are executed
+  repeatedly as long as the `condition` evaluates to `true`.
 
-
-The loop continues to iterate until the `condition` becomes `false`. If the `condition` is initially `false`, the code block is never executed.
-
+The loop continues to iterate until the `condition` becomes `false`. If the
+`condition` is initially `false`, the code block is never executed.
 
 ### <span style="color:#8e44ad">Flowchart Representation</span>
 
-
 ```mermaid
 graph TD
-    A[Start] --> B{Condition True?};
-    B -- Yes --> C[Execute Code Block];
+    A[🚀 Start] --> B{❓ Condition True?};
+    B -- ✅ Yes --> C[🔨 Execute Code Block];
     C --> B;
-    B -- No --> D[End];
-```
+    B -- ❌ No --> D[🏁 End];
 
+    style A fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#FFFFFF,font-size:16px
+    style B fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:14px
+    style C fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style D fill:#8BC34A,stroke:#558B2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+
+```
 
 ## <span style="color:#2980b9">Indefinite Iteration Examples 🌟</span>
 
+`while` loops are particularly useful when you don't know in advance how many
+times you need to repeat a block of code. The loop continues until a specific
+event or condition is met.
 
-`while` loops are particularly useful when you don't know in advance how many times you need to repeat a block of code.  The loop continues until a specific event or condition is met.
-
-
-### <span style="color:#8e44ad">Example 1:  Guess the Number 🎯</span>
-
+### <span style="color:#8e44ad">Example 1: Guess the Number 🎯</span>
 
 ```c
 #include <stdio.h>
@@ -1039,7 +1194,7 @@ int main() {
 }
 ```
 
-*Example Output (will vary due to random number generation):*
+_Example Output (will vary due to random number generation):_
 
 ```
 Welcome to the Number Guessing Game!
@@ -1054,9 +1209,7 @@ Enter your guess: 68
 Congratulations! You guessed the number: 68
 ```
 
-
-### <span style="color:#8e44ad">Example 2:  Summing Numbers Until Zero  ➕</span>
-
+### <span style="color:#8e44ad">Example 2: Summing Numbers Until Zero ➕</span>
 
 ```c
 #include <stdio.h>
@@ -1079,7 +1232,7 @@ int main() {
 }
 ```
 
-*Example Output:*
+_Example Output:_
 
 ```
 Enter numbers to sum (enter 0 to stop):
@@ -1090,21 +1243,26 @@ Enter numbers to sum (enter 0 to stop):
 The sum of the entered numbers is: 60
 ```
 
-
 ## <span style="color:#2980b9">Important Considerations 🤔</span>
 
+- **Infinite Loops**: Be cautious! If your `condition` never becomes `false`,
+  you'll create an _infinite loop_, causing your program to run indefinitely.
+  Use `break` statements or carefully design your conditions to avoid this.
+- **Loop Counters**: While `while` loops are great for indefinite iteration, you
+  can still use a counter variable _inside_ the loop to track iterations if
+  needed.
 
-* **Infinite Loops**: Be cautious!  If your `condition` never becomes `false`, you'll create an *infinite loop*, causing your program to run indefinitely. Use `break` statements or carefully design your conditions to avoid this.
-* **Loop Counters**:  While `while` loops are great for indefinite iteration, you can still use a counter variable *inside* the loop to track iterations if needed.
-
-
-By mastering the `while` loop, you unlock a powerful tool for creating flexible and dynamic C programs! Remember to always carefully consider your loop conditions to ensure correct and efficient program execution.
-
+By mastering the `while` loop, you unlock a powerful tool for creating flexible
+and dynamic C programs! Remember to always carefully consider your loop
+conditions to ensure correct and efficient program execution.
 
 # <span style="color:#e67e22">Understanding the `do while` Loop in C 🔄</span>
 
-The `do while` loop is a fundamental control flow statement in C that allows you to execute a block of code repeatedly, *at least once*,  based on a condition.  It differs slightly from the `while` loop, offering a crucial advantage in certain scenarios. Let's explore its syntax, functionality, and differences compared to its `while` loop counterpart.
-
+The `do while` loop is a fundamental control flow statement in C that allows you
+to execute a block of code repeatedly, _at least once_, based on a condition. It
+differs slightly from the `while` loop, offering a crucial advantage in certain
+scenarios. Let's explore its syntax, functionality, and differences compared to
+its `while` loop counterpart.
 
 ## <span style="color:#2980b9">Syntax of the `do while` Loop 📜</span>
 
@@ -1113,41 +1271,49 @@ The general structure of a `do while` loop is as follows:
 ```c
 do {
   // Code to be executed repeatedly
-} while (condition); 
+} while (condition);
 ```
 
-*   **`do`**: This keyword marks the beginning of the loop block.  The code within the curly braces `{}` will be executed *at least once*.
-*   **`{` and `}`**: These curly braces enclose the code block to be repeated.
-*   **`while (condition)`**: This part checks the condition.  If the `condition` evaluates to `true` (non-zero), the loop continues to execute the code block. If it's `false` (zero), the loop terminates.  The crucial difference is that the condition is checked *after* the code block is executed.
-
+- **`do`**: This keyword marks the beginning of the loop block. The code within
+  the curly braces `{}` will be executed _at least once_.
+- **`{` and `}`**: These curly braces enclose the code block to be repeated.
+- **`while (condition)`**: This part checks the condition. If the `condition`
+  evaluates to `true` (non-zero), the loop continues to execute the code block.
+  If it's `false` (zero), the loop terminates. The crucial difference is that
+  the condition is checked _after_ the code block is executed.
 
 ### <span style="color:#8e44ad">Flowchart Representation</span>
 
 ```mermaid
 graph TD
-    A[Start] --> B{Do Code Block};
-    B --> C{Is Condition True?};
-    C -- Yes --> B;
-    C -- No --> D[End];
-```
+    A[🚀 Start] --> B{📝 Do Code Block};
+    B --> C{❓ Is Condition True?};
+    C -- ✅ Yes --> B;
+    C -- ❌ No --> D[🏁 End];
 
+    style A fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#FFFFFF,font-size:16px
+    style B fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:14px
+    style C fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style D fill:#8BC34A,stroke:#558B2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+
+```
 
 ## <span style="color:#2980b9">Key Differences from the `while` Loop 🧐</span>
 
 Here's a comparison table highlighting the core differences:
 
-| Feature        | `while` Loop                               | `do while` Loop                             |
-|----------------|-------------------------------------------|---------------------------------------------|
-| Condition Check | *Before* code execution                  | *After* code execution                       |
-| Minimum Executions | Zero (if condition is initially false) | At least one                                |
-
+| Feature            | `while` Loop                           | `do while` Loop        |
+| ------------------ | -------------------------------------- | ---------------------- |
+| Condition Check    | _Before_ code execution                | _After_ code execution |
+| Minimum Executions | Zero (if condition is initially false) | At least one           |
 
 ## <span style="color:#2980b9">Examples illustrating `do while` functionality ✨</span>
 
-
 ### <span style="color:#8e44ad">Example 1: Simple Number Guessing Game</span>
 
-This example demonstrates a simple number guessing game where the user is prompted to guess a number until they guess correctly.  The `do while` loop ensures that the user gets at least one chance to guess.
+This example demonstrates a simple number guessing game where the user is
+prompted to guess a number until they guess correctly. The `do while` loop
+ensures that the user gets at least one chance to guess.
 
 ```c
 #include <stdio.h>
@@ -1174,12 +1340,12 @@ int main() {
     }
   } while (guess != secretNumber);
 
-  printf("Congratulations! You guessed the number %d.\n", secretNumber); 
+  printf("Congratulations! You guessed the number %d.\n", secretNumber);
   return 0;
 }
 ```
 
-**Commented Output (example):**
+**Output (example):**
 
 ```
 Welcome to the Number Guessing Game!
@@ -1193,11 +1359,10 @@ Guess a number between 1 and 100: 65
 Congratulations! You guessed the number 65.
 ```
 
-
 ### <span style="color:#8e44ad">Example 2: Menu-Driven Program</span>
 
-A menu-driven program often benefits from a `do while` loop to ensure the menu is displayed at least once and the program doesn't exit prematurely.
-
+A menu-driven program often benefits from a `do while` loop to ensure the menu
+is displayed at least once and the program doesn't exit prematurely.
 
 ```c
 #include <stdio.h>
@@ -1232,7 +1397,7 @@ int main() {
 }
 ```
 
-**Commented Output (example):**
+**Output (example):**
 
 ```
 Menu:
@@ -1257,20 +1422,24 @@ Enter your choice: 3
 Exiting...
 ```
 
-
 ## <span style="color:#2980b9">Conclusion 🎯</span>
 
-The `do while` loop provides a concise way to execute a block of code at least once, making it suitable for scenarios where you need to guarantee initial execution regardless of the condition.  Understanding its nuances compared to the `while` loop is crucial for writing efficient and robust C programs. Remember to choose the loop type that best suits your specific needs!
-
+The `do while` loop provides a concise way to execute a block of code at least
+once, making it suitable for scenarios where you need to guarantee initial
+execution regardless of the condition. Understanding its nuances compared to the
+`while` loop is crucial for writing efficient and robust C programs. Remember to
+choose the loop type that best suits your specific needs!
 
 # <span style="color:#e67e22">C Loops: 🌀 `for` vs. `while`</span>
 
-This document compares the `for` and `while` loops in C, highlighting their differences and providing examples to illustrate their best use cases.  We'll use emojis, Markdown formatting, and Mermaid diagrams to make it visually appealing and easy to understand.
-
+This document compares the `for` and `while` loops in C, highlighting their
+differences and providing examples to illustrate their best use cases.
 
 ## <span style="color:#2980b9">The `for` Loop 🔁</span>
 
-The `for` loop is ideal when you know *in advance* how many times you need to iterate.  It's perfect for processing arrays, iterating a specific number of times, or working with sequences.
+The `for` loop is ideal when you know _in advance_ how many times you need to
+iterate. It's perfect for processing arrays, iterating a specific number of
+times, or working with sequences.
 
 ### <span style="color:#8e44ad">Syntax and Structure</span>
 
@@ -1282,9 +1451,12 @@ for (initialization; condition; increment/decrement) {
 }
 ```
 
-*   **Initialization:** Executed once at the beginning of the loop.  Typically used to declare and initialize a counter variable.
-*   **Condition:** Checked before each iteration. If true, the loop body executes; otherwise, the loop terminates.
-*   **Increment/Decrement:**  Executed after each iteration.  Usually used to update the counter variable.
+- **Initialization:** Executed once at the beginning of the loop. Typically used
+  to declare and initialize a counter variable.
+- **Condition:** Checked before each iteration. If true, the loop body executes;
+  otherwise, the loop terminates.
+- **Increment/Decrement:** Executed after each iteration. Usually used to update
+  the counter variable.
 
 ### <span style="color:#8e44ad">Example: Printing Numbers 1-10</span>
 
@@ -1303,24 +1475,33 @@ int main() {
 **Output:**
 
 ```
-1 2 3 4 5 6 7 8 9 10 
+1 2 3 4 5 6 7 8 9 10
 ```
 
-### <span style="color:#8e44ad">Mermaid Diagram</span>
+### <span style="color:#8e44ad">Diagram</span>
 
 ```mermaid
 graph TD
-    A[Initialization] --> B{Condition?};
-    B -- Yes --> C[Loop Body];
-    C --> D[Increment/Decrement];
+    A[🔄 Initialization] --> B{❓ Condition?};
+    B -- ✅ Yes --> C[🔁 Loop Body];
+    C --> D[➕ Increment/Decrement];
     D --> B;
-    B -- No --> E[Loop End];
-```
+    B -- ❌ No --> E[🏁 Loop End];
 
+    style A fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#FFFFFF,font-size:16px
+    style B fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:14px
+    style C fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style D fill:#03A9F4,stroke:#0288D1,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style E fill:#8BC34A,stroke:#558B2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+
+```
 
 ## <span style="color:#2980b9">The `while` Loop 🔄</span>
 
-The `while` loop is perfect when you don't know *in advance* how many times you need to iterate.  It continues to execute as long as a specified condition is true.  It's often used for input processing, reading files until the end, or waiting for a specific event.
+The `while` loop is perfect when you don't know _in advance_ how many times you
+need to iterate. It continues to execute as long as a specified condition is
+true. It's often used for input processing, reading files until the end, or
+waiting for a specific event.
 
 ### <span style="color:#8e44ad">Syntax and Structure</span>
 
@@ -1332,9 +1513,11 @@ while (condition) {
 }
 ```
 
-*   **Condition:** Checked before each iteration. If true, the loop body executes; otherwise, the loop terminates.  It's crucial to ensure the condition eventually becomes false to prevent an infinite loop.
+- **Condition:** Checked before each iteration. If true, the loop body executes;
+  otherwise, the loop terminates. It's crucial to ensure the condition
+  eventually becomes false to prevent an infinite loop.
 
-### <span style="color:#8e44ad">Example:  Reading Input Until a Specific Character</span>
+### <span style="color:#8e44ad">Example: Reading Input Until a Specific Character</span>
 
 ```c
 #include <stdio.h>
@@ -1362,53 +1545,75 @@ q
 Loop terminated.
 ```
 
-### <span style="color:#8e44ad">Mermaid Diagram</span>
+### <span style="color:#8e44ad">Diagram</span>
 
 ```mermaid
 graph TD
-    A{Condition?} -- Yes --> B[Loop Body];
+    A{❓ Condition?} -- ✅ Yes --> B[🔁 Loop Body];
     B --> A;
-    A -- No --> C[Loop End];
-```
+    A -- ❌ No --> C[🏁 Loop End];
 
+    style A fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,font-size:16px
+    style B fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style C fill:#8BC34A,stroke:#558B2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+
+```
 
 ## <span style="color:#2980b9">Choosing Between `for` and `while` 🤔</span>
 
-*   **Use `for` when:** You know the number of iterations beforehand (e.g., iterating through an array).
-*   **Use `while` when:** The number of iterations is unknown and depends on a condition (e.g., reading data from a file until the end-of-file is reached).
+- **Use `for` when:** You know the number of iterations beforehand (e.g.,
+  iterating through an array).
+- **Use `while` when:** The number of iterations is unknown and depends on a
+  condition (e.g., reading data from a file until the end-of-file is reached).
 
-Remember to always carefully design your loop conditions to avoid infinite loops!  Use `break` and `continue` statements judiciously for more complex control flow within loops.
+Remember to always carefully design your loop conditions to avoid infinite
+loops! Use `break` and `continue` statements judiciously for more complex
+control flow within loops.
 
-
-This guide provides a clear understanding of `for` and `while` loops in C.  Choose the loop that best suits your specific needs for efficient and readable code. Remember to always test your code thoroughly! 🧪
-
+This guide provides a clear understanding of `for` and `while` loops in C.
+Choose the loop that best suits your specific needs for efficient and readable
+code. Remember to always test your code thoroughly! 🧪
 
 # <span style="color:#e67e22">The `continue` Statement in C: Skipping Iterations ✨</span>
 
-The `continue` statement in C is a control flow statement that allows you to skip the rest of the current iteration of a loop (either `for` or `while`) and proceed directly to the next iteration.  Think of it as saying, "Okay, I'm done with this one; let's move on to the next!"
+The `continue` statement in C is a control flow statement that allows you to
+skip the rest of the current iteration of a loop (either `for` or `while`) and
+proceed directly to the next iteration. Think of it as saying, "Okay, I'm done
+with this one; let's move on to the next!"
 
 ## <span style="color:#2980b9">How `continue` Works 🏃‍♂️</span>
 
-When the `continue` statement is encountered within a loop, the following happens:
+When the `continue` statement is encountered within a loop, the following
+happens:
 
-* The remaining statements within the current loop iteration are ignored.
-* The loop's control goes directly to the loop's condition check (or increment/decrement in the case of a `for` loop).
-* If the loop condition is still true, the next iteration begins; otherwise, the loop terminates.
+- The remaining statements within the current loop iteration are ignored.
+- The loop's control goes directly to the loop's condition check (or
+  increment/decrement in the case of a `for` loop).
+- If the loop condition is still true, the next iteration begins; otherwise, the
+  loop terminates.
 
-### <span style="color:#8e44ad">Visual Representation with a Mermaid Flowchart</span>
+### <span style="color:#8e44ad">Flowchart</span>
 
 ```mermaid
 graph TD
-    A[Start of Loop Iteration] --> B{Is `continue` encountered?};
-    B -- Yes --> C[Go to next iteration];
-    B -- No --> D[Execute remaining code in iteration];
-    D --> E[End of Iteration];
+    A[🔄 Start of Loop Iteration] --> B{🤔 Is *continue* encountered?};
+    B -- ✅ Yes --> C[⏩ Go to next iteration];
+    B -- ❌ No --> D[📝 Execute remaining code in iteration];
+    D --> E[🏁 End of Iteration];
     C --> E;
-    E --> F[Loop condition check];
-    F -- True --> A;
-    F -- False --> G[End of Loop];
-```
+    E --> F{🔍 Loop condition check};
+    F -- ✅ True --> A;
+    F -- ❌ False --> G[🚪 End of Loop];
 
+    style A fill:#FFEB3B,stroke:#FBC02D,stroke-width:2px,color:#000000,font-size:16px
+    style B fill:#8BC34A,stroke:#4CAF50,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style C fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style D fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style E fill:#8BC34A,stroke:#558B2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style F fill:#FFC107,stroke:#FF8F00,stroke-width:2px,color:#000000,font-size:14px
+    style G fill:#F44336,stroke:#D32F2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+
+```
 
 ## <span style="color:#2980b9">Examples Illustrating `continue` 💡</span>
 
@@ -1416,7 +1621,8 @@ Let's explore some examples to solidify your understanding.
 
 ### <span style="color:#8e44ad">Example 1: Skipping Even Numbers</span>
 
-This example demonstrates printing only odd numbers from 1 to 10 using a `for` loop and the `continue` statement.
+This example demonstrates printing only odd numbers from 1 to 10 using a `for`
+loop and the `continue` statement.
 
 ```c
 #include <stdio.h>
@@ -1433,12 +1639,12 @@ int main() {
 }
 ```
 
-*Output*: `1 3 5 7 9`
+_Output_: `1 3 5 7 9`
 
+### <span style="color:#8e44ad">Example 2: Processing User Input with `continue`</span>
 
-### <span style="color:#8e44ad">Example 2:  Processing User Input with `continue`</span>
-
-This example demonstrates a `while` loop that continues to prompt the user for input until a positive number is entered.
+This example demonstrates a `while` loop that continues to prompt the user for
+input until a positive number is entered.
 
 ```c
 #include <stdio.h>
@@ -1463,7 +1669,8 @@ int main() {
 }
 ```
 
-*Output (Example):*
+_Output (Example):_
+
 ```
 Enter a positive integer: -5
 Number must be positive. Try again.
@@ -1475,30 +1682,35 @@ Enter a positive integer: 7
 You entered: 7
 ```
 
-
 ## <span style="color:#2980b9">Key Differences between `continue` and `break` 🔄</span>
 
 It's important to distinguish `continue` from `break`:
 
-* **`continue`**: Skips the *rest* of the current iteration and proceeds to the next iteration of the loop.
-* **`break`**: Exits the loop entirely.
-
+- **`continue`**: Skips the _rest_ of the current iteration and proceeds to the
+  next iteration of the loop.
+- **`break`**: Exits the loop entirely.
 
 ## <span style="color:#2980b9">When to Use `continue` 🤔</span>
 
-Use `continue` when you want to selectively skip parts of a loop's iterations based on a condition, but you *don't* want to terminate the loop prematurely.  It's particularly useful for handling exceptions or filtering data within loops.  Remember, overuse can lead to less readable code, so use it judiciously.
-
+Use `continue` when you want to selectively skip parts of a loop's iterations
+based on a condition, but you _don't_ want to terminate the loop prematurely.
+It's particularly useful for handling exceptions or filtering data within loops.
+Remember, overuse can lead to less readable code, so use it judiciously.
 
 # <span style="color:#e67e22">The Mighty `break` Statement in C 💥</span>
 
-The `break` statement in C is a powerful tool used to abruptly end the execution of a loop or a `switch` statement.  It's like hitting the "escape" button in a program, forcing an immediate exit from the current control structure. Let's explore its functionality in detail.
-
+The `break` statement in C is a powerful tool used to abruptly end the execution
+of a loop or a `switch` statement. It's like hitting the "escape" button in a
+program, forcing an immediate exit from the current control structure. Let's
+explore its functionality in detail.
 
 ## <span style="color:#2980b9">Breaking Free from Loops 🔄</span>
 
-The `break` statement offers a way to exit a `for`, `while`, or `do-while` loop prematurely.  This is particularly useful when a specific condition is met and further iterations are unnecessary or undesirable.
+The `break` statement offers a way to exit a `for`, `while`, or `do-while` loop
+prematurely. This is particularly useful when a specific condition is met and
+further iterations are unnecessary or undesirable.
 
-### <span style="color:#8e44ad">Example:  Exiting a `for` loop</span>
+### <span style="color:#8e44ad">Example: Exiting a `for` loop</span>
 
 ```c
 #include <stdio.h>
@@ -1515,33 +1727,43 @@ int main() {
 }
 ```
 
-**Commented Output:**
+**Output:**
 
 ```
 1 2 3 4 Loop terminated.
 ```
 
-The loop iterates until `i` becomes 5. At that point, `break` is executed, and the loop terminates immediately, preventing the printing of numbers 6 through 10.
-
+The loop iterates until `i` becomes 5. At that point, `break` is executed, and
+the loop terminates immediately, preventing the printing of numbers 6
+through 10.
 
 ### <span style="color:#8e44ad">Flowchart for `break` in a `for` loop</span>
 
 ```mermaid
 graph TD
-    A[Start Loop] --> B{i == 5?};
-    B -- Yes --> C[break];
-    B -- No --> D[Print i];
-    D --> E[Increment i];
+    A[🔄 Start Loop] --> B{❓ i == 5?};
+    B -- ✅ Yes --> C[🚪 break];
+    B -- ❌ No --> D[🖨️ Print i];
+    D --> E[🔼 Increment i];
     E --> B;
-    C --> F[Loop Terminated];
-```
+    C --> F[❌ Loop Terminated];
 
+    style A fill:#FFEB3B,stroke:#FBC02D,stroke-width:2px,color:#000000,font-size:16px
+    style B fill:#8BC34A,stroke:#4CAF50,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style C fill:#F44336,stroke:#D32F2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style D fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style E fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style F fill:#8BC34A,stroke:#558B2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+
+```
 
 ## <span style="color:#2980b9">Escaping from `switch` Statements 🚪</span>
 
-In a `switch` statement, `break` prevents the "fall-through" behavior.  Without `break`, execution would continue into the next `case` even if the current `case`'s condition is met. This is often unintended and leads to errors.
+In a `switch` statement, `break` prevents the "fall-through" behavior. Without
+`break`, execution would continue into the next `case` even if the current
+`case`'s condition is met. This is often unintended and leads to errors.
 
-### <span style="color:#8e44ad">Example:  `switch` with and without `break`</span>
+### <span style="color:#8e44ad">Example: `switch` with and without `break`</span>
 
 ```c
 #include <stdio.h>
@@ -1565,67 +1787,84 @@ int main() {
 }
 ```
 
-**Commented Output (Without break in case 1):**
+**Output (Without break in case 1):**
 
 ```
 Monday
 Tuesday
 ```
 
-**Commented Output (With break in case 1):**
+**Output (With break in case 1):**
 
 ```
 Wednesday
 ```
 
-The first output shows the fall-through; the second demonstrates how `break` prevents it.
-
+The first output shows the fall-through; the second demonstrates how `break`
+prevents it.
 
 ### <span style="color:#8e44ad">Flowchart for `break` in a `switch` statement</span>
 
 ```mermaid
 graph TD
-    A[switch(day)] --> B{day == 1?};
-    B -- Yes --> C[Print "Monday"];
-    C --> D{break?};
-    D -- Yes --> E[End switch];
-    D -- No --> F[Print "Tuesday"];
+    A[switch *day*] --> B{❓ day == 1?};
+    B -- ✅ Yes --> C[📅 Print Monday];
+    C --> D{❓ break?};
+    D -- ✅ Yes --> E[🚪 End switch];
+    D -- ❌ No --> F[📅 Print Tuesday];
     F --> E;
-    B -- No --> G{day == 2?};
-    G -- Yes --> H[Print "Tuesday"];
+    B -- ❌ No --> G{❓ day == 2?};
+    G -- ✅ Yes --> H[📅 Print Tuesday];
     H --> E;
-    G -- No --> I{day == 3?};
-    I -- Yes --> J[Print "Wednesday"];
+    G -- ❌ No --> I{❓ day == 3?};
+    I -- ✅ Yes --> J[📅 Print Wednesday];
     J --> E;
-    I -- No --> K[Print "Other day"];
+    I -- ❌ No --> K[📅 Print Other day];
     K --> E;
-```
 
+    style A fill:#FFEB3B,stroke:#FBC02D,stroke-width:2px,color:#000000,font-size:16px
+    style B fill:#8BC34A,stroke:#4CAF50,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style C fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style D fill:#FF5722,stroke:#D32F2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style F fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style G fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#000000,font-size:14px
+    style H fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style I fill:#FFEB3B,stroke:#FBC02D,stroke-width:2px,color:#000000,font-size:14px
+    style J fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style K fill:#FF5722,stroke:#D32F2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style E fill:#8BC34A,stroke:#558B2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+
+```
 
 ## <span style="color:#2980b9">Key Takeaways 💡</span>
 
-*   `break` provides a mechanism to exit loops and `switch` statements prematurely.
-*   In loops, it prevents unnecessary iterations when a specific condition is met.
-*   In `switch` statements, it avoids unintended fall-through between cases, leading to cleaner and more predictable code.
-*   Always consider using `break` strategically to improve the efficiency and readability of your C programs.
+- `break` provides a mechanism to exit loops and `switch` statements
+  prematurely.
+- In loops, it prevents unnecessary iterations when a specific condition is met.
+- In `switch` statements, it avoids unintended fall-through between cases,
+  leading to cleaner and more predictable code.
+- Always consider using `break` strategically to improve the efficiency and
+  readability of your C programs.
 
-Remember to use `break` carefully and thoughtfully; its misuse can lead to unexpected program behavior.  Understanding its function is crucial for writing effective and reliable C code.
-
+Remember to use `break` carefully and thoughtfully; its misuse can lead to
+unexpected program behavior. Understanding its function is crucial for writing
+effective and reliable C code.
 
 # <span style="color:#e67e22">The `goto` Statement in C: A Controversial Jump</span> ✈️
 
-
 ## <span style="color:#2980b9">Understanding the `goto` Statement</span>
 
-The `goto` statement in C is a **jump statement** that allows you to transfer control unconditionally to another point in your program.  Think of it as a forceful redirection – you tell the program to immediately jump to a specific labeled location, ignoring the normal sequential flow of execution.
-
+The `goto` statement in C is a **jump statement** that allows you to transfer
+control unconditionally to another point in your program. Think of it as a
+forceful redirection – you tell the program to immediately jump to a specific
+labeled location, ignoring the normal sequential flow of execution.
 
 ### <span style="color:#8e44ad">Syntax</span>
 
 The syntax is straightforward:
 
 ```c
-goto label; 
+goto label;
 
 // ... some code ...
 
@@ -1633,24 +1872,33 @@ label:
   // Code to execute after the jump
 ```
 
-*   `goto label;` : This line initiates the jump.  `label` is an identifier (a name) that you define to mark the target location.
-*   `label:`: This is a label declaration. It's simply a name followed by a colon (`:`) that marks a specific point in your code.  Labels must be unique within a function.
-
+- `goto label;` : This line initiates the jump. `label` is an identifier (a
+  name) that you define to mark the target location.
+- `label:`: This is a label declaration. It's simply a name followed by a colon
+  (`:`) that marks a specific point in your code. Labels must be unique within a
+  function.
 
 ## <span style="color:#2980b9">Potential Uses (and Why They're Often Discouraged)</span>
 
-While `goto` might seem like a powerful tool, its use is generally discouraged in modern C programming.  Here's why:
+While `goto` might seem like a powerful tool, its use is generally discouraged
+in modern C programming. Here's why:
 
-* **Unstructured Code:**  Excessive use of `goto` leads to *spaghetti code* – programs that are difficult to read, understand, debug, and maintain. The flow of control becomes tangled and unpredictable.
+- **Unstructured Code:** Excessive use of `goto` leads to _spaghetti code_ –
+  programs that are difficult to read, understand, debug, and maintain. The flow
+  of control becomes tangled and unpredictable.
 
-* **Error-Prone:**  Jumping around with `goto` can easily lead to errors, especially in larger programs. It's easy to accidentally jump into or out of loops or blocks of code incorrectly.
+- **Error-Prone:** Jumping around with `goto` can easily lead to errors,
+  especially in larger programs. It's easy to accidentally jump into or out of
+  loops or blocks of code incorrectly.
 
-* **Alternatives:**  Structured programming constructs like `for`, `while`, `do-while`, `if-else`, `switch`, and functions offer more readable and maintainable ways to control program flow.
-
+- **Alternatives:** Structured programming constructs like `for`, `while`,
+  `do-while`, `if-else`, `switch`, and functions offer more readable and
+  maintainable ways to control program flow.
 
 ### <span style="color:#8e44ad">Example: A Simple (and questionable) `goto` usage</span>
 
-This example demonstrates a simple `goto` usage for exiting a nested loop.  *While functional, it's considered bad practice.*
+This example demonstrates a simple `goto` usage for exiting a nested loop.
+_While functional, it's considered bad practice._
 
 ```c
 #include <stdio.h>
@@ -1671,7 +1919,7 @@ end_loops:
 }
 ```
 
-**Commented Output:**
+**Output:**
 
 ```
 i = 0, j = 0
@@ -1690,10 +1938,10 @@ i = 2, j = 2
 Exiting loops using goto...
 ```
 
-
 ### <span style="color:#8e44ad">A Better Approach (Without `goto`) </span>
 
-The previous example can be rewritten in a much clearer way using a `break` statement:
+The previous example can be rewritten in a much clearer way using a `break`
+statement:
 
 ```c
 #include <stdio.h>
@@ -1714,54 +1962,79 @@ int main() {
 }
 ```
 
-The output is the same, but the code is significantly more readable and easier to understand.
+The output is the same, but the code is significantly more readable and easier
+to understand.
 
 ## <span style="color:#2980b9">Flowchart Comparison</span>
-
 
 **Using `goto`:**
 
 ```mermaid
 graph TD
-A[Start] --> B{i<5?};
-B -- Yes --> C{j<5?};
-C -- Yes --> D[Print i,j];
-D --> E{i==2 && j==3?};
-E -- Yes --> F[goto end];
-E -- No --> C;
-B -- No --> F;
-F[end] --> G[End];
+    A[🚦 Start] --> B{🔢 i < 5?};
+    B -- ✅ Yes --> C{🔢 j < 5?};
+    C -- ✅ Yes --> D[📣 Print i, j];
+    D --> E{🔍 i == 2 && j == 3?};
+    E -- ✅ Yes --> F[⛔ Goto End];
+    E -- ❌ No --> C;
+    B -- ❌ No --> F;
+    F[🏁 End] --> G[✅ End];
+
+    style A fill:#FFEB3B,stroke:#FBC02D,stroke-width:2px,color:#000000,font-size:16px
+    style B fill:#8BC34A,stroke:#4CAF50,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style C fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style D fill:#FF5722,stroke:#D32F2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style E fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#000000,font-size:14px
+    style F fill:#9C27B0,stroke:#7B1FA2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style G fill:#8BC34A,stroke:#558B2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+
 ```
 
 **Using `break`:**
 
 ```mermaid
 graph TD
-A[Start] --> B{i<5?};
-B -- Yes --> C{j<5?};
-C -- Yes --> D[Print i,j];
-D --> E{i==2 && j==3?};
-E -- Yes --> F[break];
-E -- No --> C;
-C -- No --> H{i ==2 && j==3?};
-H -- Yes --> F
-H -- No --> I[i++]
-I --> B;
-B -- No --> F;
-F[End loops] --> G[End];
+    A[🚦 Start] --> B{🔢 i < 5?};
+    B -- ✅ Yes --> C{🔢 j < 5?};
+    C -- ✅ Yes --> D[📣 Print i, j];
+    D --> E{🔍 i == 2 && j == 3?};
+    E -- ✅ Yes --> F[⛔ Break];
+    E -- ❌ No --> C;
+    C -- ❌ No --> H{🔍 i == 2 && j == 3?};
+    H -- ✅ Yes --> F;
+    H -- ❌ No --> I[🔄 i++];
+    I --> B;
+    B -- ❌ No --> F;
+    F[🏁 End loops] --> G[✅ End];
+
+    style A fill:#FFEB3B,stroke:#FBC02D,stroke-width:2px,color:#000000,font-size:16px
+    style B fill:#8BC34A,stroke:#4CAF50,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style C fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style D fill:#FF5722,stroke:#D32F2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style E fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#000000,font-size:14px
+    style F fill:#9C27B0,stroke:#7B1FA2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style H fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#FFFFFF,font-size:14px
+    style I fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#000000,font-size:14px
+    style G fill:#8BC34A,stroke:#558B2F,stroke-width:2px,color:#FFFFFF,font-size:14px
+
 
 ```
 
-As you can see, the `break`-based flowchart is much cleaner and easier to follow.
-
+As you can see, the `break`-based flowchart is much cleaner and easier to
+follow.
 
 ## <span style="color:#2980b9">Conclusion</span> 🔚
 
-While `goto` *can* be used, it's generally best avoided in favor of structured programming techniques.  Using `goto` makes your code harder to read, understand, and maintain, increasing the likelihood of errors.  Stick to the structured programming constructs provided by C for cleaner, more robust code!
-
+While `goto` _can_ be used, it's generally best avoided in favor of structured
+programming techniques. Using `goto` makes your code harder to read, understand,
+and maintain, increasing the likelihood of errors. Stick to the structured
+programming constructs provided by C for cleaner, more robust code!
 
 <h1><span style='color:#e67e22'>Conclusion</span></h1>
 
-And there you have it!  We've covered a lot of ground today, and hopefully, you found this information helpful and insightful. 😊  But the conversation doesn't end here! We'd love to hear your thoughts, comments, and any suggestions you might have.  What did you think of this post? What other topics would you like to see us cover?  Let us know in the comments below! 👇 We're excited to hear from you!  🎉
-
-
+And there you have it! We've covered a lot of ground today, and hopefully, you
+found this information helpful and insightful. 😊 But the conversation doesn't
+end here! We'd love to hear your thoughts, comments, and any suggestions you
+might have. What did you think of this post? What other topics would you like to
+see us cover? Let us know in the comments below! 👇 We're excited to hear from
+you! 🎉
