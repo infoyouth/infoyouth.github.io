@@ -3,12 +3,10 @@ name: Jekyll GH-Pages Tagging Workflow
 on:
     # Trigger when Markdown files pushed to docs/_posts on the master branch 
     push:
-      branches: [ "main" ]
-    pull_request:
-      branches: [ "main" ]
-      paths:
-        - _posts/*.md'
-    # Allows this workflow to be triggered manually
+        branches:
+            - main
+        paths:
+            - '_posts/*.md'
     workflow_dispatch:
 
 jobs:
