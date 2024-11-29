@@ -12,7 +12,6 @@ pin: true
 math: false
 mermaid: true
 ---
-
 # Reusable GitHub Action for Python Code Quality 🚀
 
 Reusable GitHub Actions help you
