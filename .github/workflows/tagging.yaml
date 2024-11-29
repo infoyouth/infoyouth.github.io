@@ -7,6 +7,12 @@ on:
             - main
         paths:
             - '_posts/*.md'
+    pull_request:
+        branches:
+          - main
+        paths:
+            - '_posts/*.md'
+            
     workflow_dispatch:
 
 jobs:
