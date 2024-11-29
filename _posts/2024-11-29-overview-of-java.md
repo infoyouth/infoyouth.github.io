@@ -296,8 +296,8 @@ graph TD
 
 ## <span style="color:#2980b9">Download & Installation ⬇️</span>
 
-1. Download the Eclipse IDE for Java Developers from the official website
-   ([eclipse.org](eclipse.org)). Choose the Windows 64-bit installer.
+1. Download the Eclipse IDE for Java Developers from the official website.
+   Choose the Windows 64-bit installer.
 2. Run the installer. Choose a directory (e.g., `C:\eclipse`), and extract the
    contents.
 
@@ -315,10 +315,9 @@ graph TD
 3. Click _Finish_.
 4. Right-click on the project -> _New_ -> _Class_.
 5. Name your class (e.g., `Main`). Check the box for
-    `public static void main(String[] args)`.
+   `public static void main(String[] args)`.
 6. Write your code (e.g., `System.out.println("Hello, World!");`).
-7. Run your code by right-clicking and selecting _Run As_ -> _Java
-    Application_.
+7. Run your code by right-clicking and selecting _Run As_ -> _Java Application_.
 
 ```mermaid
 graph TD
