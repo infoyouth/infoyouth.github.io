@@ -8,7 +8,7 @@ author: infoyouth
 date: 2024-11-29 02:00:00 +0000
 categories:
   - Programming
-  - Java
+  - Java Programming
   - Java Basics
 tags:
   - "Java Programming"

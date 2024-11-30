@@ -7,8 +7,8 @@ author: infoyouth
 date: 2024-11-14 02:00:00 +0000
 categories:
   - Programming
-  - C Language
-  - Basics
+  - C Programming
+  - Variables and Constants
 tags:
   - "Ch 02 C Variables and Constants"
   - "C Programming Basics"

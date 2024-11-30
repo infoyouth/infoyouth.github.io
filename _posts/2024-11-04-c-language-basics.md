@@ -7,7 +7,7 @@ author: infoyouth
 date: 2024-11-04 02:00:00 +0000
 categories:
   - Programming
-  - C Language
+  - C Programming
   - Beginner
 tags:
   - Ch 01 C Programming Basics

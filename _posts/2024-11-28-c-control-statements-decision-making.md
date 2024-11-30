@@ -7,7 +7,7 @@ author: infoyouth
 date: 2024-11-28 03:00:00 +0000
 categories:
   - Programming
-  - C Language
+  - C Programming
   - Control Statements
 tags:
   - "C Control Statements"
