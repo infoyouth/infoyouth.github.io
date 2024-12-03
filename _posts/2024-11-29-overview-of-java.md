@@ -1,5 +1,5 @@
 ---
-title: "01. Overview of Java"
+title: "01. Java Overview"
 description:
   "✨ Dive into the world of Java programming! Explore its rich history, compare
   it with other languages, and get hands-on with the essentials like JDK, JVM,
@@ -133,7 +133,7 @@ development.
 ## Syntax Comparison ✍️
 
 | Language   | Syntax Complexity      | Example Code                                                                                           | Key Features ✨                                                                                 |
-| ---------- | ---------------------- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| ---------- | ---------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
 | **Java**   | Verbose and Structured | `public class HelloWorld { public static void main(String[] args) { System.out.println("Hello!"); } }` | 🛠️ **Verbose syntax** for clarity. Requires explicit declaration of the class and main method.  |
 | **C++**    | Flexible but Complex   | `#include <iostream> int main() { std::cout << "Hello!" << std::endl; return 0; }`                     | 🔧 **More control** over system resources. Requires manual handling of memory and file streams. |
 | **Python** | Concise and Readable   | `print("Hello!")`                                                                                      | ✍️ **Concise and readable** syntax. Emphasizes ease of learning and writing.                    |
