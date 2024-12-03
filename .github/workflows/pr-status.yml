@@ -1,63 +1,56 @@
-name: PR Status Table
+name: Manage PR Checkboxes
 
 on:
-  pull_request:
+  workflow_run:
+    workflows:
+      - Build Test and Deploy
+      - Algolia Search Indexing
+      - Code Scanning Results
     types:
-      - opened
-      - synchronize
-      - reopened
+      - completed
 
 permissions:
   pull-requests: write
-  statuses: read
-  contents: read
+  checks: read
 
 jobs:
-  update-pr-comment:
-    name: Update PR Status Table
+  update-checkboxes:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+      # Step 1: Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-    - name: Get Check Runs via API
-      id: fetch-checks
-      run: |
-        PR_NUMBER=${{ github.event.pull_request.number }}
-        REPO=${{ github.repository }}
-        SHA=${{ github.event.pull_request.head.sha }}
+      # Step 2: Detect CI Check Status
+      - name: Retrieve CI Check Runs
+        uses: peter-evans/retrieve-check-runs@v1
+        id: detect-checks
+        with:
+          check-name: |
+            Build Test and Deploy / build
+            Build Test and Deploy / deploy
+            Algolia Search Indexing / 🔍 Pre-qualifying Checks
+            Algolia Search Indexing / ⚡ Run Algolia Jekyll Action
+            Code scanning results / CodeQL
+            CodeQL Advanced / Analyze (ruby)
 
-        # Fetch check runs using GitHub CLI
-        CHECK_RUNS=$(gh api repos/$REPO/commits/$SHA/check-runs --jq '.check_runs[] | {name: .name, status: .status, conclusion: .conclusion, details_url: .html_url}' | jq -s)
-        echo "check_runs=$CHECK_RUNS" >> $GITHUB_ENV
+      # Step 3: Update Checkboxes in PR Description
+      - name: Update Checkboxes
+        uses: marocchino/checkbox-action@v1
+        with:
+          list: |
+            Build (Skipped or Failed)
+            Deploy (Skipped or Failed)
+            Pre-qualifying Checks
+            Action Execution
+            CodeQL (No new alerts)
+            CodeQL Advanced (Ruby)
+          action: check
+          error: 'warn'
 
-    - name: Format Status Table
-      id: format-table
-      run: |
-        TABLE="| 🏷️ **Check Name** | 📊 **Status** | 🎯 **Conclusion** | 🔗 **Details** |\n"
-        TABLE+="|------------------|----------------|--------------------|----------------|\n"
-        
-        for row in $(echo "${check_runs}" | jq -c '.[]'); do
-          NAME=$(echo $row | jq -r '.name')
-          STATUS=$(echo $row | jq -r '.status')
-          CONCLUSION=$(echo $row | jq -r '.conclusion // "N/A"')
-          DETAILS_URL=$(echo $row | jq -r '.details_url')
-          TABLE+="| $NAME | $STATUS | $CONCLUSION | [Details]($DETAILS_URL) |\n"
-        done
-
-        echo "table=$TABLE" >> $GITHUB_ENV
-
-    - name: Post Status Table to PR
-      uses: marocchino/sticky-pull-request-comment@v2
-      with:
-        header: "ci-status-table"
-        recreate: true
-        message: |
-          ### 🚀 PR Status Table
-
-          Here is the latest summary of the checks for this pull request:
-
-          ${{ env.table }}
-
-          💡 *Updated automatically by CI/CD pipeline.*
+      # Optional: Additional Actions for Skipped or Failed Checks
+      - name: Handle Skipped/Failed Checks
+        if: ${{ steps.detect-checks.outputs.status != 'success' }}
+        run: |
+          echo "Some checks were skipped or failed. Handle as needed."
