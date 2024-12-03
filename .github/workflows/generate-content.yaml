@@ -104,6 +104,7 @@ jobs:
           assignees: "project-owner"
           base: main
           branch: ${{ env.BRANCH_NAME }}
+          labels: blog-post
           commit-message: "📝 Freshly Generated Course Content for '${{ env.TOPIC_WITH_SPACE }}' on ${{ env.CURRENT_DATETIME }} 📚✨ | Ready to Dive In!"
 
           token: ${{ secrets.GITHUB_TOKEN }}
