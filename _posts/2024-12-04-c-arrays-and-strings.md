@@ -276,8 +276,8 @@ Let's add two 2x2 matrices:
 #include <stdio.h>
 
 int main() {
-    int matrix1[2][2] = {{1, 2}, {3, 4}};
-    int matrix2[2][2] = {{5, 6}, {7, 8}};
+    int matrix1[2][2] = \{\{1, 2\}, \{3, 4\}\}; //Ignore black slashes here
+    int matrix2[2][2] = \{\{5, 6\}, \{7, 8\}\}; //Ignore black slashes here
     int result[2][2];
 
     // Add the matrices
@@ -600,7 +600,7 @@ void myFunction(int *arr, int rows, int cols) {
 }
 
 int main() {
-  int myArray[3][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+  int myArray[3][4] = \{\{1, 2, 3, 4\}, \{5, 6, 7, 8\}, \{9, 10, 11, 12\}\}; //Ignore black slashes here
   myFunction(&myArray[0][0], 3, 4); // Pass the address of the first element, rows, and cols
   return 0;
 }
@@ -624,7 +624,7 @@ void myFunction(int (*arr)[4], int rows) { // Note the important parentheses!
 }
 
 int main() {
-  int myArray[3][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+  int myArray[3][4] = \{\{1, 2, 3, 4\}, \{5, 6, 7, 8\}, \{9, 10, 11, 12\}\}; //Ignore black slashes here
   myFunction(myArray, 3); // Pass the array directly (no ampersand needed)
   return 0;
 }
