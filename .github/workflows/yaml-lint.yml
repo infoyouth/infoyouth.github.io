@@ -22,7 +22,6 @@ jobs:
       - id: yaml-lint
         name: 📝 Run YAML Linter
         uses: ibiqlik/action-yamllint@v3
-        continue-on-error: true # Continue even if linting fails
 
       # Print the linting results to the console
       - name: 📋 Show Linting Results
