@@ -17,22 +17,22 @@ jobs:
       # Checkout the repository
       - name: 🛠️ Checkout Repository
         uses: actions/checkout@v3
-        
+
       # Run YAML Linter and store output in a log file
       - id: yaml-lint
         name: 📝 Run YAML Linter
         uses: ibiqlik/action-yamllint@v3
-        continue-on-error: true  # Continue even if linting fails
+        continue-on-error: true # Continue even if linting fails
 
       # Print the linting results to the console
       - name: 📋 Show Linting Results
-        run: | 
-            echo "Linting results: ${{ steps.yaml-lint.outputs.logfile }}"
+        run: |
+          echo "Linting results: ${{ steps.yaml-lint.outputs.logfile }}"
 
       # Upload the lint results as an artifact (log file)
       - name: 📤 Upload Linting Log File
         uses: actions/upload-artifact@v3
-        if: always()  # Upload the artifact even if the job fails
+        if: always() # Upload the artifact even if the job fails
         with:
           name: yamllint-logfile
           path: ${{ steps.yaml-lint.outputs.logfile }}
