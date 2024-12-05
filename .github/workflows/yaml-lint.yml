@@ -1,0 +1,46 @@
+name: Yaml Lint
+
+# Trigger on push to any branch (and PRs to main)
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lintAllTheThings:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: 🛠️ Checkout Repository
+        uses: actions/checkout@v3
+        
+      # Run YAML Linter and store output in a log file
+      - id: yaml-lint
+        name: 📝 Run YAML Linter
+        uses: ibiqlik/action-yamllint@v3
+        continue-on-error: true  # Continue even if linting fails
+
+      # Print the linting results to the console
+      - name: 📋 Show Linting Results
+        run: echo "Linting results: ${{ steps.yaml-lint.outputs.logfile }}"
+
+      # Upload the lint results as an artifact (log file)
+      - name: 📤 Upload Linting Log File
+        uses: actions/upload-artifact@v3
+        if: always()  # Upload the artifact even if the job fails
+        with:
+          name: yamllint-logfile
+          path: ${{ steps.yaml-lint.outputs.logfile }}
+
+      # Add a badge or status on README (Optional but useful)
+      - name: 📈 Add Status Badge to README
+        uses: peter-evans/readme-badger@v3
+        with:
+          message: 'Yaml Lint Status'
+          status: ${{ job.status }}  # Show 'success' or 'failure' based on job status
+          label: 'Linting'
+          color: ${{ job.status == 'success' && 'brightgreen' || 'red' }} # Change color based on status
