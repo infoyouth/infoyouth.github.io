@@ -36,12 +36,3 @@ jobs:
         with:
           name: yamllint-logfile
           path: ${{ steps.yaml-lint.outputs.logfile }}
-
-      # Add a badge or status on README (Optional but useful)
-      - name: 📈 Add Status Badge to README
-        uses: peter-evans/readme-badger@v3
-        with:
-          message: 'Yaml Lint Status'
-          status: ${{ job.status }}  # Show 'success' or 'failure' based on job status
-          label: 'Linting'
-          color: ${{ job.status == 'success' && 'brightgreen' || 'red' }} # Change color based on status
