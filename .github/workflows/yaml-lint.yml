@@ -26,7 +26,8 @@ jobs:
 
       # Print the linting results to the console
       - name: 📋 Show Linting Results
-        run: echo "Linting results: ${{ steps.yaml-lint.outputs.logfile }}"
+        run: | 
+            echo "Linting results: ${{ steps.yaml-lint.outputs.logfile }}"
 
       # Upload the lint results as an artifact (log file)
       - name: 📤 Upload Linting Log File
