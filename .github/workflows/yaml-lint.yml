@@ -16,7 +16,7 @@ jobs:
     steps:
       # Checkout the repository
       - name: 🛠️ Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         
       # Run YAML Linter and store output in a log file
       - id: yaml-lint
@@ -31,7 +31,7 @@ jobs:
 
       # Upload the lint results as an artifact (log file)
       - name: 📤 Upload Linting Log File
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()  # Upload the artifact even if the job fails
         with:
           name: yamllint-logfile
