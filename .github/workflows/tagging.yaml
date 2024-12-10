@@ -1,31 +1,35 @@
-name: Jekyll GH-Pages Tagging Workflow
+name: Lint
 
 on:
-    # Trigger when Markdown files pushed to docs/_posts on the master branch 
-    push:
-        branches:
-            - main
-    pull_request:
-        branches:
-          - main
-            
-    workflow_dispatch:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - main
+  # Replace pull_request with pull_request_target if you
+  # plan to use this action with forks, see the Limitations section
+  pull_request:
+    branches:
+      - main
+
+# Down scope as necessary via https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
+permissions:
+  checks: write
+  contents: write
 
 jobs:
-    generate_tags:
-        runs-on: ubuntu-latest
-        permissions:
-            contents: write
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-            - name: Generate Tags
-              uses: ragdata/jekyll-ghpages-tagging@master
-              with:
-                posts_dir: "_posts"
-                tags_dir: "_tags"
-                tags_layout: "tags"
-                feeds_dir: "_feeds"
-                feeds_layout: "feed"
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+
+      # Install your linters here
+
+      - name: Run linters
+        uses: wearerequired/lint-action@v2
+        with:
+          eslint: true
+          prettier: true
