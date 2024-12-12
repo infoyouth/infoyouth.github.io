@@ -20,7 +20,6 @@ pin: true
 math: false
 mermaid: true
 ---
-
 # <span style="color:#e67e22;">What we will learn in this post?</span>
 
 <ul style='list-style-type: none; padding-left: 0;'>
