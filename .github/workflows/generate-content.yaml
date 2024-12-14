@@ -7,7 +7,7 @@ on:
         required: false
         default: 'Manual content generation'
   schedule:
-    - cron: '0 3 * * *'
+    - cron: '0 1 * * *'
 
 permissions:
   contents: write
