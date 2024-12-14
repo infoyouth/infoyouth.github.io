@@ -84,21 +84,8 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4.0.5
 
-      - name: 📦 Check for New Files in _posts/
-        id: check_new_files
-        run: |
-          added_files=$(git diff --name-only --diff-filter=A -- _posts/)
-          if [[ -n "$added_files" ]]; then
-            # Extract post titles using 'sed' and format them into a comma-separated list
-            titles=$(echo "$added_files" | sed -E 's/^\d{4}-\d{2}-\d{2}-\d{2}.-(.*)\.md$/\1/' | tr '\n' ', ')
-            echo "NEW_POSTS=$titles" >> $GITHUB_ENV
-            echo "new-files=true" >> $GITHUB_ENV
-          else
-            echo "new-files=false" >> $GITHUB_ENV
-          fi
-
       - name: 📢 Notify Discord of New Posts
-        if: ${{ needs.deploy.result == 'success' && env.new-files == 'true' }}
+        if: env.NEW_POSTS != ''
         uses: cabrera-evil/discord-notify-action@1.0.2
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
@@ -115,3 +102,22 @@ jobs:
             Thank you for your continued support! 💖
           include_image: 'true'
           username: 'Youth Innovations'
+
+      # - name: 📢 Notify Discord of New Posts
+      #   if: ${{ needs.deploy.result == 'success' && env.new-files == 'true' }}
+      #   uses: cabrera-evil/discord-notify-action@1.0.2
+      #   with:
+      #     webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      #     title: "🎉 New Posts Published on Youth Innovations!"
+      #     description: |
+      #       🚀 **Exciting News from Youth Innovations!** 🚀
+      #       We have just published new blog posts on our site! 🎉
+
+      #       **Check out the latest topics:**
+      #       ${{ env.NEW_POSTS }}
+
+      #       📖 Visit us at [Youth Innovations](https://infoyouth.github.io) for more insightful articles and innovations!
+
+      #       Thank you for your continued support! 💖
+      #     include_image: 'true'
+      #     username: 'Youth Innovations'
