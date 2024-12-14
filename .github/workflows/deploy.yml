@@ -91,23 +91,18 @@ jobs:
           if [[ -n "$added_files" ]]; then
             # Extract post titles using 'sed' and format them into a comma-separated list
             titles=$(echo "$added_files" | sed -E 's/^\d{4}-\d{2}-\d{2}-\d{2}.-(.*)\.md$/\1/' | tr '\n' ', ')
-            echo "new-files=true" >> $GITHUB_ENV
             echo "NEW_POSTS=$titles" >> $GITHUB_ENV
+            echo "new-files=true" >> $GITHUB_ENV
           else
             echo "new-files=false" >> $GITHUB_ENV
           fi
 
-  # Notify job (runs only if deploy was successful and new files were added)
-  notify:
-    runs-on: ubuntu-latest
-    needs: deploy
-    if: ${{ needs.deploy.result == 'success' && env.new-files == 'true' }}
-    steps:
       - name: 📢 Notify Discord of New Posts
+        if: ${{ needs.deploy.result == 'success' && env.new-files == 'true' }}
         uses: cabrera-evil/discord-notify-action@1.0.2
         with:
-          webhook_url: ${{ secrets.DISCORD_ANNOUNCE }}
-          title: "🎉 New Posts Published!"
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: "🎉 New Posts Published on Youth Innovations!"
           description: |
             🚀 **Exciting News from Youth Innovations!** 🚀
             We have just published new blog posts on our site! 🎉
