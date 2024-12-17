@@ -56,10 +56,10 @@ jobs:
           # Initialize a flag for content generation
           CONTENT_GENERATED=false
       
-          # Check if any .md files were generated
-          if ls *.md 1> /dev/null 2>&1; then
-            echo "📄 Found generated markdown files, copying them..."
-            cp *.md $GITHUB_WORKSPACE/_posts
+          # Check if any .md files were generated, excluding README.md
+          if ls *.md 2>/dev/null | grep -v '^README.md$' > /dev/null; then
+            echo "📄 Found generated markdown files (excluding README.md), copying them..."
+            ls *.md | grep -v '^README.md$' | xargs -I {} cp {} $GITHUB_WORKSPACE/_posts
             CONTENT_GENERATED=true
           else
             echo "🚫 No content generated for today. Skipping file copy."
