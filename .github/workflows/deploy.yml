@@ -86,7 +86,7 @@ jobs:
 
       - name: 📢 Notify Discord of New Posts
         if: env.NEW_POSTS != ''
-        uses: cabrera-evil/discord-notify-action@1.0.2
+        uses: cabrera-evil/discord-notify-action@1.1.8
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
           title: "🎉 New Posts Published on Youth Innovations!"
@@ -105,7 +105,7 @@ jobs:
 
       # - name: 📢 Notify Discord of New Posts
       #   if: ${{ needs.deploy.result == 'success' && env.new-files == 'true' }}
-      #   uses: cabrera-evil/discord-notify-action@1.0.2
+      #   uses: cabrera-evil/discord-notify-action@1.1.8
       #   with:
       #     webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
       #     title: "🎉 New Posts Published on Youth Innovations!"
