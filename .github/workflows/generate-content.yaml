@@ -131,11 +131,13 @@ jobs:
             
             🔖 **Branch:** ${{ steps.create_pull_request.outputs.pull-request-branch }}
             
-            🔢 **PR:** ${{ steps.create_pull_request.outputs.pull-request-number }}
+            🔢 **PR Number:** ${{ steps.create_pull_request.outputs.pull-request-number }}
             
-            🔗 [View PR](${{ steps.create_pull_request.outputs.pull-request-url }})
+            🔗 **View PR:** [Click here](${{ steps.create_pull_request.outputs.pull-request-url }})
             
             💬 Review, share feedback, and help improve open-source! 🌐 
           include_image: 'true'
           username: 'Youth Innovations'
-          title_url: ${{ steps.create_pull_request.outputs.pull-request-url }}
+          custom_image_url: 'https://raw.githubusercontent.com/infoyouth/infoyouth.github.io/main/assets/img/favicons/favicon-48x48.png'
+          repo_name: ${{ github.repository }}
+          repo_url: ${{ github.server_url }}/${{ github.repository }}
