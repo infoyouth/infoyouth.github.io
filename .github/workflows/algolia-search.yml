@@ -11,7 +11,7 @@ on:
 jobs:
   pre-checks:
     name: 🔍 Pre-qualifying Checks
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: 📥 Checkout Repository
@@ -36,7 +36,7 @@ jobs:
   algolia-search:
     name: ⚡ Run Algolia Jekyll Action
     needs: pre-checks # Ensure pre-checks pass before running
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.ref == 'refs/heads/main' # Only run on pushes to main
 
     env:
