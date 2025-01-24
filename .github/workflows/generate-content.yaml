@@ -20,7 +20,7 @@ env:
 jobs:
   generate-content:
     name: 📚 Generate Course Content
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: 🔍 Checkout Main Repository
         uses: actions/checkout@v4
