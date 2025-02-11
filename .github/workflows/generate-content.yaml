@@ -102,7 +102,7 @@ jobs:
           committer: "Youth Innovations <info.youthinno@gmail.com>"
           author: "Youth Innovations <info.youthinno@gmail.com>"
           assignees: "project-owner"
-          reviewers: DarshanBoraganve,Sanmatiboragave,shweta-borganve
+          reviewers: DarshanBoraganve,Sanmatiboragave,shweta-borganve,spp1997
           base: main
           branch: ${{ env.BRANCH_NAME }}
           labels: blog-post
