@@ -1,11 +1,11 @@
 ---
-title: "C++ Overview"
+title: "01. C++ Overview"
 description: "🚀 Dive into the world of C++!  This comprehensive guide covers its history, key features, setup, and comparison with C, empowering you to start your C++ programming journey. 💡"
 author: infoyouth
 date: 2025-02-25 02:00:00 +0000
 categories:
   - Programming
-  - C++
+  - C++ Programming
   - C++ Fundamentals
   - C++ Development
   - C++ History
@@ -174,12 +174,31 @@ C++ remains a dominant force in game development, high-performance computing, an
 
 ```mermaid
 graph LR
-A[C with Classes] --> B{C++98/03};
-B --> C[C++11];
-C --> D[C++14];
-D --> E[C++17];
-E --> F[C++20];
-F --> G[Future Standards];
+    A["📚 C with Classes"] --> B{"🖥️ C++98/03"};
+    B --> C["📅 C++11"];
+    C --> D["📅 C++14"];
+    D --> E["📅 C++17"];
+    E --> F["📅 C++20"];
+    F --> G["🔮 Future Standards"];
+
+    %% Custom Styles
+    classDef cStyle fill:#FFD700,stroke:#B8860B,color:#000000,font-size:14px,stroke-width:3px,rx:15px,shadow:5px;
+    classDef cpp98Style fill:#FF6347,stroke:#B22222,color:#FFFFFF,font-size:14px,stroke-width:3px,rx:15px,shadow:5px;
+    classDef cpp11Style fill:#32CD32,stroke:#006400,color:#000000,font-size:14px,stroke-width:3px,rx:15px,shadow:5px;
+    classDef cpp14Style fill:#1E90FF,stroke:#00008B,color:#FFFFFF,font-size:14px,stroke-width:3px,rx:15px,shadow:5px;
+    classDef cpp17Style fill:#8A2BE2,stroke:#4B0082,color:#FFFFFF,font-size:14px,stroke-width:3px,rx:15px,shadow:5px;
+    classDef cpp20Style fill:#FF4500,stroke:#FF6347,color:#FFFFFF,font-size:14px,stroke-width:3px,rx:15px,shadow:5px;
+    classDef futureStyle fill:#DA70D6,stroke:#8B008B,color:#FFFFFF,font-size:14px,stroke-width:3px,rx:15px,shadow:5px;
+
+    %% Apply Classes
+    class A cStyle;
+    class B cpp98Style;
+    class C cpp11Style;
+    class D cpp14Style;
+    class E cpp17Style;
+    class F cpp20Style;
+    class G futureStyle;
+
 ```
 
 
@@ -207,9 +226,22 @@ C++ remains incredibly relevant.  To learn more, check out these resources: [cpp
 
 ```mermaid
 graph LR
-A[Gaming] --> B(C++);
-C[Operating Systems] --> B;
-D[High-Frequency Trading] --> B;
+    A["🎮 Gaming"] --> B["💻 C++"];
+    C["🖥️ Operating Systems"] --> B;
+    D["📈 High-Frequency Trading"] --> B;
+
+    %% Custom Styles
+    classDef gamingStyle fill:#FFD700,stroke:#B8860B,color:#000000,font-size:14px,stroke-width:3px,rx:15px,shadow:5px;
+    classDef osStyle fill:#32CD32,stroke:#006400,color:#000000,font-size:14px,stroke-width:3px,rx:15px,shadow:5px;
+    classDef hftStyle fill:#FF6347,stroke:#B22222,color:#FFFFFF,font-size:14px,stroke-width:3px,rx:15px,shadow:5px;
+    classDef cppStyle fill:#1E90FF,stroke:#00008B,color:#FFFFFF,font-size:14px,stroke-width:3px,rx:15px,shadow:5px;
+
+    %% Apply Classes
+    class A gamingStyle;
+    class B cppStyle;
+    class C osStyle;
+    class D hftStyle;
+
 ```
 
 
