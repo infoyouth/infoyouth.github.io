@@ -16,7 +16,7 @@ jobs:
     steps:
       # Checkout the repository
       - name: 🛠️ Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         
       # Run YAML Linter and store output in a log file
       - id: yaml-lint
