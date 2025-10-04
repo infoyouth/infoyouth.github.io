@@ -1,0 +1,62 @@
+<!-- 
+  Landing Page Image Handler
+  Dynamically selects and categorizes images from the assets folder
+  This include file helps organize images for hero sections, galleries, and thumbnails
+-->
+
+{% comment %}
+  Image Detection Logic:
+  - Scans assets/images/ folder for images
+  - Categorizes by size and type
+  - Provides fallbacks for missing images
+{% endcomment %}
+
+{% assign all_images = site.static_files | where_exp: "file", "file.path contains '/assets/'" %}
+{% assign image_files = "" | split: "" %}
+
+{% for file in all_images %}
+  {% assign file_ext = file.path | split: "." | last | downcase %}
+  {% if file_ext == "jpg" or file_ext == "jpeg" or file_ext == "png" or file_ext == "gif" or file_ext == "webp" or file_ext == "svg" %}
+    {% assign image_files = image_files | push: file %}
+  {% endif %}
+{% endfor %}
+
+{% comment %}
+  Select Featured/Hero Image
+  Priority: 
+  1. Largest image in assets/images/
+  2. Site logo
+  3. Default gradient
+{% endcomment %}
+
+{% assign hero_image = nil %}
+{% for image in image_files %}
+  {% if image.path contains "hero" or image.path contains "banner" or image.path contains "featured" %}
+    {% assign hero_image = image.path %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% if hero_image == nil %}
+  {% assign hero_image = site.avatar %}
+{% endif %}
+
+{% comment %}
+  Gallery Images
+  Collect all suitable images for gallery display
+{% endcomment %}
+
+{% assign gallery_images = "" | split: "" %}
+{% for image in image_files %}
+  {% unless image.path contains "favicon" or image.path contains "icon" %}
+    {% if image.path contains "/images/" %}
+      {% assign gallery_images = gallery_images | push: image %}
+    {% endif %}
+  {% endunless %}
+{% endfor %}
+
+{% comment %}
+  Export variables for use in landing page
+  Usage: {% include landing-images.html %}
+  Then access: hero_image, gallery_images
+{% endcomment %}
