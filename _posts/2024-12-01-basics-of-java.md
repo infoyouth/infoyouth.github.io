@@ -97,7 +97,6 @@ public class Main { // This is the class declaration
 - **`public class Main`**: This line _declares_ a class named `Main`. In Java, everything runs inside a class. Think of a class as a blueprint for creating objects. `public` means this class is accessible from anywhere.
 
 - **`public static void main(String[] args)`**: This is the _main method_, the entry point of your program.
-
   - `public`: Accessible from anywhere.
   - `static`: Belongs to the class itself, not a specific object.
   - `void`: Doesn't return any value.
