@@ -1,0 +1,151 @@
+---
+---
+
+/* PWA Install Button */
+.pwa-install-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+  z-index: 9999;
+  animation: slideInUp 0.5s ease;
+}
+
+.pwa-install-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.pwa-install-button:active {
+  transform: translateY(0);
+}
+
+.pwa-install-button svg {
+  width: 24px;
+  height: 24px;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* PWA Update Notification */
+.pwa-update-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 10000;
+  animation: slideInDown 0.5s ease;
+}
+
+.pwa-update-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pwa-update-content span {
+  font-weight: 600;
+  color: #333;
+}
+
+.pwa-update-content button {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.pwa-update-content button:hover {
+  transform: scale(1.05);
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* PWA Mode Adjustments */
+body.pwa-mode {
+  /* Add extra padding for iOS safe areas */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .pwa-update-notification {
+    background: #2d2d2d;
+  }
+  
+  .pwa-update-content span {
+    color: #e0e0e0;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .pwa-install-button {
+    bottom: 16px;
+    right: 16px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .pwa-update-notification {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    padding: 12px 16px;
+  }
+  
+  .pwa-update-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .pwa-update-content button {
+    width: 100%;
+  }
+}
+
+/* Hide install button when already installed */
+@media (display-mode: standalone) {
+  .pwa-install-button {
+    display: none !important;
+  }
+}
