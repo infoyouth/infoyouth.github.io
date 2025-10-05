@@ -45,9 +45,9 @@ social:
     # - https://www.linkedin.com/in/username
 
 algolia:
-  application_id: 4EQSIW4SIA
+  application_id: OAGHTXZ8RA
   index_name: ALOG_APP # You can replace that with whatever name you want
-  search_only_api_key: 2831ae0392bb97cc1a4c33769b0a4d19
+  search_only_api_key: 579d5e684097267ed46ed7919053933d
 
 # Site Verification Settings
 webmaster_verifications:
