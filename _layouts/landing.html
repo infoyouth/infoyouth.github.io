@@ -1,0 +1,242 @@
+---
+layout: default
+---
+
+<!-- Landing Page Styles -->
+<link rel="stylesheet" href="{{ '/assets/css/landing.css' | relative_url }}">
+
+<!-- Landing Page for Youth Innovations Blog -->
+<!-- This layout creates a dynamic, modern landing page while preserving all existing post links -->
+
+<div class="landing-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title animate-fade-in">{{ site.title }}</h1>
+      <p class="hero-tagline animate-fade-in-delay">{{ site.tagline }}</p>
+      <p class="hero-description animate-fade-in-delay-2">{{ site.description }}</p>
+      <div class="hero-cta animate-fade-in-delay-3">
+        <a href="#recent-posts" class="btn btn-primary">Explore Articles</a>
+        <a href="/categories/" class="btn btn-secondary">Browse Categories</a>
+      </div>
+    </div>
+    <!-- Dynamic hero background image -->
+    {% assign hero_image = "/assets/images/logo.png" %}
+    <div class="hero-background" style="background-image: url('{{ hero_image | relative_url }}');"></div>
+  </section>
+
+  <!-- Featured Categories Section -->
+  <section class="categories-section">
+    <div class="container">
+      <h2 class="section-title">Explore Topics</h2>
+      <div class="categories-grid">
+        {% assign all_categories = site.categories | sort %}
+        {% assign category_limit = 6 %}
+        {% for category in all_categories limit: category_limit %}
+          {% assign category_name = category[0] %}
+          {% assign posts_count = category[1] | size %}
+          <a href="/categories/{{ category_name | slugify }}/" class="category-card">
+            <div class="category-icon">
+              {% case category_name %}
+                {% when "DevOps" %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0ZM2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484-.08.08-.162.158-.242.234-.416.396-.787.749-.758 1.266.035.634.618.824 1.214 1.017.577.188 1.168.38 1.286.983.082.417-.075.988-.22 1.52-.215.782-.406 1.548.076 1.934.618.494 1.426.051 2.043-.45.535-.433.923-.87 1.405-1.043.334-.12.63-.012.919.118.36.162.754.338 1.248.078.583-.308.756-.956.928-1.598.181-.675.364-1.373.964-1.577.467-.159.935-.041 1.395.078.515.134 1.048.272 1.548-.078.58-.406.684-1.12.787-1.828.103-.708.207-1.416.787-1.822.5-.35 1.033-.212 1.548-.078.46.12.928.237 1.395.078.6-.204.783-.902.964-1.577.172-.642.345-1.29.928-1.598.494-.26.888-.084 1.248.078.289.13.585.238.919.118.482-.173.87-.61 1.405-1.043.617-.501 1.425-.944 2.043-.45.482.386.291 1.152.076 1.934-.145.532-.302 1.103-.22 1.52.118.603.709.795 1.286.983.596.193 1.179.383 1.214 1.017.029.517-.342.87-.758 1.266-.08.076-.162.154-.242.234-.05.05.263-.221.743-.484 1.185-.65 3.392-1.861 3.717-3.19.021-.087.027-.174.027-.261 0-4.418-3.582-8-8-8-.087 0-.174.006-.261.027z"/>
+                  </svg>
+                {% when "Python" or "Java" or "C" %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z"/>
+                  </svg>
+                {% when "Angular" %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 0L0 2.8l1.2 10.4L8 16l6.8-2.8L16 2.8 8 0zm0 1.5l5.9 2.3-.9 8L8 14.3l-5-2.5-.9-8L8 1.5z"/>
+                  </svg>
+                {% else %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                  </svg>
+                {% endcase %}
+            </div>
+            <h3 class="category-name">{{ category_name }}</h3>
+            <p class="category-count">{{ posts_count }} article{% if posts_count != 1 %}s{% endif %}</p>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Posts Section -->
+  <section id="recent-posts" class="recent-posts-section">
+    <div class="container">
+      <h2 class="section-title">Latest Articles</h2>
+      <div class="posts-grid">
+        {% comment %}
+          Strategy: Get the latest post from each unique primary category
+          Categories to target: C Programming, Java Programming, DevOps, Frontend Development, etc.
+          This ensures diversity in topics shown on the landing page
+        {% endcomment %}
+        {% assign featured_posts = "" | split: "" %}
+        {% assign used_categories = "" | split: "" %}
+        {% assign max_posts = 6 %}
+        
+        {% comment %} 
+          Define priority categories to show (these are your main topic areas)
+          We'll look for the most specific category (e.g., "C Programming" not just "Programming")
+        {% endcomment %}
+        
+        {% comment %} First pass: Get one post per unique secondary category {% endcomment %}
+        {% for post in site.posts %}
+          {% if featured_posts.size >= max_posts %}
+            {% break %}
+          {% endif %}
+          
+          {% comment %} Get the most specific category (usually the second one, or first if only one) {% endcomment %}
+          {% if post.categories.size > 1 %}
+            {% assign post_category = post.categories[1] %}
+          {% else %}
+            {% assign post_category = post.categories[0] %}
+          {% endif %}
+          
+          {% unless used_categories contains post_category %}
+            {% assign featured_posts = featured_posts | push: post %}
+            {% assign used_categories = used_categories | push: post_category %}
+          {% endunless %}
+        {% endfor %}
+        
+        {% comment %} If we have fewer than max_posts, fill with most recent {% endcomment %}
+        {% if featured_posts.size < max_posts %}
+          {% for post in site.posts %}
+            {% if featured_posts.size >= max_posts %}
+              {% break %}
+            {% endif %}
+            {% unless featured_posts contains post %}
+              {% assign featured_posts = featured_posts | push: post %}
+            {% endunless %}
+          {% endfor %}
+        {% endif %}
+        
+        {% for post in featured_posts %}
+          <article class="post-card">
+            <!-- Post thumbnail with fallback -->
+            <div class="post-thumbnail">
+              {% if post.image %}
+                <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
+              {% else %}
+                <div class="post-thumbnail-placeholder">
+                  <i class="fas fa-image"></i>
+                </div>
+              {% endif %}
+              <!-- Category badge - show the most specific category -->
+              {% if post.categories.size > 1 %}
+                <span class="post-category-badge">{{ post.categories[1] }}</span>
+              {% elsif post.categories.size > 0 %}
+                <span class="post-category-badge">{{ post.categories[0] }}</span>
+              {% endif %}
+            </div>
+            
+            <!-- Post content -->
+            <div class="post-content">
+              <h3 class="post-title">
+                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              </h3>
+              
+              <!-- Post meta -->
+              <div class="post-meta">
+                <time datetime="{{ post.date | date_to_xmlschema }}">
+                  {{ post.date | date: "%B %d, %Y" }}
+                </time>
+                {% if post.author %}
+                  <span class="post-author">by {{ post.author }}</span>
+                {% endif %}
+              </div>
+              
+              <!-- Post excerpt -->
+              {% if post.description %}
+                <p class="post-excerpt">{{ post.description | truncate: 120 }}</p>
+              {% elsif post.excerpt %}
+                <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+              {% endif %}
+              
+              <!-- Tags -->
+              {% if post.tags.size > 0 %}
+                <div class="post-tags">
+                  {% for tag in post.tags limit: 3 %}
+                    <a href="/tags/{{ tag | slugify }}/" class="post-tag">#{{ tag }}</a>
+                  {% endfor %}
+                </div>
+              {% endif %}
+              
+              <!-- Read more link -->
+              <a href="{{ post.url | relative_url }}" class="read-more">
+                Read Article →
+              </a>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+      
+      <!-- View all posts CTA -->
+      <div class="view-all-posts">
+        <a href="/archives/" class="btn btn-outline">View All Articles</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">{{ site.posts | size }}</div>
+          <div class="stat-label">Articles Published</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">{{ site.categories | size }}</div>
+          <div class="stat-label">Categories</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">{{ site.tags | size }}</div>
+          <div class="stat-label">Topics Covered</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter/CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2 class="cta-title">Stay Updated</h2>
+        <p class="cta-description">Join our community and get the latest articles delivered to your inbox.</p>
+        <div class="cta-buttons">
+          <a href="{{ site.social.links[1] }}" target="_blank" rel="noopener" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 8px;">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            Follow on GitHub
+          </a>
+          <a href="/categories/" class="btn btn-outline">Browse All Topics</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SEO and Social Sharing Meta Tags -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "{{ site.title }}",
+  "description": "{{ site.description }}",
+  "url": "{{ site.url }}{{ site.baseurl }}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.social.name }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.avatar | absolute_url }}"
+    }
+  }
+}
+</script>

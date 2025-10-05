@@ -30,10 +30,10 @@ concurrency:
 jobs:
   # Build job
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -67,7 +67,7 @@ jobs:
           bundle exec rubocop
 
       - name: 📤 Upload Site Artifact
-        uses: actions/upload-pages-artifact@v3.0.1
+        uses: actions/upload-pages-artifact@v4.0.0
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
 
@@ -76,7 +76,7 @@ jobs:
     environment:
       name: 🌐 Youth Innovations
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: build
     if: github.ref == 'refs/heads/main'  # Only run deploy when pushing to main
     steps:
@@ -86,7 +86,7 @@ jobs:
 
       - name: 📢 Notify Discord of New Posts
         if: env.NEW_POSTS != ''
-        uses: cabrera-evil/discord-notify-action@1.0.2
+        uses: cabrera-evil/discord-notify-action@v1.0.2
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
           title: "🎉 New Posts Published on Youth Innovations!"
@@ -105,7 +105,7 @@ jobs:
 
       # - name: 📢 Notify Discord of New Posts
       #   if: ${{ needs.deploy.result == 'success' && env.new-files == 'true' }}
-      #   uses: cabrera-evil/discord-notify-action@1.0.2
+      #   uses: cabrera-evil/discord-notify-action@1.1.8
       #   with:
       #     webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
       #     title: "🎉 New Posts Published on Youth Innovations!"

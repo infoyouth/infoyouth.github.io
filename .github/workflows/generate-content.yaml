@@ -20,13 +20,13 @@ env:
 jobs:
   generate-content:
     name: 📚 Generate Course Content
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: 🔍 Checkout Main Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: 🔐 Checkout Private Content Repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: infoyouth/course-content-action
           ref: main
@@ -95,7 +95,7 @@ jobs:
       - name: 🚀 Open Pull Request
         if: env.CONTENT_GENERATED == 'true'
         id: create_pull_request
-        uses: peter-evans/create-pull-request@v7.0.6
+        uses: peter-evans/create-pull-request@v7.0.8
         with:
           title: "📝 ${{ env.TOPIC_WITH_SPACE }} - Comprehensive Notes with New Insights (${{ env.CURRENT_DATETIME }}) 📥"
           body: "This PR includes generated notes created on ${{ env.CURRENT_DATETIME }}."
@@ -118,7 +118,7 @@ jobs:
           echo "Pull Request URL: ${{ steps.create_pull_request.outputs.pull-request-url }}"
       - name: 🚨 Notify Discord
         if: steps.create_pull_request.outputs.pull-request-operation == 'created'
-        uses: cabrera-evil/discord-notify-action@1.0.2
+        uses: cabrera-evil/discord-notify-action@v1.0.2
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
           title: '📢 ** ${{ env.TOPIC }} **'
@@ -131,11 +131,13 @@ jobs:
             
             🔖 **Branch:** ${{ steps.create_pull_request.outputs.pull-request-branch }}
             
-            🔢 **PR:** ${{ steps.create_pull_request.outputs.pull-request-number }}
+            🔢 **PR Number:** ${{ steps.create_pull_request.outputs.pull-request-number }}
             
-            🔗 [View PR](${{ steps.create_pull_request.outputs.pull-request-url }})
+            🔗 **View PR:** [Click here](${{ steps.create_pull_request.outputs.pull-request-url }})
             
             💬 Review, share feedback, and help improve open-source! 🌐 
           include_image: 'true'
           username: 'Youth Innovations'
-          title_url: ${{ steps.create_pull_request.outputs.pull-request-url }}
+          custom_image_url: 'https://raw.githubusercontent.com/infoyouth/infoyouth.github.io/main/assets/img/favicons/favicon-48x48.png'
+          repo_name: ${{ github.repository }}
+          repo_url: ${{ github.server_url }}/${{ github.repository }}
