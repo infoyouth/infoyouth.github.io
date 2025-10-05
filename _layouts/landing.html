@@ -26,41 +26,78 @@ layout: default
     <div class="hero-background" style="background-image: url('{{ hero_image | relative_url }}');"></div>
   </section>
 
-  <!-- Featured Categories Section -->
+  <!-- Featured Learning Paths Section -->
   <section class="categories-section">
     <div class="container">
-      <h2 class="section-title">Explore Topics</h2>
-      <div class="categories-grid">
-        {% assign all_categories = site.categories | sort %}
-        {% assign category_limit = 6 %}
-        {% for category in all_categories limit: category_limit %}
-          {% assign category_name = category[0] %}
-          {% assign posts_count = category[1] | size %}
-          <a href="/categories/{{ category_name | slugify }}/" class="category-card">
+      <h2 class="section-title">🎓 Start Your Learning Journey</h2>
+      <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Swipe or scroll to explore all topics →</p>
+      <div class="categories-scroll-wrapper">
+        <div class="categories-grid-scroll">
+        
+          <!-- C Programming -->
+          <a href="/categories/c-programming/" class="category-card topic-card">
             <div class="category-icon">
-              {% case category_name %}
-                {% when "DevOps" %}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0ZM2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484-.08.08-.162.158-.242.234-.416.396-.787.749-.758 1.266.035.634.618.824 1.214 1.017.577.188 1.168.38 1.286.983.082.417-.075.988-.22 1.52-.215.782-.406 1.548.076 1.934.618.494 1.426.051 2.043-.45.535-.433.923-.87 1.405-1.043.334-.12.63-.012.919.118.36.162.754.338 1.248.078.583-.308.756-.956.928-1.598.181-.675.364-1.373.964-1.577.467-.159.935-.041 1.395.078.515.134 1.048.272 1.548-.078.58-.406.684-1.12.787-1.828.103-.708.207-1.416.787-1.822.5-.35 1.033-.212 1.548-.078.46.12.928.237 1.395.078.6-.204.783-.902.964-1.577.172-.642.345-1.29.928-1.598.494-.26.888-.084 1.248.078.289.13.585.238.919.118.482-.173.87-.61 1.405-1.043.617-.501 1.425-.944 2.043-.45.482.386.291 1.152.076 1.934-.145.532-.302 1.103-.22 1.52.118.603.709.795 1.286.983.596.193 1.179.383 1.214 1.017.029.517-.342.87-.758 1.266-.08.076-.162.154-.242.234-.05.05.263-.221.743-.484 1.185-.65 3.392-1.861 3.717-3.19.021-.087.027-.174.027-.261 0-4.418-3.582-8-8-8-.087 0-.174.006-.261.027z"/>
-                  </svg>
-                {% when "Python" or "Java" or "C" %}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z"/>
-                  </svg>
-                {% when "Angular" %}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M8 0L0 2.8l1.2 10.4L8 16l6.8-2.8L16 2.8 8 0zm0 1.5l5.9 2.3-.9 8L8 14.3l-5-2.5-.9-8L8 1.5z"/>
-                  </svg>
-                {% else %}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
-                  </svg>
-                {% endcase %}
+              <div class="topic-emoji">🔧</div>
             </div>
-            <h3 class="category-name">{{ category_name }}</h3>
-            <p class="category-count">{{ posts_count }} article{% if posts_count != 1 %}s{% endif %}</p>
+            <h3 class="category-name">C Programming</h3>
+            <p class="category-description">Master the fundamentals with 18 comprehensive lessons</p>
+            <div class="topic-badge">Start Learning →</div>
           </a>
-        {% endfor %}
+
+          <!-- C++ Programming -->
+          <a href="/categories/cpp-programming/" class="category-card topic-card">
+            <div class="category-icon">
+              <div class="topic-emoji">⚙️</div>
+            </div>
+            <h3 class="category-name">C++ Mastery</h3>
+            <p class="category-description">Advanced OOP concepts in 29 detailed tutorials</p>
+            <div class="topic-badge">Start Learning →</div>
+          </a>
+
+          <!-- Java Programming -->
+          <a href="/categories/java-programming/" class="category-card topic-card">
+            <div class="category-icon">
+              <div class="topic-emoji">☕</div>
+            </div>
+            <h3 class="category-name">Complete Java</h3>
+            <p class="category-description">From basics to advanced with 27 lessons</p>
+            <div class="topic-badge">Start Learning →</div>
+          </a>
+
+          <!-- Angular Framework -->
+          <a href="/categories/angular/" class="category-card topic-card">
+            <div class="category-icon">
+              <div class="topic-emoji">🅰️</div>
+            </div>
+            <h3 class="category-name">Angular Framework</h3>
+            <p class="category-description">Modern web development in 15 modules</p>
+            <div class="topic-badge">Start Learning →</div>
+          </a>
+
+          <!-- DevOps -->
+          <a href="/categories/devops/" class="category-card topic-card">
+            <div class="category-icon">
+              <div class="topic-emoji">🚀</div>
+            </div>
+            <h3 class="category-name">DevOps</h3>
+            <p class="category-description">CI/CD, Docker, Kubernetes & more in 15 chapters</p>
+            <div class="topic-badge">Start Learning →</div>
+          </a>
+
+          <!-- Shell Scripting -->
+          <a href="/categories/shell-scripting/" class="category-card topic-card">
+            <div class="category-icon">
+              <div class="topic-emoji">🐚</div>
+            </div>
+            <h3 class="category-name">Shell Scripting</h3>
+            <p class="category-description">Automate with Bash in 13 practical lessons</p>
+            <div class="topic-badge">Start Learning →</div>
+          </a>
+
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="/categories/" class="btn btn-outline">View All Categories</a>
       </div>
     </div>
   </section>
