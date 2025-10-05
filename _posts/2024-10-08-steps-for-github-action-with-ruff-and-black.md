@@ -61,7 +61,6 @@ repositories.
 ### **Why Use Reusable Actions?**
 
 1. **Embrace the DRY Principle**:
-
    - <span style="color:#00BFFF; font-weight:bold;">**DRY**</span> stands for
      _Don’t Repeat Yourself_. By using
      <span style="color:#32CD32; font-weight:bold;">**reusable actions**</span>,
@@ -72,7 +71,6 @@ repositories.
    ![DRY Principle](https://via.placeholder.com/300x100/007BFF/FFFFFF?text=DRY+Principle)
 
 2. **Consistency Across Projects**:
-
    - Using the same action across different repositories ensures that your
      workflows remain
      <span style="color:#FFD700; font-weight:bold;">**consistent**</span>. This
@@ -80,7 +78,6 @@ repositories.
      how things work.
 
 3. **Simplified Maintenance**:
-
    - When you need to update a process, you only have to change it in one
      place—the <span style="color:#32CD32; font-weight:bold;">**reusable
      action**</span>. This makes maintaining your code much easier and less
@@ -170,7 +167,6 @@ the steps your action will execute.
 #### **Creating the Directory and File**
 
 1. **Open Your Terminal**:
-
    - Navigate to your GitHub repository directory using the terminal. You can
      use the command:
 
@@ -179,7 +175,6 @@ the steps your action will execute.
      ```
 
 2. **Create the Directory Structure**:
-
    - Create a new directory for your action inside the `.github` folder. Use the
      following command:
 
@@ -188,7 +183,6 @@ the steps your action will execute.
      ```
 
 3. **Create the `action.yml` File**:
-
    - Now, create the `action.yml` file in the new directory:
 
      ```bash

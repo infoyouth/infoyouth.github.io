@@ -140,7 +140,6 @@ For further details on YAML syntax, you can refer to the
 ### 🏗️ Steps in the Job
 
 1. **Checkout Code**:
-
    - **Function**: Uses `actions/checkout@v2` to access the repository's files.
    - **Example**: Allows the workflow to work with the latest code changes
      before executing tests.
@@ -274,7 +273,6 @@ graph TD;
    ```
 
 8. **Where to Look for Actions Running:**
-
    - Go to your GitHub repository page.
 
    - Click on the "Actions" tab.
