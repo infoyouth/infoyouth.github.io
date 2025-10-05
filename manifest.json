@@ -1,0 +1,52 @@
+{
+  "name": "Youth Innovations",
+  "short_name": "Youth Innov",
+  "description": "Empowering Equal Opportunities - Educational resources for C, C++, Java, Angular, DevOps, and more",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#667eea",
+  "icons": [
+    {
+      "src": "/assets/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "reference", "productivity"],
+  "lang": "en",
+  "dir": "ltr",
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "C Programming",
+      "short_name": "C Course",
+      "description": "Master C fundamentals",
+      "url": "/categories/c-programming/",
+      "icons": [{ "src": "/assets/images/logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Java Programming",
+      "short_name": "Java Course",
+      "description": "Complete Java tutorials",
+      "url": "/categories/java-programming/",
+      "icons": [{ "src": "/assets/images/logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "DevOps",
+      "short_name": "DevOps",
+      "description": "CI/CD & Cloud tutorials",
+      "url": "/categories/devops/",
+      "icons": [{ "src": "/assets/images/logo.png", "sizes": "192x192" }]
+    }
+  ]
+}
