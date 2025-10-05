@@ -1,4 +1,24 @@
-Error: API request failed with error: 429 Client Error: Too Many Requests for url: <https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=AIzaSyCqqy_YUWLqdIADD-v3sAMpRI7xGRp6B-E>
+---
+title: "02. Core Angular Concepts"
+description: "🚀 Master essential Angular concepts! Learn Component Lifecycle hooks, Component Communication with @Input/@Output, Data Binding techniques, Template Syntax, and Pipes for data transformation. 🎯"
+author: infoyouth
+date: 2025-01-01 02:00:00 +0000
+categories:
+  - Programming
+  - Angular
+  - Web Development
+  - Frontend
+tags:
+  - "Angular"
+  - "Component Lifecycle"
+  - "Data Binding"
+  - "Angular Pipes"
+  - "Component Communication"
+  - "TypeScript"
+pin: true
+math: false
+mermaid: true
+---
 
 # <span style="color:#e67e22;">What we will learn in this post?</span>
 
@@ -71,18 +91,18 @@ Here's a friendly rundown of the main hooks you'll encounter:
 
 ```mermaid
 graph LR
-    A[Component Creation] --> B(ngOnChanges);
-    B --> C(ngOnInit);
-    C --> D(ngDoCheck);
-    D --> E(ngAfterContentInit);
-    E --> F(ngAfterContentChecked);
-    F --> G(ngAfterViewInit);
-    G --> H(ngAfterViewChecked);
-        H --> I{Change Detection};
+    A[Component Creation] --> B["ngOnChanges"];
+    B --> C["ngOnInit"];
+    C --> D["ngDoCheck"];
+    D --> E["ngAfterContentInit"];
+    E --> F["ngAfterContentChecked"];
+    F --> G["ngAfterViewInit"];
+    G --> H["ngAfterViewChecked"];
+    H --> I{Change Detection};
     I -- Yes --> D;
     I -- No --> J[Component Usage];
-J --> K(ngOnDestroy);
- K --> L[Component Destruction];
+    J --> K["ngOnDestroy"];
+    K --> L[Component Destruction];
 
     style A fill:#f9f,stroke:#333,stroke-width:2px
     style L fill:#f9f,stroke:#333,stroke-width:2px
@@ -93,6 +113,8 @@ J --> K(ngOnDestroy);
 Let's make these hooks more tangible with some practical scenarios:
 
 ### <span style="color:#8e44ad">Example 1: Initializing with `ngOnInit`</span>
+
+{% raw %}
 
 ```typescript
 import { Component, OnInit } from "@angular/core";
@@ -115,9 +137,13 @@ export class UserProfileComponent implements OnInit {
 }
 ```
 
+{% endraw %}
+
 - In this example, the `ngOnInit` hook is used to fetch user data when the component is first created. We use an `UserService` (assuming you have one) and subscribe to it to update our component's property `userName`.
 
 ### <span style="color:#8e44ad">Example 2: Cleaning Up with `ngOnDestroy`</span>
+
+{% raw %}
 
 ```typescript
 import { Component, OnDestroy, OnInit } from "@angular/core";
@@ -143,10 +169,14 @@ export class TimerComponent implements OnInit, OnDestroy {
 }
 ```
 
+{% endraw %}
+
 - Here, `ngOnDestroy` is used to unsubscribe from our `interval` observable which is set up in the ngOnInit() method. Failing to unsubscribe would cause a memory leak and problems later.
 - This ensures resources are released when the component is no longer used.
 
 ### <span style="color:#8e44ad">Example 3: Reacting to Input Changes with `ngOnChanges`</span>
+
+{% raw %}
 
 ```typescript
 import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
@@ -170,6 +200,8 @@ export class GreetingComponent implements OnChanges {
   }
 }
 ```
+
+{% endraw %}
 
 - Here we have a component that reacts to an input property called `name`. Whenever the `name` prop of the component changes, the `ngOnChanges` method gets invoked, which logs the changes to the console.
 
@@ -208,6 +240,8 @@ Here's a simple code snippet for better understanding:
 
 **Child Component (`child.component.ts`)**
 
+{% raw %}
+
 ```typescript
 import { Component, Input } from "@angular/core";
 
@@ -222,7 +256,11 @@ export class ChildComponent {
 }
 ```
 
+{% endraw %}
+
 **Parent Component (`parent.component.ts`)**
+
+{% raw %}
 
 ```typescript
 import { Component } from "@angular/core";
@@ -235,6 +273,8 @@ export class ParentComponent {
   parentName: string = "John Doe";
 }
 ```
+
+{% endraw %}
 
 In this example:
 
@@ -262,6 +302,8 @@ Let's explore this with another example:
 
 **Child Component (`button.component.ts`)**
 
+{% raw %}
+
 ```typescript
 import { Component, Output, EventEmitter } from "@angular/core";
 
@@ -277,7 +319,11 @@ export class ButtonComponent {
 }
 ```
 
+{% endraw %}
+
 **Parent Component (`parent.component.ts`)**
+
+{% raw %}
 
 ```typescript
 import { Component } from "@angular/core";
@@ -296,6 +342,8 @@ export class ParentComponent {
   }
 }
 ```
+
+{% endraw %}
 
 In this example:
 
@@ -316,8 +364,8 @@ Here's a simplified diagram of how these components communicate:
 
 ```mermaid
 graph LR
-    A[Parent Component] -->|@Input() data| B(Child Component)
-    B -->|@Output() event| A
+    A[Parent Component] -->|"@Input() data"| B["Child Component"];
+    B -->|"@Output() event"| A;
     style A fill:#ccf,stroke:#333,stroke-width:2px
     style B fill:#afa,stroke:#333,stroke-width:2px
 ```
@@ -327,6 +375,8 @@ graph LR
 We can combine `@Input()` and `@Output()` to create interactive components. Imagine a counter component that displays a count and allows the parent to control initial value and listens for value change.
 
 **Child Component (`counter.component.ts`)**
+
+{% raw %}
 
 ```typescript
 import { Component, Input, Output, EventEmitter } from "@angular/core";
@@ -349,7 +399,11 @@ export class CounterComponent {
 }
 ```
 
+{% endraw %}
+
 **Parent Component (`parent.component.ts`)**
+
+{% raw %}
 
 ```typescript
 import { Component } from "@angular/core";
@@ -373,6 +427,8 @@ export class ParentComponent {
   }
 }
 ```
+
+{% endraw %}
 
 In this complex example:
 
@@ -413,13 +469,15 @@ Think of pipes as tiny helpers that sit between your component data and how it's
   - Makes data presentation more user-friendly.
 
 <br>
+
 ```mermaid
 graph LR
-    A[Component Data] --> B(Pipe);
-    B --> C{Transformed Data};
+    A[Component Data] --> B["Pipe"];
+    B --> C["Transformed Data"];
     C --> D[Template Display];
     style B fill:#f9f,stroke:#333,stroke-width:2px
 ```
+
 <br>
 
 ## <span style="color:#2980b9">Built-in Pipes: Your Ready-to-Use Toolkit 🛠️</span>
@@ -454,11 +512,15 @@ Angular comes packed with several built-in pipes ready to handle common transfor
 
 You simply use the `|` (pipe) symbol in your template, followed by the pipe name and any arguments required by the pipe.
 
+{% raw %}
+
 ```html
 <p>Today's date: {{ myDate | date: 'longDate' }}</p>
 <p>Your balance: {{ balance | currency: 'EUR' }}</p>
 <p>The string in upper case: {{myString | uppercase}}</p>
 ```
+
+{% endraw %}
 
 **Key Takeaway:** These built-in pipes are your go-to for quick and common data transformations!
 <br>
@@ -508,10 +570,14 @@ In this example, the code splits the value into an array of characters, reverses
 
 Now you can use your custom pipe in templates!
 
+{% raw %}
+
 ```html
 <p>Original Text: {{myString}}</p>
 <p>Reversed Text: {{myString | myCustomPipe}}</p>
 ```
+
+{% endraw %}
 
 **Important points about custom pipes:**
 
@@ -525,11 +591,15 @@ Now you can use your custom pipe in templates!
 
 You can chain multiple pipes together for more complex transformations.
 
+{% raw %}
+
 ```html
 <p>
   Formatted and Uppercased Date: {{ myDate | date: 'shortDate' | uppercase }}
 </p>
 ```
+
+{% endraw %}
 
 The output of the first pipe becomes the input of the second pipe and so on.
 
