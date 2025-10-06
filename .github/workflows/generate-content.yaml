@@ -69,8 +69,8 @@ jobs:
               FILENAME=$(basename "$json_file")
               echo "  → Checking ${FILENAME}..."
               
-              # Check if today's date exists in this JSON file
-              if grep -q "\"date\": \"${TODAY}\"" "$json_file"; then
+              # Check if today's date exists in this JSON file (capital "Date" field)
+              if grep -qi "\"Date\": \"${TODAY}\"" "$json_file"; then
                 # Extract topic name from filename
                 TOPIC_NAME=$(basename "$json_file" | sed 's/topics_and_prompts_//;s/.json//')
                 echo "✅ Found content for topic: ${TOPIC_NAME}"
