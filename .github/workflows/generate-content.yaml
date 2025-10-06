@@ -48,7 +48,6 @@ jobs:
         working-directory: ./temp
         run: |
           export PYTHONPATH=$(pwd)
-          mkdir -p $GITHUB_WORKSPACE/_posts
           echo "🎯 Starting content generation process..."
           # Run the Python script to generate content and set the TOPIC value in the script
           python3 todays_course_finder.py || { echo "Failed to generate content, exiting with error code"; exit 1; }
@@ -59,7 +58,18 @@ jobs:
           # Check if any .md files were generated, excluding README.md
           if ls *.md 2>/dev/null | grep -v '^README.md$' > /dev/null; then
             echo "📄 Found generated markdown files (excluding README.md), copying them..."
-            ls *.md | grep -v '^README.md$' | xargs -I {} cp {} $GITHUB_WORKSPACE/_posts
+            
+            # Map TOPIC to folder name (lowercase with hyphens)
+            TOPIC_FOLDER=$(echo "${TOPIC}" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
+            TARGET_DIR="$GITHUB_WORKSPACE/_posts/${TOPIC_FOLDER}"
+            
+            # Create topic folder if it doesn't exist
+            mkdir -p "${TARGET_DIR}"
+            
+            # Copy files to the topic-specific folder
+            ls *.md | grep -v '^README.md$' | xargs -I {} cp {} "${TARGET_DIR}/"
+            echo "✅ Copied posts to _posts/${TOPIC_FOLDER}/"
+            
             CONTENT_GENERATED=true
           else
             echo "🚫 No content generated for today. Skipping file copy."
