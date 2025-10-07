@@ -4,94 +4,155 @@ layout: default
 
 <!-- Landing Page Styles -->
 <link rel="stylesheet" href="{{ '/assets/css/landing.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/glass-micro-interactions.css' | relative_url }}">
+
+<!-- Alpine.js for Micro-interactions -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <!-- Landing Page for Youth Innovations Blog -->
-<!-- This layout creates a dynamic, modern landing page while preserving all existing post links -->
+<!-- Enhanced with Glassmorphism & Micro-interactions (2025) -->
 
-<div class="landing-page">
-  <!-- Hero Section -->
+<!-- Reading Progress Bar -->
+<div x-data="{ progress: 0 }" 
+     @scroll.window="progress = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100"
+     class="reading-progress" 
+     :style="`width: ${progress}%`"></div>
+
+<div class="landing-page" x-data="{ scrolled: false }" @scroll.window="scrolled = window.scrollY > 100">
+  <!-- Hero Section with Glass Effect -->
   <section class="hero-section">
-    <div class="hero-overlay"></div>
+    <div class="hero-glass-overlay"></div>
     <div class="hero-content">
-      <h1 class="hero-title animate-fade-in">{{ site.title }}</h1>
-      <p class="hero-tagline animate-fade-in-delay">{{ site.tagline }}</p>
-      <p class="hero-description animate-fade-in-delay-2">{{ site.description }}</p>
-      <div class="hero-cta animate-fade-in-delay-3">
-        <a href="#recent-posts" class="btn btn-primary">Explore Articles</a>
-        <a href="/categories/" class="btn btn-secondary">Browse Categories</a>
+      <!-- Floating Logo -->
+      <div class="float" style="margin-bottom: 2rem;">
+        <img src="/assets/images/logo.png" alt="{{ site.title }}" width="120" class="pulse">
+      </div>
+      
+      <!-- Glass Card Container -->
+      <div class="hero-glass-card">
+        <h1 class="hero-title animate-fade-in">
+          <span class="gradient-text">{{ site.title }}</span>
+        </h1>
+        <p class="hero-tagline animate-fade-in-delay">{{ site.tagline }}</p>
+        <p class="hero-description animate-fade-in-delay-2">{{ site.description }}</p>
+        
+        <!-- Enhanced CTA Buttons -->
+        <div class="hero-cta animate-fade-in-delay-3" style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+          <a href="#recent-posts" class="magnetic-btn ripple" data-tooltip="Discover amazing content">
+            ✨ Explore Articles
+          </a>
+          <a href="/categories/" class="magnetic-btn ripple" data-tooltip="Browse by topic" style="background: linear-gradient(135deg, rgba(118, 75, 162, 0.8), rgba(102, 126, 234, 0.8));">
+            📚 Browse Categories
+          </a>
+        </div>
+      </div>
+      
+      <!-- Floating Stats -->
+      <div class="float-delayed" style="display: flex; gap: 2rem; justify-content: center; margin-top: 3rem;">
+        <div class="glass-card" style="padding: 1rem 2rem;">
+          <div style="font-size: 2rem; font-weight: bold;" class="gradient-text">119+</div>
+          <div style="font-size: 0.9rem; opacity: 0.8;">Articles</div>
+        </div>
+        <div class="glass-card" style="padding: 1rem 2rem;">
+          <div style="font-size: 2rem; font-weight: bold;" class="gradient-text">8</div>
+          <div style="font-size: 0.9rem; opacity: 0.8;">Categories</div>
+        </div>
+        <div class="glass-card" style="padding: 1rem 2rem;">
+          <div style="font-size: 2rem; font-weight: bold;" class="gradient-text">587+</div>
+          <div style="font-size: 0.9rem; opacity: 0.8;">Diagrams</div>
+        </div>
       </div>
     </div>
-    <!-- Dynamic hero background image -->
-    {% assign hero_image = "/assets/images/logo.png" %}
-    <div class="hero-background" style="background-image: url('{{ hero_image | relative_url }}');"></div>
+    <!-- Dynamic hero background image - using smaller favicon to prevent overflow -->
+    {% assign hero_image = "/assets/img/favicons/web-app-manifest-192x192.png" %}
+    <div class="hero-background" style="background-image: url('{{ hero_image | relative_url }}'); opacity: 0.15;"></div>
   </section>
 
   <!-- Featured Learning Paths Section -->
-  <section class="categories-section">
+  <section class="categories-section" style="padding: 4rem 0;">
     <div class="container">
-      <h2 class="section-title">🎓 Start Your Learning Journey</h2>
-      <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Swipe or scroll to explore all topics →</p>
+      <h2 class="section-title"><span class="gradient-text">🎓 Start Your Learning Journey</span></h2>
+      <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">✨ Hover to explore • Swipe to discover more →</p>
+      
       <div class="categories-scroll-wrapper">
-        <div class="categories-grid-scroll">
+        <div class="categories-grid-scroll" x-data="{ hoveredCard: null }">
         
           <!-- C Programming -->
-          <a href="/categories/c-programming/" class="category-card topic-card">
+          <a href="/categories/c-programming/" 
+             class="category-card-enhanced ripple"
+             @mouseenter="hoveredCard = 'c'"
+             @mouseleave="hoveredCard = null">
             <div class="category-icon">
-              <div class="topic-emoji">🔧</div>
+              <div class="topic-emoji icon-bounce">🔧</div>
             </div>
             <h3 class="category-name">C Programming</h3>
             <p class="category-description">Master the fundamentals with 18 comprehensive lessons</p>
-            <div class="topic-badge">Start Learning →</div>
+            <div class="topic-badge" style="margin-top: 1rem; color: #667eea;">Start Learning →</div>
           </a>
 
           <!-- C++ Programming -->
-          <a href="/categories/cpp-programming/" class="category-card topic-card">
+          <a href="/categories/cpp-programming/" 
+             class="category-card-enhanced ripple"
+             @mouseenter="hoveredCard = 'cpp'"
+             @mouseleave="hoveredCard = null">
             <div class="category-icon">
-              <div class="topic-emoji">⚙️</div>
+              <div class="topic-emoji icon-bounce">⚙️</div>
             </div>
             <h3 class="category-name">C++ Mastery</h3>
             <p class="category-description">Advanced OOP concepts in 29 detailed tutorials</p>
-            <div class="topic-badge">Start Learning →</div>
+            <div class="topic-badge" style="margin-top: 1rem; color: #667eea;">Start Learning →</div>
           </a>
 
           <!-- Java Programming -->
-          <a href="/categories/java-programming/" class="category-card topic-card">
+          <a href="/categories/java-programming/" 
+             class="category-card-enhanced ripple"
+             @mouseenter="hoveredCard = 'java'"
+             @mouseleave="hoveredCard = null">
             <div class="category-icon">
-              <div class="topic-emoji">☕</div>
+              <div class="topic-emoji icon-bounce">☕</div>
             </div>
             <h3 class="category-name">Complete Java</h3>
-            <p class="category-description">From basics to advanced with 27 lessons</p>
-            <div class="topic-badge">Start Learning →</div>
+            <p class="category-description">From basics to advanced with 28 lessons</p>
+            <div class="topic-badge" style="margin-top: 1rem; color: #667eea;">Start Learning →</div>
           </a>
 
           <!-- Angular Framework -->
-          <a href="/categories/angular/" class="category-card topic-card">
+          <a href="/categories/angular/" 
+             class="category-card-enhanced ripple"
+             @mouseenter="hoveredCard = 'angular'"
+             @mouseleave="hoveredCard = null">
             <div class="category-icon">
-              <div class="topic-emoji">🅰️</div>
+              <div class="topic-emoji icon-bounce">🅰️</div>
             </div>
             <h3 class="category-name">Angular Framework</h3>
             <p class="category-description">Modern web development in 15 modules</p>
-            <div class="topic-badge">Start Learning →</div>
+            <div class="topic-badge" style="margin-top: 1rem; color: #667eea;">Start Learning →</div>
           </a>
 
           <!-- DevOps -->
-          <a href="/categories/devops/" class="category-card topic-card">
+          <a href="/categories/devops/" 
+             class="category-card-enhanced ripple"
+             @mouseenter="hoveredCard = 'devops'"
+             @mouseleave="hoveredCard = null">
             <div class="category-icon">
-              <div class="topic-emoji">🚀</div>
+              <div class="topic-emoji icon-bounce">🚀</div>
             </div>
             <h3 class="category-name">DevOps</h3>
-            <p class="category-description">CI/CD, Docker, Kubernetes & more in 15 chapters</p>
-            <div class="topic-badge">Start Learning →</div>
+            <p class="category-description">CI/CD, Docker, Kubernetes & more in 14 chapters</p>
+            <div class="topic-badge" style="margin-top: 1rem; color: #667eea;">Start Learning →</div>
           </a>
 
           <!-- Shell Scripting -->
-          <a href="/categories/bash-shell-scripting/" class="category-card topic-card">
+          <a href="/categories/bash-shell-scripting/" 
+             class="category-card-enhanced ripple"
+             @mouseenter="hoveredCard = 'shell'"
+             @mouseleave="hoveredCard = null">
             <div class="category-icon">
-              <div class="topic-emoji">🐚</div>
+              <div class="topic-emoji icon-bounce">🐚</div>
             </div>
             <h3 class="category-name">Shell Scripting</h3>
-            <p class="category-description">Automate with Bash in 13 practical lessons</p>
-            <div class="topic-badge">Start Learning →</div>
+            <p class="category-description">Automate with Bash in 12 practical lessons</p>
+            <div class="topic-badge" style="margin-top: 1rem; color: #667eea;">Start Learning →</div>
           </a>
 
         </div>
