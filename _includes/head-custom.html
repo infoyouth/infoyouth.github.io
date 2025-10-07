@@ -1,2 +1,19 @@
 <!-- PWA Support -->
 {% include pwa-head.html %}
+
+<!-- Enhanced SEO Meta Tags -->
+{% include seo-meta.html %}
+
+<!-- Schema.org Structured Data for SEO -->
+{% include structured-data.html %}
+{% include breadcrumb-schema.html %}
+{% include faq-schema.html %}
+{% include howto-schema.html %}
+
+<!-- Organization Schema (only on homepage) -->
+{% if page.url == '/' %}
+{% include organization-schema.html %}
+{% endif %}
+
+<!-- Microsoft Clarity Analytics -->
+{% include clarity-analytics.html %}

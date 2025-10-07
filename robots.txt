@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and system files
+Disallow: /assets/js/
+Disallow: /_site/
+Disallow: /tools/
+
+# Sitemap location
+Sitemap: https://infoyouth.github.io/sitemap.xml
+
+# Crawl-delay for polite bots
+Crawl-delay: 1

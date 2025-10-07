@@ -78,6 +78,10 @@ analytics:
   fathom:
     id: # fill in your Fathom Site ID
 
+# Microsoft Clarity Analytics
+clarity:
+  id: tmlftkmf8p
+
 # Page views settings
 pageviews:
   provider: # now only supports 'goatcounter'
