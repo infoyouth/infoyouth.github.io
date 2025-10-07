@@ -6,8 +6,36 @@ layout: page
 <!-- Archives Custom Styles -->
 <link rel="stylesheet" href="{{ '/assets/css/archives.css' | relative_url }}">
 
-<!-- Alpine.js with Collapse Plugin -->
+<!-- Alpine.js CDN -->
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<!-- Alpine.js Data Component -->
+<script>
+document.addEventListener('alpine:init', () => {
+  Alpine.data('archivesData', () => ({
+    openYears: ['{{ current_year }}'],
+    openMonths: ['{{ current_year }}-{{ current_month_name }}'],
+    totalPosts: {{ site.posts | size }},
+    yearCounts: {},
+    
+    toggleYear(year) {
+      if (this.openYears.includes(year)) {
+        this.openYears = this.openYears.filter(y => y !== year);
+      } else {
+        this.openYears.push(year);
+      }
+    },
+    
+    toggleMonth(monthId) {
+      if (this.openMonths.includes(monthId)) {
+        this.openMonths = this.openMonths.filter(m => m !== monthId);
+      } else {
+        this.openMonths.push(monthId);
+      }
+    }
+  }))
+})
+</script>
 
 {% assign current_year = "now" | date: "%Y" | plus: 0 %}
 {% assign current_month = "now" | date: "%m" | plus: 0 %}
@@ -134,31 +162,3 @@ layout: page
     {% endfor %}
   </div>
 </div>
-
-<!-- Alpine.js Logic -->
-<script>
-document.addEventListener('alpine:init', () => {
-  Alpine.data('archivesData', () => ({
-    openYears: ['{{ current_year }}'], // Only current year open by default
-    openMonths: ['{{ current_year }}-{{ current_month_name }}'], // Only current month open by default
-    totalPosts: {{ site.posts | size }},
-    yearCounts: {},
-    
-    toggleYear(year) {
-      if (this.openYears.includes(year)) {
-        this.openYears = this.openYears.filter(y => y !== year);
-      } else {
-        this.openYears.push(year);
-      }
-    },
-    
-    toggleMonth(monthId) {
-      if (this.openMonths.includes(monthId)) {
-        this.openMonths = this.openMonths.filter(m => m !== monthId);
-      } else {
-        this.openMonths.push(monthId);
-      }
-    }
-  }))
-})
-</script>
