@@ -1,0 +1,36 @@
+<!-- HowTo Schema for tutorial posts -->
+{% if page.tutorial %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "{{ page.title | escape }}",
+  "description": "{{ page.description | default: page.excerpt | strip_html | truncate: 160 | escape }}",
+  "image": "{{ page.image.path | default: '/assets/img/default-post-image.jpg' | absolute_url }}",
+  "totalTime": "{{ page.tutorial.duration | default: 'PT30M' }}",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "0"
+  },
+  "tool": [
+    {% for tool in page.tutorial.tools %}
+    {
+      "@type": "HowToTool",
+      "name": "{{ tool }}"
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ],
+  "step": [
+    {% for step in page.tutorial.steps %}
+    {
+      "@type": "HowToStep",
+      "name": "{{ step.name | escape }}",
+      "text": "{{ step.text | escape }}",
+      "url": "{{ page.url | absolute_url }}#step-{{ forloop.index }}"
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}

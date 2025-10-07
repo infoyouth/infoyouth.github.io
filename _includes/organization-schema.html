@@ -1,0 +1,26 @@
+<!-- Organization Schema for brand identity -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{{ site.title | escape }}",
+  "url": "{{ site.url }}",
+  "logo": "{{ site.avatar | absolute_url }}",
+  "description": "{{ site.description | escape }}",
+  "email": "{{ site.social.email }}",
+  "sameAs": [
+    {% for link in site.social.links %}
+    "{{ link }}"{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "{{ site.social.name | escape }}"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "{{ site.social.email }}",
+    "contactType": "Customer Service"
+  }
+}
+</script>
