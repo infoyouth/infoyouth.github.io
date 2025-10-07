@@ -1,0 +1,38 @@
+<!-- Support This Blog Section -->
+{% if site.monetization.support_enabled %}
+<div class="support-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0; text-align: center;">
+  <h3 style="margin: 0 0 1rem 0; font-size: 1.5rem;">
+    <i class="fas fa-heart" style="color: #ff6b6b;"></i>
+    Support This Blog
+  </h3>
+  <p style="margin: 0 0 1.5rem 0; opacity: 0.9;">
+    {{ site.monetization.support_message | default: "If you find this content helpful, consider supporting my work!" }}
+  </p>
+  
+  <div class="support-buttons" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+    {% if site.monetization.kofi_username %}
+    <a href="https://ko-fi.com/{{ site.monetization.kofi_username }}" 
+       target="_blank"
+       style="background: #FF5E5B; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+      <i class="fas fa-coffee"></i> Buy me a coffee
+    </a>
+    {% endif %}
+    
+    {% if site.monetization.paypal_username %}
+    <a href="https://paypal.me/{{ site.monetization.paypal_username }}" 
+       target="_blank"
+       style="background: #00457C; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+      <i class="fab fa-paypal"></i> PayPal
+    </a>
+    {% endif %}
+    
+    {% if site.monetization.github_sponsors %}
+    <a href="https://github.com/sponsors/{{ site.github.username }}" 
+       target="_blank"
+       style="background: #333; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+      <i class="fab fa-github"></i> Sponsor
+    </a>
+    {% endif %}
+  </div>
+</div>
+{% endif %}

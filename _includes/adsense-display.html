@@ -1,0 +1,23 @@
+<!-- AdSense Display Ad -->
+{% if site.adsense.enabled and site.adsense.client_id %}
+<div class="adsense-container {{ include.class }}" style="text-align: center; margin: {{ include.margin | default: '2rem 0' }};">
+  {% if include.slot_id %}
+  <!-- Manual Ad Unit -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="{{ site.adsense.client_id }}"
+       data-ad-slot="{{ include.slot_id }}"
+       data-ad-format="{{ include.format | default: 'auto' }}"
+       data-full-width-responsive="true"></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+  {% else %}
+  <!-- Placeholder for future ad -->
+  <div class="ad-placeholder" style="background: #f5f5f5; padding: 2rem; border: 1px dashed #ddd; border-radius: 8px; color: #999;">
+    <p style="margin: 0; font-size: 0.9rem;">Advertisement Space</p>
+    <small>Configure AdSense in _config.yml</small>
+  </div>
+  {% endif %}
+</div>
+{% endif %}
