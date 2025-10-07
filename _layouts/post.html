@@ -6,12 +6,15 @@ panel_includes:
 tail_includes:
   - related-posts
   - post-nav
-  - comments
+script_includes:
+  - comment
 ---
 
 {% include lang.html %}
 
-<article class="px-1">
+{% include toc-status.html %}
+
+<article class="px-1" data-toc="{{ enable_toc }}">
   <header>
     <h1 data-toc-skip>{{ page.title }}</h1>
     {% if page.description %}
@@ -57,36 +60,32 @@ tail_includes:
             {% assign authors = page.author %}
           {% elsif page.authors %}
             {% assign authors = page.authors %}
-          {% else %}
-            {% assign authors = site.social.name %}
           {% endif %}
 
           {{ site.data.locales[lang].post.written_by }}
 
           <em>
             {% if authors %}
-              {% if site.data.authors %}
-                {% for author in authors %}
-                  {% if site.data.authors[author] %}
-                    <a href="{{ site.data.authors[author].url }}">{{ site.data.authors[author].name }}</a>
-                  {% else %}
-                    {{ author }}
-                  {% endif %}
-                  {% unless forloop.last %}{{ '</em>, <em>' }}{% endunless %}
-                {% endfor %}
-              {% else %}
-                {{ authors }}
-              {% endif %}
+              {% for author in authors %}
+                {% if site.data.authors[author].url -%}
+                  <a href="{{ site.data.authors[author].url }}">{{ site.data.authors[author].name }}</a>
+                {%- else -%}
+                  {{ site.data.authors[author].name }}
+                {%- endif %}
+                {% unless forloop.last %}{{ '</em>, <em>' }}{% endunless %}
+              {% endfor %}
+            {% else %}
+              <a href="{{ site.social.links[0] }}">{{ site.social.name }}</a>
             {% endif %}
           </em>
         </span>
 
         <div>
-          <!-- page views -->
-          {% if site.pageviews.provider and page.redirect_from == nil %}
+          <!-- pageviews -->
+          {% if site.pageviews.provider and site.analytics[site.pageviews.provider].id %}
             <span>
-              <em id="pv" class="pageviews">
-                <i class="fas fa-spinner fa-spin fa-fw"></i>
+              <em id="pageviews">
+                <i class="fas fa-spinner fa-spin small"></i>
               </em>
               {{ site.data.locales[lang].post.pageview_measure }}
             </span>
@@ -98,6 +97,30 @@ tail_includes:
       </div>
     </div>
   </header>
+
+  {% if enable_toc %}
+    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
+      <span class="label text-truncate">{{ page.title }}</span>
+      <button type="button" class="toc-trigger btn me-1">
+        <i class="fa-solid fa-list-ul fa-fw"></i>
+      </button>
+    </div>
+
+    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
+      <span class="label ps-2 pe-1">{{- site.data.locales[lang].panel.toc -}}</span>
+      <i class="fa-solid fa-angle-right fa-fw"></i>
+    </button>
+
+    <dialog id="toc-popup" class="p-0">
+      <div class="header d-flex flex-row align-items-center justify-content-between">
+        <div class="label text-truncate py-2 ms-4">{{- page.title -}}</div>
+        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
+          <i class="fas fa-close"></i>
+        </button>
+      </div>
+      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
+    </dialog>
+  {% endif %}
 
   <div class="content">
     {{ content }}
