@@ -1,0 +1,15 @@
+<!-- Google AdSense Integration -->
+{% if site.adsense.enabled and site.adsense.client_id %}
+
+<!-- AdSense Auto Ads (Recommended) -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.adsense.client_id }}"
+     crossorigin="anonymous"></script>
+
+{% if site.adsense.auto_ads %}
+<!-- Auto ads will place ads automatically -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+{% endif %}
+
+{% endif %}
