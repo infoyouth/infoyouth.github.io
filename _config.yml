@@ -80,7 +80,7 @@ analytics:
 
 # Microsoft Clarity Analytics
 clarity:
-  id: # Get your project ID from https://clarity.microsoft.com
+  id: tmlftkmf8p
 
 # Page views settings
 pageviews:
