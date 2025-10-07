@@ -6,7 +6,7 @@ description:
   Python projects.
 author: infoyouth
 date: 2024-10-07 02:00:00 +0000
-categories: [DevOps, Automation, Python]
+categories: [DevOps, Automation]
 tags: [GitHub Actions, Ruff, Black, Python, Code Quality]
 pin: true
 math: false
