@@ -324,7 +324,7 @@
 }
 
 .post-title {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: #333;
   margin: 0 0 0.5rem 0;
@@ -386,7 +386,7 @@
   }
 
   .timeline-container {
-    padding-left: 1rem;
+    padding-left: 0.5rem;
   }
 
   .timeline-container::before {
@@ -409,11 +409,11 @@
 
   .months-container {
     margin-left: 0;
-    padding-left: 0.25rem;
+    padding-left: 0.15rem;
   }
 
   .post-item {
-    padding: 0.75rem 0.5rem 0.75rem 0.4rem;
+    padding: 0.75rem 0.5rem 0.75rem 0.25rem;
   }
 
   .post-date {
@@ -450,7 +450,7 @@
   }
 
   .month-header {
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 1rem 0.75rem 0.25rem;
   }
 
   .month-name {
@@ -793,13 +793,13 @@
 
   /* Compact month headers */
   .month-header {
-    padding: 0.6rem 0.5rem;
+    padding: 0.6rem 0.5rem 0.6rem 0.2rem;
     margin-left: 0;
     border-radius: 8px;
   }
 
   .months-container {
-    padding-left: 0.25rem;
+    padding-left: 0.15rem;
     margin-left: 0;
   }
 
@@ -831,7 +831,7 @@
 
   /* Compact post items */
   .post-item {
-    padding: 0.6rem 0.4rem 0.6rem 0.3rem;
+    padding: 0.6rem 0.4rem 0.6rem 0.2rem;
     gap: 0.5rem;
     margin-left: 0;
     border-radius: 8px;
@@ -891,7 +891,7 @@
 
   .post-item {
     margin-left: 0;
-    padding: 0.5rem 0.3rem 0.5rem 0.25rem;
+    padding: 0.5rem 0.3rem 0.5rem 0.2rem;
   }
 
   .post-title {
