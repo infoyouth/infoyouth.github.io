@@ -8,12 +8,28 @@ layout: default
      crossorigin="anonymous"></script>
 {% endif %}
 
-<!-- Landing Page Styles -->
-<link rel="stylesheet" href="{{ '/assets/css/landing.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/css/glass-micro-interactions.css' | relative_url }}">
+<!-- Preload Critical CSS -->
+<link rel="preload" href="{{ '/assets/css/landing.css' | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ '/assets/css/landing.css' | relative_url }}"></noscript>
 
-<!-- Alpine.js for Micro-interactions -->
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<!-- Load Glass Effects CSS with low priority -->
+<link rel="preload" href="{{ '/assets/css/glass-micro-interactions.css' | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ '/assets/css/glass-micro-interactions.css' | relative_url }}"></noscript>
+
+<!-- Alpine.js for Micro-interactions - Deferred with fallback -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" 
+        onerror="this.onerror=null;this.src='{{ '/assets/js/vendor/alpine.min.js' | relative_url }}'"></script>
+
+<!-- Inline Critical CSS Loading Script -->
+<script>
+  // Fallback for preload polyfill
+  if(!("onload" in HTMLLinkElement.prototype)){
+    var links = document.querySelectorAll("link[rel='preload'][as='style']");
+    links.forEach(function(link){
+      link.rel = "stylesheet";
+    });
+  }
+</script>
 
 <!-- Landing Page for Youth Innovations Blog -->
 <!-- Enhanced with Glassmorphism & Micro-interactions (2025) -->
