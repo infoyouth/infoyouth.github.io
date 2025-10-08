@@ -72,7 +72,12 @@ layout: default
   <section class="categories-section" style="padding: 4rem 0;">
     <div class="container">
       <h2 class="section-title"><span class="gradient-text">🎓 Start Your Learning Journey</span></h2>
-      <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">✨ Hover to explore • Swipe to discover more →</p>
+      
+      <!-- Responsive instruction text -->
+      <p class="categories-instruction">
+        <span class="desktop-only">✨ Explore our comprehensive learning paths below</span>
+        <span class="mobile-only">✨ Swipe to discover more →</span>
+      </p>
       
       <div class="categories-scroll-wrapper">
         <div class="categories-grid-scroll" x-data="{ hoveredCard: null }">
