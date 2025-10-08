@@ -84,15 +84,15 @@ clarity:
 
 # Monetization Settings
 monetization:
-  # Google AdSense
-  adsense:
-    enabled: true # Set to true when approved
-    client_id: ca-pub-8844965520305488
-    auto_ads: true # Enable auto ad placement
-  
   # Affiliate Programs
   affiliate_disclosure: true # Show affiliate disclosure
   amazon_tag: # your-amazon-tag-20
+
+# Google AdSense (must be at root level for Jekyll)
+adsense:
+  enabled: true # Set to true when approved
+  client_id: ca-pub-8844965520305488
+  auto_ads: true # Enable auto ad placement
   
   # Support/Donations
   support_enabled: false # Enable support section
