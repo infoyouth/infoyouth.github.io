@@ -2,6 +2,14 @@
 layout: default
 ---
 
+<!-- Preconnect to critical third-party origins -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+{% if site.adsense.enabled %}
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+{% endif %}
+
 <!-- Google AdSense -->
 {% if site.adsense.enabled and site.adsense.client_id %}
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.adsense.client_id }}"
@@ -45,9 +53,12 @@ layout: default
   <section class="hero-section">
     <div class="hero-glass-overlay"></div>
     <div class="hero-content">
-      <!-- Floating Logo -->
+      <!-- Floating Logo - Optimized WebP with PNG fallback -->
       <div class="float" style="margin-bottom: 2rem;">
-        <img src="/assets/images/logo.png" alt="{{ site.title }}" width="120" class="pulse">
+        <picture>
+          <source srcset="/assets/images/logo-120.webp" type="image/webp">
+          <img src="/assets/images/logo.png" alt="{{ site.title }}" width="120" height="120" class="pulse" fetchpriority="high">
+        </picture>
       </div>
       
       <!-- Glass Card Container -->
