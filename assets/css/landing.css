@@ -7,6 +7,52 @@
  * Color Palette: Primary #4CAF50 (Green), Secondary #2196F3 (Blue), Accent #FF5722 (Orange)
  */
 
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+/* Font Display Optimization - Override CDN fonts with swap */
+@font-face {
+  font-family: 'Font Awesome 6 Free';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/webfonts/fa-solid-900.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Font Awesome 6 Brands';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/webfonts/fa-brands-400.woff2) format('woff2');
+}
+
+/* Prevent layout shift from avatar */
+img[alt="avatar"] {
+  width: 112px !important;
+  height: 112px !important;
+  aspect-ratio: 1/1;
+  display: block;
+  content-visibility: auto;
+}
+
+/* Prevent layout shift from hero content */
+.hero-content {
+  min-height: 300px;
+  contain: layout;
+}
+
+/* Prevent layout shift from tags */
+.post-tag {
+  min-width: 80px;
+  text-align: center;
+}
+
+/* ============================================
+   CSS VARIABLES
+   ============================================ */
+
 :root {
   --primary-color: #4CAF50;
   --primary-dark: #388E3C;
@@ -674,7 +720,7 @@
 
 .cta-description {
   font-size: 1.25rem;
-  color: var(--text-secondary);
+  color: #2c3e50; /* WCAG AAA compliant - 10.7:1 contrast on light bg */
   margin-bottom: 2rem;
   line-height: 1.6;
 }
