@@ -1,0 +1,47 @@
+/* Glassmorphism styles for About Us page */
+.about-glass-container {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 900px;
+}
+.about-carousel {
+  width: 100%;
+  margin: 2rem auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+}
+.about-carousel img {
+  width: 100%;
+  display: block;
+}
+.about-section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #00e6e6;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.about-callout {
+  background: rgba(0, 230, 230, 0.12);
+  border-left: 4px solid #00e6e6;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  font-size: 1.1rem;
+}
+@media (max-width: 600px) {
+  .about-glass-container {
+    padding: 1rem;
+    max-width: 98vw;
+  }
+  .about-section-title {
+    font-size: 1.3rem;
+  }
+}
