@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Register service worker
   registerServiceWorker();
+  
+  // Diagnostic: Check manifest availability and CORS
+  checkManifestAvailability();
 });
 
 // Register Service Worker
@@ -228,4 +231,19 @@ function isPWA() {
 if (isPWA()) {
   document.body.classList.add('pwa-mode');
   console.log('Running as PWA');
+}
+
+// Diagnostic helper: fetch manifest and report status
+async function checkManifestAvailability() {
+  try {
+    const resp = await fetch('/manifest.json', { cache: 'no-store' });
+    if (!resp.ok) {
+      console.warn('Manifest fetch responded with status:', resp.status);
+      return;
+    }
+    const json = await resp.json();
+    console.log('Manifest loaded, start_url=', json.start_url, 'icons=', json.icons && json.icons.map(i=>i.src));
+  } catch (err) {
+    console.error('Failed to fetch manifest (CORS or network):', err);
+  }
 }
