@@ -1,0 +1,10 @@
+# Python posts with OneCompiler playgrounds
+# These files contain code in HTML attributes that Prettier corrupts
+_posts/python/2025-10-13-02.-python-basics---syntax-and-data-types.md
+_posts/python/2025-10-16-03.-python-strings.md
+_posts/python/2025-10-19-04.-python-lists.md
+_posts/python/2025-10-22-05.-python-tuples-and-sets.md
+_posts/python/2025-10-25-06.-python-dictionaries.md
+_posts/python/2025-10-28-07.-python-control-flow---conditional-statements.md
+_posts/python/2025-10-31-08.-python-loops---for-and-while.md
+_posts/python/2025-11-03-09.-python-functions---basics.md
