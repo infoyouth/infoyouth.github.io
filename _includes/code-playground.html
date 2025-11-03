@@ -37,7 +37,8 @@
       width="100%" 
       height="{{ playground_height }}px" 
       src="https://onecompiler.com/embed/{{ include.language }}?hideLanguageSelection=true&hideNew=true&hideTitle=true&theme={{ playground_theme }}&listenToEvents=true"
-      data-code="{{ include.code | uri_escape }}">
+      data-language="{{ include.language }}"
+      data-code="{{ include.code | escape }}">
     </iframe>
   </div>
 </details>
@@ -49,21 +50,21 @@
     const playgroundIframes = document.querySelectorAll('.onecompiler-iframe');
     
     playgroundIframes.forEach(function(iframe, index) {
-      const encodedCode = iframe.getAttribute('data-code');
-      if (encodedCode) {
-        const code = decodeURIComponent(encodedCode);
-        
+      const code = iframe.getAttribute('data-code');
+      const language = iframe.getAttribute('data-language');
+      
+      if (code && language) {
         // Small delay to ensure iframe is fully loaded
         setTimeout(function() {
           iframe.contentWindow.postMessage({
             eventType: 'populateCode',
-            language: '{{ include.language }}',
+            language: language,
             files: [{
-              name: 'main.{{ include.language }}',
+              name: 'main.' + language,
               content: code
             }]
           }, '*');
-        }, 500 + (index * 100)); // Stagger the messages slightly
+        }, 1000 + (index * 200)); // Longer delay and stagger the messages
       }
     });
   });
