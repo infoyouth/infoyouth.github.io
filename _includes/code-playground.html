@@ -1,0 +1,71 @@
+{% comment %}
+  Code Playground Component
+  Usage: {% include code-playground.html language="python" code="your code here" height="500" theme="dark" %}
+  
+  Parameters:
+  - language: required (python, c, cpp, java, go, bash, javascript, etc.)
+  - code: required (the code to pre-load)
+  - height: optional (default: 500px)
+  - theme: optional (default: dark)
+  - gradient: optional (default: purple - options: purple, pink, green, orange)
+{% endcomment %}
+
+{% assign playground_height = include.height | default: "500" %}
+{% assign playground_theme = include.theme | default: "dark" %}
+{% assign playground_gradient = include.gradient | default: "purple" %}
+
+{% if playground_gradient == "purple" %}
+  {% assign gradient_style = "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" %}
+{% elsif playground_gradient == "pink" %}
+  {% assign gradient_style = "background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" %}
+{% elsif playground_gradient == "green" %}
+  {% assign gradient_style = "background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);" %}
+{% elsif playground_gradient == "orange" %}
+  {% assign gradient_style = "background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);" %}
+{% else %}
+  {% assign gradient_style = "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" %}
+{% endif %}
+
+<details class="code-playground" style="margin: 20px 0; border: 2px solid #3498db; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  <summary style="{{ gradient_style }} padding: 15px 20px; color: white; font-weight: bold; cursor: pointer; user-select: none;">
+    🚀 Try this Live → Click to open interactive {{ include.language | upcase }} playground
+  </summary>
+  <div style="padding: 0;">
+    <iframe 
+      class="onecompiler-iframe"
+      frameborder="0" 
+      width="100%" 
+      height="{{ playground_height }}px" 
+      src="https://onecompiler.com/embed/{{ include.language }}?hideLanguageSelection=true&hideNew=true&hideTitle=true&theme={{ playground_theme }}&listenToEvents=true"
+      data-code="{{ include.code | uri_escape }}">
+    </iframe>
+  </div>
+</details>
+
+<script>
+(function() {
+  // Wait for iframe to load and populate code
+  window.addEventListener('load', function() {
+    const playgroundIframes = document.querySelectorAll('.onecompiler-iframe');
+    
+    playgroundIframes.forEach(function(iframe, index) {
+      const encodedCode = iframe.getAttribute('data-code');
+      if (encodedCode) {
+        const code = decodeURIComponent(encodedCode);
+        
+        // Small delay to ensure iframe is fully loaded
+        setTimeout(function() {
+          iframe.contentWindow.postMessage({
+            eventType: 'populateCode',
+            language: '{{ include.language }}',
+            files: [{
+              name: 'main.{{ include.language }}',
+              content: code
+            }]
+          }, '*');
+        }, 500 + (index * 100)); // Stagger the messages slightly
+      }
+    });
+  });
+})();
+</script>
