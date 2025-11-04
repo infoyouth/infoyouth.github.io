@@ -67,7 +67,7 @@ jobs:
         run: |
           bundle exec htmlproofer _site${{ steps.pages.outputs.base_path }} \
             --cache '{"timeframe": {"external": "30d"}}' \
-            --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
+            --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/,/fonts\.googleapis\.com/,/fonts\.gstatic\.com/"
 
       - name: 🧹 Lint Ruby Code
         run: |
