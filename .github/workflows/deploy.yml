@@ -55,10 +55,19 @@ jobs:
         env:
           JEKYLL_ENV: "production"
 
-      - name: 🔍 Test Site
+      - name: � Cache HTMLProofer
+        uses: actions/cache@v4
+        with:
+          path: tmp/.htmlproofer
+          key: htmlproofer-${{ github.sha }}
+          restore-keys: |
+            htmlproofer-
+
+      - name: �🔍 Test Site
         run: |
           bundle exec htmlproofer _site${{ steps.pages.outputs.base_path }} \
             --disable-external \
+            --cache '{"timeframe": {"external": "30d"}}' \
             --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
 
       - name: 🧹 Lint Ruby Code
@@ -78,46 +87,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-24.04
     needs: build
-    if: github.ref == 'refs/heads/main'  # Only run deploy when pushing to main
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4.0.5
-
-      - name: 📢 Notify Discord of New Posts
-        if: env.NEW_POSTS != ''
-        uses: cabrera-evil/discord-notify-action@v1.0.2
-        with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          title: "🎉 New Posts Published on Youth Innovations!"
-          description: |
-            🚀 **Exciting News from Youth Innovations!** 🚀
-            We have just published new blog posts on our site! 🎉
-
-            **Check out the latest topics:**
-            ${{ env.NEW_POSTS }}
-
-            📖 Visit us at [Youth Innovations](https://infoyouth.github.io) for more insightful articles and innovations!
-
-            Thank you for your continued support! 💖
-          include_image: 'true'
-          username: 'Youth Innovations'
-
-      # - name: 📢 Notify Discord of New Posts
-      #   if: ${{ needs.deploy.result == 'success' && env.new-files == 'true' }}
-      #   uses: cabrera-evil/discord-notify-action@1.1.8
-      #   with:
-      #     webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-      #     title: "🎉 New Posts Published on Youth Innovations!"
-      #     description: |
-      #       🚀 **Exciting News from Youth Innovations!** 🚀
-      #       We have just published new blog posts on our site! 🎉
-
-      #       **Check out the latest topics:**
-      #       ${{ env.NEW_POSTS }}
-
-      #       📖 Visit us at [Youth Innovations](https://infoyouth.github.io) for more insightful articles and innovations!
-
-      #       Thank you for your continued support! 💖
-      #     include_image: 'true'
-      #     username: 'Youth Innovations'
