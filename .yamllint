@@ -1,0 +1,39 @@
+---
+# YAML Lint Configuration
+# Relaxed rules for practical use
+
+extends: default
+
+rules:
+  # Allow lines longer than 80 characters (common in GitHub Actions)
+  line-length:
+    max: 250
+    level: warning
+
+  # Allow missing document start (---)
+  document-start: disable
+
+  # Allow 'on:' instead of forcing "on:"
+  truthy:
+    allowed-values: ['true', 'false', 'on', 'off']
+    check-keys: false
+
+  # Allow single space before comments
+  comments:
+    min-spaces-from-content: 1
+
+  # Allow trailing spaces (auto-formatters sometimes add them)
+  trailing-spaces: disable
+
+  # Relax comment indentation rules
+  comments-indentation: disable
+
+  # Allow more flexible bracket spacing
+  brackets:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+
+  # Allow flexible indentation
+  indentation:
+    spaces: 2
+    indent-sequences: true
