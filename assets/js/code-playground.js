@@ -1,81 +1,124 @@
 /**
  * OneCompiler Code Playground Integration
  * Handles code population for embedded OneCompiler iframes
+ * Version: 2.0 - Compatible with GitHub Pages
  */
 
 (function() {
   'use strict';
 
+  console.log('[Playground] Script loaded');
+
   /**
    * Decode HTML entities from the data-code attribute
-   * This handles &quot;, &amp;, &lt;, &gt;, etc.
    */
   function decodeHTMLEntities(text) {
-    var textArea = document.createElement('textarea');
-    textArea.innerHTML = text;
-    return textArea.value;
+    var textarea = document.createElement('textarea');
+    textarea.innerHTML = text;
+    return textarea.value;
   }
 
   /**
-   * Initialize all code playgrounds on the page
+   * Populate a single playground iframe
    */
-  function initializePlaygrounds() {
-    const playgroundIframes = document.querySelectorAll('.onecompiler-iframe');
+  function populatePlayground(iframe, index) {
+    var encodedCode = iframe.getAttribute('data-code');
+    var language = iframe.getAttribute('data-language');
     
-    if (playgroundIframes.length === 0) {
-      return; // No playgrounds on this page
+    if (!encodedCode || !language) {
+      console.warn('[Playground ' + index + '] Missing code or language attribute');
+      return false;
+    }
+    
+    var code = decodeHTMLEntities(encodedCode);
+    console.log('[Playground ' + index + '] Decoded ' + encodedCode.length + ' → ' + code.length + ' chars');
+    
+    try {
+      iframe.contentWindow.postMessage({
+        eventType: 'populateCode',
+        language: language,
+        files: [{
+          name: 'main.' + language,
+          content: code
+        }]
+      }, '*');
+      
+      console.log('[Playground ' + index + '] ✓ Code sent to OneCompiler (' + language + ')');
+      return true;
+    } catch (error) {
+      console.error('[Playground ' + index + '] ✗ Failed to send code:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Initialize all playgrounds on the page
+   */
+  function initializeAllPlaygrounds() {
+    var iframes = document.querySelectorAll('.onecompiler-iframe');
+    
+    if (iframes.length === 0) {
+      console.log('[Playground] No playgrounds found on this page');
+      return;
     }
 
-    console.log(`Found ${playgroundIframes.length} code playground(s)`);
+    console.log('[Playground] Found ' + iframes.length + ' playground(s), initializing...');
     
-    playgroundIframes.forEach(function(iframe, index) {
-      const encodedCode = iframe.getAttribute('data-code');
-      const language = iframe.getAttribute('data-language');
-      
-      if (!encodedCode || !language) {
-        console.warn(`Playground ${index} missing code or language attribute`);
-        return;
-      }
-      
-      // Decode HTML entities from the code
-      const code = decodeHTMLEntities(encodedCode);
-      
-      console.log(`Playground ${index}: Decoded ${encodedCode.length} chars to ${code.length} chars`);
-      
-      // Wait for iframe to be fully loaded, then populate code
-      // Stagger the messages to avoid race conditions
-      const delay = 1000 + (index * 300);
+    var successCount = 0;
+    iframes.forEach(function(iframe, index) {
+      // Stagger the population to avoid overwhelming OneCompiler
+      var delay = 1500 + (index * 400);
       
       setTimeout(function() {
-        try {
-          iframe.contentWindow.postMessage({
-            eventType: 'populateCode',
-            language: language,
-            files: [{
-              name: 'main.' + language,
-              content: code
-            }]
-          }, '*');
-          
-          console.log(`Populated playground ${index} (${language})`);
-        } catch (error) {
-          console.error(`Failed to populate playground ${index}:`, error);
+        if (populatePlayground(iframe, index)) {
+          successCount++;
         }
       }, delay);
     });
+    
+    // Log summary after all attempts
+    setTimeout(function() {
+      console.log('[Playground] Initialization complete: ' + successCount + '/' + iframes.length + ' successful');
+    }, 1500 + (iframes.length * 400) + 500);
   }
 
-  // Initialize when DOM is ready
+  /**
+   * Initialize playgrounds when a details element is expanded
+   */
+  window.initializePlaygroundOnExpand = function(summaryElement) {
+    var details = summaryElement.parentElement;
+    if (details.getAttribute('data-playground-ready') === 'true') {
+      return; // Already initialized
+    }
+    
+    console.log('[Playground] Expanding playground, initializing...');
+    details.setAttribute('data-playground-ready', 'true');
+    
+    var iframe = details.querySelector('.onecompiler-iframe');
+    if (iframe) {
+      setTimeout(function() {
+        populatePlayground(iframe, 'expanded');
+      }, 800);
+    }
+  };
+
+  // Initialize on DOM ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializePlaygrounds);
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('[Playground] DOM ready, initializing...');
+      setTimeout(initializeAllPlaygrounds, 500);
+    });
   } else {
-    // DOM is already ready
-    initializePlaygrounds();
+    console.log('[Playground] DOM already ready, initializing...');
+    setTimeout(initializeAllPlaygrounds, 500);
   }
 
-  // Re-initialize when window fully loads (backup)
+  // Backup initialization on window load
   window.addEventListener('load', function() {
-    setTimeout(initializePlaygrounds, 500);
+    console.log('[Playground] Window loaded, running backup initialization...');
+    setTimeout(initializeAllPlaygrounds, 1000);
   });
+
+  console.log('[Playground] Event listeners registered');
 
 })();

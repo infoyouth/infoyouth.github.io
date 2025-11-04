@@ -26,8 +26,8 @@
   {% assign gradient_style = "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" %}
 {% endif %}
 
-<details class="code-playground" style="margin: 20px 0; border: 2px solid #3498db; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-  <summary style="{{ gradient_style }} padding: 15px 20px; color: white; font-weight: bold; cursor: pointer; user-select: none;">
+<details class="code-playground" style="margin: 20px 0; border: 2px solid #3498db; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" data-playground-ready="false">
+  <summary style="{{ gradient_style }} padding: 15px 20px; color: white; font-weight: bold; cursor: pointer; user-select: none;" onclick="window.initializePlaygroundOnExpand && window.initializePlaygroundOnExpand(this);">
     🚀 Try this Live → Click to open interactive {{ include.language | upcase }} playground
   </summary>
   <div style="padding: 0;">
@@ -38,66 +38,8 @@
       height="{{ playground_height }}px" 
       src="https://onecompiler.com/embed/{{ include.language }}?hideLanguageSelection=true&hideNew=true&hideTitle=true&theme={{ playground_theme }}&listenToEvents=true"
       data-language="{{ include.language }}"
-      data-code="{{ include.code | escape }}">
+      data-code="{{ include.code | escape }}"
+      loading="lazy">
     </iframe>
   </div>
 </details>
-
-<script>
-// Load the code playground initializer only once
-if (!window.playgroundInitializerLoaded) {
-  window.playgroundInitializerLoaded = true;
-  
-  // Decode HTML entities
-  function decodePlaygroundHTML(text) {
-    var textarea = document.createElement('textarea');
-    textarea.innerHTML = text;
-    return textarea.value;
-  }
-  
-  // Initialize playgrounds when DOM is ready
-  function initPlaygrounds() {
-    var iframes = document.querySelectorAll('.onecompiler-iframe');
-    console.log('Initializing ' + iframes.length + ' playground(s)');
-    
-    iframes.forEach(function(iframe, index) {
-      var encodedCode = iframe.getAttribute('data-code');
-      var language = iframe.getAttribute('data-language');
-      
-      if (!encodedCode || !language) {
-        console.warn('Playground ' + index + ' missing code or language');
-        return;
-      }
-      
-      var code = decodePlaygroundHTML(encodedCode);
-      var delay = 1500 + (index * 400);
-      
-      setTimeout(function() {
-        try {
-          iframe.contentWindow.postMessage({
-            eventType: 'populateCode',
-            language: language,
-            files: [{
-              name: 'main.' + language,
-              content: code
-            }]
-          }, '*');
-          console.log('✓ Populated playground ' + index + ' (' + language + ')');
-        } catch (e) {
-          console.error('✗ Failed playground ' + index + ':', e);
-        }
-      }, delay);
-    });
-  }
-  
-  // Run on DOM ready and page load
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPlaygrounds);
-  } else {
-    initPlaygrounds();
-  }
-  window.addEventListener('load', function() {
-    setTimeout(initPlaygrounds, 500);
-  });
-}
-</script>
