@@ -62,8 +62,8 @@ main() {
 
   # test
   bundle exec htmlproofer "$SITE_DIR" \
-    --disable-external \
-    --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
+    --cache '{"timeframe": {"external": "30d"}}' \
+    --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/,/fonts\.googleapis\.com/,/fonts\.gstatic\.com/"
 }
 
 while (($#)); do
