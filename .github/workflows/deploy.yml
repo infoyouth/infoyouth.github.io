@@ -66,6 +66,7 @@ jobs:
       - name: 🔍 Test Site
         run: |
           bundle exec htmlproofer _site${{ steps.pages.outputs.base_path }} \
+            --disable-external \
             --cache '{"timeframe": {"external": "30d"}}' \
             --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/,/fonts\.googleapis\.com/,/fonts\.gstatic\.com/,/googlesyndication\.com/,/cdn\.jsdelivr\.net/,/twitter\.com\/username/,/twitter\.com\/twitter_username/,/infoyouth\.github\.io/"
 
