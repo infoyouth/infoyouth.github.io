@@ -1,0 +1,283 @@
+---
+name: 📢 Social Media Auto-Publisher
+
+# Trigger after successful deployment
+on:
+  workflow_run:
+    workflows: ["Deploy"]
+    types: [completed]
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  detect-and-publish:
+    name: 🔍 Detect New Posts & Publish
+    # Only run if deploy succeeded
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: 🛠️ Checkout Repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 2  # Need 2 commits to compare for new files
+
+      - name: 🔍 Detect NEW Posts (Added, Not Modified)
+        id: detect
+        run: |
+          echo "🔎 Checking for newly added markdown files..."
+          
+          # Get list of NEW files added in last commit (status 'A' = Added)
+          NEW_POST_FILES=$(git diff --name-status HEAD~1 HEAD | \
+            grep '^A' | \
+            grep '_posts/.*\.md$' | \
+            awk '{print $2}')
+          
+          if [ -z "$NEW_POST_FILES" ]; then
+            echo "📭 No new posts detected. Skipping social publishing."
+            echo "has_new_posts=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          echo "✅ New posts detected:"
+          echo "$NEW_POST_FILES"
+          
+          # Get the first new post file
+          FIRST_NEW_POST=$(echo "$NEW_POST_FILES" | head -n 1)
+          echo "post_file=${FIRST_NEW_POST}" >> $GITHUB_OUTPUT
+          echo "has_new_posts=true" >> $GITHUB_OUTPUT
+          
+          echo "📝 Will publish: ${FIRST_NEW_POST}"
+
+      - name: 🐍 Setup Python
+        if: steps.detect.outputs.has_new_posts == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install Dependencies
+        if: steps.detect.outputs.has_new_posts == 'true'
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright
+          playwright install chromium
+          playwright install-deps
+
+      - name: 📝 Extract Post Metadata
+        if: steps.detect.outputs.has_new_posts == 'true'
+        id: metadata
+        run: |
+          POST_FILE="${{ steps.detect.outputs.post_file }}"
+          echo "📄 Extracting metadata from: ${POST_FILE}"
+          
+          # Make script executable
+          chmod +x scripts/social/extract_metadata.py
+          
+          # Extract metadata
+          METADATA=$(python3 scripts/social/extract_metadata.py "${POST_FILE}")
+          
+          if [ $? -ne 0 ]; then
+            echo "❌ Failed to extract metadata"
+            exit 1
+          fi
+          
+          # Parse metadata into variables
+          while IFS='=' read -r key value; do
+            case "$key" in
+              TITLE) echo "title=${value}" >> $GITHUB_OUTPUT ;;
+              CATEGORY) echo "category=${value}" >> $GITHUB_OUTPUT ;;
+              TAGS) echo "tags=${value}" >> $GITHUB_OUTPUT ;;
+              DATE) echo "date=${value}" >> $GITHUB_OUTPUT ;;
+              URL) echo "url=${value}" >> $GITHUB_OUTPUT ;;
+              DESCRIPTION) echo "description=${value}" >> $GITHUB_OUTPUT ;;
+              LEARNING_POINTS) echo "learning_points=${value}" >> $GITHUB_OUTPUT ;;
+            esac
+          done <<< "$METADATA"
+          
+          echo "✅ Metadata extracted successfully"
+
+      - name: 🎨 Generate OG Card Image
+        if: steps.detect.outputs.has_new_posts == 'true'
+        id: generate_image
+        run: |
+          # Make script executable
+          chmod +x scripts/social/generate_og_image.py
+          
+          # Extract slug from filename for image name
+          POST_FILE="${{ steps.detect.outputs.post_file }}"
+          SLUG=$(basename "${POST_FILE}" .md | sed 's/^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}-//')
+          
+          IMAGE_PATH="assets/og-images/${SLUG}.png"
+          echo "image_path=${IMAGE_PATH}" >> $GITHUB_OUTPUT
+          
+          echo "🎨 Generating OG image: ${IMAGE_PATH}"
+          
+          python3 scripts/social/generate_og_image.py \
+            "${{ steps.metadata.outputs.title }}" \
+            "${{ steps.metadata.outputs.category }}" \
+            "${{ steps.metadata.outputs.tags }}" \
+            "${{ steps.metadata.outputs.date }}" \
+            "${{ steps.metadata.outputs.learning_points }}" \
+            "${IMAGE_PATH}"
+          
+          if [ $? -ne 0 ]; then
+            echo "❌ Failed to generate OG image"
+            exit 1
+          fi
+          
+          echo "✅ OG image generated successfully"
+
+      - name: 💾 Commit OG Image to Repository
+        if: steps.detect.outputs.has_new_posts == 'true'
+        run: |
+          git config user.name "Youth Innovations Bot"
+          git config user.email "info.youthinno@gmail.com"
+          
+          git add ${{ steps.generate_image.outputs.image_path }}
+          
+          if git diff --staged --quiet; then
+            echo "📭 No changes to commit"
+          else
+            git commit -m "🎨 Add OG image for: ${{ steps.metadata.outputs.title }}"
+            git push
+            echo "✅ OG image committed to repository"
+          fi
+
+      - name: 🐦 Post to Twitter/X
+        if: steps.detect.outputs.has_new_posts == 'true'
+        env:
+          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
+        run: |
+          # Install tweepy for Twitter API
+          pip install tweepy
+          
+          # Create tweet script
+          cat > post_tweet.py << 'EOFPYTHON'
+          import tweepy
+          import os
+          import sys
+          
+          # Authenticate
+          auth = tweepy.OAuthHandler(
+              os.environ['TWITTER_API_KEY'],
+              os.environ['TWITTER_API_SECRET']
+          )
+          auth.set_access_token(
+              os.environ['TWITTER_ACCESS_TOKEN'],
+              os.environ['TWITTER_ACCESS_SECRET']
+          )
+          
+          # Create API v1.1 for media upload
+          api_v1 = tweepy.API(auth)
+          
+          # Create API v2 for posting
+          client = tweepy.Client(
+              consumer_key=os.environ['TWITTER_API_KEY'],
+              consumer_secret=os.environ['TWITTER_API_SECRET'],
+              access_token=os.environ['TWITTER_ACCESS_TOKEN'],
+              access_token_secret=os.environ['TWITTER_ACCESS_SECRET']
+          )
+          
+          # Get data from arguments
+          title = sys.argv[1]
+          category = sys.argv[2]
+          url = sys.argv[3]
+          tags = sys.argv[4].split(',')[:3]  # Limit to 3 tags
+          learning_points = sys.argv[5]  # Pipe-separated learning points
+          image_path = sys.argv[6]
+          
+          # Parse learning points
+          points = [p.strip() for p in learning_points.split('|')][:3]
+          
+          # Upload image
+          print(f"📤 Uploading image: {image_path}")
+          media = api_v1.media_upload(filename=image_path)
+          
+          # Create hashtags
+          hashtags = ' '.join([f'#{tag.strip().replace(" ", "")}' for tag in tags if tag.strip()])
+          
+          # Pattern A - Question Hook with Learning Points
+          question_hook = f"Want to master {category}?"
+          if 'angular' in category.lower():
+              question_hook = "❓ Want to master Angular fundamentals?"
+          elif 'python' in category.lower():
+              question_hook = "❓ Want to level up your Python skills?"
+          elif 'java' in category.lower():
+              question_hook = "❓ Ready to master Java programming?"
+          elif 'javascript' in category.lower():
+              question_hook = "❓ Want to become a JavaScript pro?"
+          elif 'devops' in category.lower():
+              question_hook = "❓ Want to master DevOps practices?"
+          elif 'go' in category.lower() or 'golang' in category.lower():
+              question_hook = "❓ Ready to learn Go programming?"
+          else:
+              question_hook = f"❓ Want to learn {category}?"
+          
+          # Build learning points text
+          learning_text = "\n".join([f"→ {point}" for point in points])
+          
+          # Create tweet text with Pattern A format
+          tweet_text = f"""{question_hook}
+
+{learning_text}
+
+📖 Full tutorial: {url}
+
+{hashtags}"""
+          
+          # Ensure tweet is under 280 characters
+          if len(tweet_text) > 280:
+              # Shorten learning points if needed
+              short_points = [p[:40] + "..." if len(p) > 40 else p for p in points]
+              learning_text = "\n".join([f"→ {point}" for point in short_points])
+              
+              tweet_text = f"""{question_hook}
+
+{learning_text}
+
+📖 {url}
+
+{hashtags}"""
+          
+          print(f"📝 Tweet text ({len(tweet_text)} chars):\n{tweet_text}")
+          print(f"🎯 Learning points included: {len(points)}")
+
+          
+          # Post tweet with image
+          response = client.create_tweet(
+              text=tweet_text,
+              media_ids=[media.media_id]
+          )
+          
+          print(f"✅ Tweet posted! ID: {response.data['id']}")
+          print(f"🔗 https://twitter.com/infoyouth2019/status/{response.data['id']}")
+          
+          EOFPYTHON
+          
+          # Post the tweet
+          python3 post_tweet.py \
+            "${{ steps.metadata.outputs.title }}" \
+            "${{ steps.metadata.outputs.category }}" \
+            "${{ steps.metadata.outputs.url }}" \
+            "${{ steps.metadata.outputs.tags }}" \
+            "${{ steps.metadata.outputs.learning_points }}" \
+            "${{ steps.generate_image.outputs.image_path }}"
+          
+          echo "✅ Tweet posted successfully!"
+
+      - name: 📊 Summary
+        if: always() && steps.detect.outputs.has_new_posts == 'true'
+        run: |
+          echo "## 📢 Social Publishing Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **Post:** ${{ steps.metadata.outputs.title }}" >> $GITHUB_STEP_SUMMARY
+          echo "📁 **Category:** ${{ steps.metadata.outputs.category }}" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 **URL:** ${{ steps.metadata.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+          echo "🎨 **OG Image:** ${{ steps.generate_image.outputs.image_path }}" >> $GITHUB_STEP_SUMMARY
+          echo "🐦 **Twitter:** Published!" >> $GITHUB_STEP_SUMMARY
