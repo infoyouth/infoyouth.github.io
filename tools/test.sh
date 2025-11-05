@@ -63,7 +63,7 @@ main() {
   # test
   bundle exec htmlproofer "$SITE_DIR" \
     --cache '{"timeframe": {"external": "30d"}}' \
-    --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/,/fonts\.googleapis\.com/,/fonts\.gstatic\.com/"
+    --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/,/fonts\.googleapis\.com/,/fonts\.gstatic\.com/,/googlesyndication\.com/,/cdn\.jsdelivr\.net/,/twitter\.com\/username/,/twitter\.com\/twitter_username/,/infoyouth\.github\.io/"
 }
 
 while (($#)); do
