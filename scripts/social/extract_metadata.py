@@ -169,7 +169,7 @@ def get_post_url(file_path, metadata):
         # Fallback to filename-based slug
         slug = extract_post_slug(file_path)
     else:
-        # Slugify title like Jekyll does
+        # Slugify title exactly like Jekyll does
         slug = title.lower()
         # Replace spaces and underscores with dashes
         slug = re.sub(r'[\s_]+', '-', slug)
@@ -177,8 +177,7 @@ def get_post_url(file_path, metadata):
         # This preserves "10." but removes other punctuation
         slug = re.sub(r'(?<!\d)\.', '', slug)  # Remove dots not preceded by digit
         slug = re.sub(r'[^\w.-]', '', slug)     # Remove other special chars except dot and dash
-        # Clean up multiple dashes
-        slug = re.sub(r'-+', '-', slug)
+        # Note: Jekyll preserves multiple consecutive dashes, so we do NOT collapse them
         # Remove leading/trailing dashes
         slug = slug.strip('-')
     
