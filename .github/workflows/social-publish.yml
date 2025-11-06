@@ -38,6 +38,7 @@ jobs:
 
       - name: 🔍 Detect NEW Posts (Added, Not Modified)
         id: detect
+        shell: bash
         run: |
           # Manual trigger mode - use provided post file
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -87,6 +88,7 @@ jobs:
       - name: 📝 Extract Post Metadata
         if: steps.detect.outputs.has_new_posts == 'true'
         id: metadata
+        shell: bash
         run: |
           POST_FILE="${{ steps.detect.outputs.post_file }}"
           echo "📄 Extracting metadata from: ${POST_FILE}"
@@ -117,6 +119,7 @@ jobs:
       - name: 🎨 Generate OG Card Image
         if: steps.detect.outputs.has_new_posts == 'true'
         id: generate_image
+        shell: bash
         run: |
           # Extract slug from filename for image name
           POST_FILE="${{ steps.detect.outputs.post_file }}"
@@ -144,6 +147,7 @@ jobs:
 
       - name: 🐦 Post to Twitter/X
         if: steps.detect.outputs.has_new_posts == 'true'
+        shell: bash
         env:
           TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
           TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
@@ -166,6 +170,7 @@ jobs:
 
       - name: 📊 Summary
         if: always() && steps.detect.outputs.has_new_posts == 'true'
+        shell: bash
         run: |
           echo "## 📢 Social Publishing Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
