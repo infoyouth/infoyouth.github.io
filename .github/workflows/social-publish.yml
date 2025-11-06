@@ -80,10 +80,10 @@ jobs:
           
           echo "📝 Will publish: ${FIRST_NEW_POST}"
 
-      - name: � Install Python Dependencies
+      - name: 📦 Install Python Dependencies
         if: steps.detect.outputs.has_new_posts == 'true'
         run: |
-          pip install tweepy  # Playwright is pre-installed in container
+          pip install playwright tweepy  # Install both packages, browsers already in container
 
       - name: 📝 Extract Post Metadata
         if: steps.detect.outputs.has_new_posts == 'true'
