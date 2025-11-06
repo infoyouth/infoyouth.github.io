@@ -71,19 +71,9 @@ def get_category_theme(category):
 
 
 def generate_tags_html(tags):
-    """Generate HTML for tags"""
-    if not tags:
-        return ''
-    
-    tags_list = tags.split(',') if isinstance(tags, str) else tags
-    tags_html = []
-    
-    for tag in tags_list[:3]:  # Limit to 3 tags (reduced to make space for learning points)
-        tag = tag.strip()
-        if tag:
-            tags_html.append(f'<span class="tag">#{tag}</span>')
-    
-    return '\n                '.join(tags_html)
+    """Generate HTML for tags - REMOVED to keep OG image clean"""
+    # Tags are now only in tweet text, not on the image
+    return ""
 
 
 def generate_learning_points_html(learning_points):

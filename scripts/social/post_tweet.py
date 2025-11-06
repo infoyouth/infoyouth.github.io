@@ -29,39 +29,13 @@ def create_question_hook(category):
 
 
 def create_tweet_text(category, learning_points, url, tags):
-    """Create tweet text using Pattern A format"""
-    # Parse learning points
-    points = [p.strip() for p in learning_points.split('|')][:3]
-    
-    # Create question hook
-    question_hook = create_question_hook(category)
-    
-    # Build learning points text
-    learning_text = "\n".join([f"→ {point}" for point in points])
-    
+    """Create tweet text - Simple format with URL and hashtags only"""
     # Create hashtags
     hashtags = ' '.join([f'#{tag.strip().replace(" ", "")}' for tag in tags.split(',') if tag.strip()])
     
-    # Create tweet text with Pattern A format
-    tweet_text = f"""{question_hook}
-
-{learning_text}
-
-📖 Full tutorial: {url}
-
-{hashtags}"""
-    
-    # Ensure tweet is under 280 characters
-    if len(tweet_text) > 280:
-        # Shorten learning points if needed
-        short_points = [p[:40] + "..." if len(p) > 40 else p for p in points]
-        learning_text = "\n".join([f"→ {point}" for point in short_points])
-        
-        tweet_text = f"""{question_hook}
-
-{learning_text}
-
-📖 {url}
+    # Simple tweet format: URL + hashtags
+    # The image will be on top automatically when media is attached
+    tweet_text = f"""{url}
 
 {hashtags}"""
     

@@ -161,10 +161,29 @@ def extract_post_slug(file_path):
 
 
 def get_post_url(file_path, metadata):
-    """Generate full post URL"""
-    slug = extract_post_slug(file_path)
+    """Generate full post URL using Jekyll's title-based permalink"""
+    # Jekyll uses the title field for :title in permalink
+    # It slugifies: lowercase, spaces to dashes, keeps dots after numbers
+    title = metadata.get('title', '')
+    if not title:
+        # Fallback to filename-based slug
+        slug = extract_post_slug(file_path)
+    else:
+        # Slugify title like Jekyll does
+        slug = title.lower()
+        # Replace spaces and underscores with dashes
+        slug = re.sub(r'[\s_]+', '-', slug)
+        # Remove special chars EXCEPT dots that follow digits
+        # This preserves "10." but removes other punctuation
+        slug = re.sub(r'(?<!\d)\.', '', slug)  # Remove dots not preceded by digit
+        slug = re.sub(r'[^\w.-]', '', slug)     # Remove other special chars except dot and dash
+        # Clean up multiple dashes
+        slug = re.sub(r'-+', '-', slug)
+        # Remove leading/trailing dashes
+        slug = slug.strip('-')
+    
     base_url = "https://infoyouth.github.io"
-    return f"{base_url}/posts/{slug}"
+    return f"{base_url}/posts/{slug}/"
 
 
 def format_date(date_str):
