@@ -25,7 +25,7 @@ jobs:
     if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-24.04
     container:
-      image: mcr.microsoft.com/playwright/python:v1.49.0-jammy
+      image: mcr.microsoft.com/playwright/python:v1.55.0-jammy
       options: --user root
 
     steps:
