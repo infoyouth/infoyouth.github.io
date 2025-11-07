@@ -161,24 +161,33 @@ def extract_post_slug(file_path):
 
 
 def get_post_url(file_path, metadata):
-    """Generate full post URL using Jekyll's title-based permalink"""
-    # Jekyll uses the title field for :title in permalink
-    # It slugifies: lowercase, spaces to dashes, keeps dots after numbers
+    """Generate full post URL matching Jekyll's :title permalink behavior
+    
+    Jekyll uses the 'title' frontmatter field and applies slugification:
+    - Converts to lowercase
+    - Replaces spaces with hyphens
+    - Removes most special characters
+    - Keeps alphanumeric, dots, and hyphens
+    - COLLAPSES multiple consecutive hyphens to single hyphen
+    
+    This matches Jekyll's actual behavior, not the filename.
+    """
     title = metadata.get('title', '')
     if not title:
         # Fallback to filename-based slug
         slug = extract_post_slug(file_path)
     else:
-        # Slugify title exactly like Jekyll does
+        # Match Jekyll's exact slugification process
         slug = title.lower()
-        # Replace spaces and underscores with dashes
-        slug = re.sub(r'[\s_]+', '-', slug)
-        # Remove special chars EXCEPT dots that follow digits
-        # This preserves "10." but removes other punctuation
-        slug = re.sub(r'(?<!\d)\.', '', slug)  # Remove dots not preceded by digit
-        slug = re.sub(r'[^\w.-]', '', slug)     # Remove other special chars except dot and dash
-        # Note: Jekyll preserves multiple consecutive dashes, so we do NOT collapse them
-        # Remove leading/trailing dashes
+        # Replace spaces with hyphens
+        slug = re.sub(r'\s+', '-', slug)
+        # Remove periods NOT preceded by digits
+        slug = re.sub(r'(?<!\d)\.', '', slug)
+        # Remove all special chars except alphanumeric, dots, hyphens
+        slug = re.sub(r'[^\w.-]', '', slug)
+        # Collapse multiple hyphens to single hyphen (Jekyll does this!)
+        slug = re.sub(r'-+', '-', slug)
+        # Remove leading/trailing hyphens
         slug = slug.strip('-')
     
     base_url = "https://infoyouth.github.io"
