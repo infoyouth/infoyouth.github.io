@@ -19,6 +19,11 @@ name: 📢 Social Media Auto-Publisher
         required: false
         type: string
         default: 'main'
+      skip_twitter:
+        description: 'Skip Twitter posting (for testing without API credentials)'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -151,7 +156,7 @@ jobs:
           echo "✅ OG image generated successfully"
 
       - name: 🐦 Post to Twitter/X
-        if: steps.detect.outputs.has_new_posts == 'true'
+        if: steps.detect.outputs.has_new_posts == 'true' && !inputs.skip_twitter
         shell: bash
         env:
           TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
@@ -173,7 +178,40 @@ jobs:
           
           echo "✅ Tweet posted successfully!"
 
-      - name: 📊 Summary
+      - name: 📋 Preview Tweet (Test Mode)
+        if: steps.detect.outputs.has_new_posts == 'true' && inputs.skip_twitter
+        shell: bash
+        run: |
+          echo "=================================================="
+          echo "🧪 TEST MODE - Tweet Preview (not posted)"
+          echo "=================================================="
+          echo ""
+          echo "📝 Tweet Text:"
+          echo "${{ steps.metadata.outputs.url }}"
+          echo ""
+          echo "${{ steps.metadata.outputs.tags }}" | python3 -c "
+          import sys
+          tags = sys.stdin.read().strip()
+          hashtags = ' '.join([f'#{tag.strip().replace(\" \", \"\")}' for tag in tags.split(',') if tag.strip()])
+          print(hashtags)
+          "
+          echo ""
+          echo "🖼️  OG Image: ${{ steps.generate_image.outputs.image_path }}"
+          echo "📊 Image Size: $(du -h ${{ steps.generate_image.outputs.image_path }} | cut -f1)"
+          echo ""
+          echo "=================================================="
+          echo "To post to Twitter, set skip_twitter=false and add API credentials"
+          echo "=================================================="
+
+      - name: � Upload OG Image as Artifact
+        if: steps.detect.outputs.has_new_posts == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: og-image-preview
+          path: ${{ steps.generate_image.outputs.image_path }}
+          retention-days: 7
+
+      - name:  Summary
         if: always() && steps.detect.outputs.has_new_posts == 'true'
         shell: bash
         run: |
@@ -183,4 +221,12 @@ jobs:
           echo "📁 **Category:** ${{ steps.metadata.outputs.category }}" >> $GITHUB_STEP_SUMMARY
           echo "🔗 **URL:** ${{ steps.metadata.outputs.url }}" >> $GITHUB_STEP_SUMMARY
           echo "🎨 **OG Image:** ${{ steps.generate_image.outputs.image_path }}" >> $GITHUB_STEP_SUMMARY
-          echo "🐦 **Twitter:** Published!" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ inputs.skip_twitter }}" == "true" ]; then
+            echo "🐦 **Twitter:** Skipped (test mode)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "🐦 **Twitter:** Published!" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📥 **Download OG Image:** Check workflow artifacts" >> $GITHUB_STEP_SUMMARY
