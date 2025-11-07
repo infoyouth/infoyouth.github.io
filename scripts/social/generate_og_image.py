@@ -138,15 +138,33 @@ def generate_og_image(title, category, tags, date, learning_points, output_path)
             print("📄 Loading HTML template...")
             page.set_content(html, wait_until='networkidle')
             
-            # Wait for fonts to load
-            page.wait_for_timeout(1000)
+            # Wait longer for fonts to load (increased for CI environment)
+            print("⏳ Waiting for fonts and rendering...")
+            page.wait_for_timeout(3000)  # Increased from 1000ms to 3000ms
+            
+            # Verify content is rendered
+            title_element = page.locator('.title')
+            if title_element.count() == 0:
+                print("⚠️  Warning: Title element not found, rendering may be incomplete")
             
             print(f"📸 Taking screenshot...")
-            page.screenshot(path=output_path, type='png')
+            page.screenshot(path=output_path, type='png', full_page=True)
             
             browser.close()
             
         print(f"✅ OG image generated: {output_path}")
+        
+        # Verify file was created and has content
+        if os.path.exists(output_path):
+            file_size = os.path.getsize(output_path)
+            print(f"📊 Image size: {file_size} bytes")
+            if file_size < 1000:
+                print("⚠️  Warning: Image file is suspiciously small")
+                return False
+        else:
+            print("❌ Image file was not created")
+            return False
+            
         return True
         
     except Exception as e:
