@@ -14,6 +14,11 @@ name: 📢 Social Media Auto-Publisher
         description: 'Path to the blog post file (e.g., _posts/python/2025-11-06-10.-python-functions---advanced.md)'
         required: true
         type: string
+      branch:
+        description: 'Branch to checkout (default: main, for testing use feature branch)'
+        required: false
+        type: string
+        default: 'main'
 
 permissions:
   contents: write
@@ -34,7 +39,7 @@ jobs:
         with:
           fetch-depth: 2  # Need 2 commits to compare for new files
           token: ${{ secrets.GITHUB_TOKEN }}
-          ref: main
+          ref: ${{ github.event.inputs.branch || 'main' }}  # Use input branch or default to main
 
       - name: 🔍 Detect NEW Posts (Added, Not Modified)
         id: detect
