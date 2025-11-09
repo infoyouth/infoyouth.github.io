@@ -1,19 +1,25 @@
 ---
-name: 📢 Social Media Auto-Publisher
+name: 📢 Social Media Auto-Publisher (DISABLED - X Account Suspended)
 
-# Trigger after successful deployment
+# DISABLED: X account suspended - workflow commented out
+# To re-enable: uncomment the "on:" section below
 "on":
-  workflow_run:
-    workflows: ["🚧 Build Test and Deploy"]
-    types: [completed]
-    branches:
-      - main
+  # workflow_run:
+  #   workflows: ["🚧 Build Test and Deploy"]
+  #   types: [completed]
+  #   branches:
+  #     - main
   workflow_dispatch:
     inputs:
       post_file:
         description: 'Path to the blog post file (e.g., _posts/python/2025-11-06-10.-python-functions---advanced.md)'
         required: true
         type: string
+      skip_twitter:
+        description: 'Skip Twitter posting (test mode)'
+        required: false
+        type: boolean
+        default: true  # Default to TRUE since account is suspended
 
 permissions:
   contents: write
