@@ -6,18 +6,152 @@ layout: page
 {% include lang.html %}
 
 <style>
-.category-section {
-  margin-bottom: 3rem;
+/* Adaptive tabs for 2-4 categories, accordions for 5+ */
+.category-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--card-border-color);
+  overflow-x: auto;
+  scrollbar-width: thin;
 }
 
-.category-section-title {
-  font-size: 2rem;
+.category-tab {
+  padding: 1rem 2rem;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--text-muted-color);
+  font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.category-tab::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.category-tab:hover {
+  color: var(--heading-color);
+  background: rgba(102, 126, 234, 0.08);
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.category-tab:hover::before {
+  width: 80%;
+}
+
+.category-tab.active {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  border-bottom-color: transparent;
+}
+
+.category-tab.active::before {
+  width: 100%;
+}
+
+[data-mode="light"] .category-tab {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+[data-mode="light"] .category-tab.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(102, 126, 234, 0.15);
+}
+
+[data-mode="dark"] .category-tab.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%, #f093fb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 8px rgba(102, 126, 234, 0.4));
+}
+
+/* Accordion styling for 5+ categories */
+.category-accordion {
+  margin-bottom: 1.5rem;
+  border: 2px solid var(--card-border-color);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.accordion-header {
+  padding: 1.25rem 1.5rem;
+  background: var(--card-bg);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+[data-mode="light"] .accordion-header {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.accordion-header:hover {
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.accordion-icon {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.accordion-header.collapsed .accordion-icon {
+  transform: rotate(-90deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0 1.5rem;
+}
+
+.accordion-content.expanded {
+  max-height: 5000px;
+  padding: 1.5rem;
+}
+
+.category-section {
+  margin-bottom: 2rem;
+}
+
+.category-section.tab-content {
+  display: none;
+}
+
+.category-section.tab-content.active {
+  display: block;
 }
 
 .category-grid {
@@ -204,12 +338,45 @@ layout: page
 {% comment %} Sort by date (Jekyll sorts strings, so we reverse to get newest first) {% endcomment %}
 {% assign sorted_category_dates = category_dates | sort | reverse %}
 
+{% comment %} Decide layout: tabs for 2-4 categories, accordion for 5+ {% endcomment %}
+{% assign parent_count = parent_categories | size %}
+{% assign use_accordion = false %}
+{% if parent_count >= 5 %}
+  {% assign use_accordion = true %}
+{% endif %}
+
+{% comment %} Render tabs if using tab layout {% endcomment %}
+{% if use_accordion == false and parent_count > 1 %}
+<div class="category-tabs">
+  {% for parent in parent_categories %}
+    <button class="category-tab {% if forloop.first %}active{% endif %}" 
+            onclick="switchTab(event, '{{ parent | slugify }}')">
+      {{ parent }}
+    </button>
+  {% endfor %}
+</div>
+{% endif %}
+
 {% comment %} Display categories by parent, sorted by latest post {% endcomment %}
 {% for parent in parent_categories %}
-  <div class="category-section">
-    <h2 class="category-section-title">{{ parent }}</h2>
-    
-    <div class="category-grid">
+  {% if use_accordion %}
+    {% comment %} Accordion layout for 5+ categories {% endcomment %}
+    <div class="category-accordion">
+      <div class="accordion-header {% unless forloop.first %}collapsed{% endunless %}" 
+           onclick="toggleAccordion(this)">
+        <span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+          {{ parent }}
+        </span>
+        <span class="accordion-icon">▼</span>
+      </div>
+      <div class="accordion-content {% if forloop.first %}expanded{% endif %}">
+        <div class="category-grid">
+  {% else %}
+    {% comment %} Tab layout for 2-4 categories {% endcomment %}
+    <div class="category-section tab-content {% if forloop.first %}active{% endif %}" 
+         id="{{ parent | slugify }}">
+      <div class="category-grid">
+  {% endif %}
       {% assign displayed_categories = "" | split: "" %}
       
       {% for entry in sorted_category_dates %}
@@ -250,6 +417,56 @@ layout: page
           {% endunless %}
         {% endif %}
       {% endfor %}
+  
+  {% if use_accordion %}
+        </div>
+      </div>
     </div>
-  </div>
+  {% else %}
+      </div>
+    </div>
+  {% endif %}
 {% endfor %}
+
+<script>
+// Tab switching function
+function switchTab(event, tabId) {
+  // Hide all tab contents
+  const tabContents = document.querySelectorAll('.tab-content');
+  tabContents.forEach(content => {
+    content.classList.remove('active');
+  });
+  
+  // Remove active class from all tabs
+  const tabs = document.querySelectorAll('.category-tab');
+  tabs.forEach(tab => {
+    tab.classList.remove('active');
+  });
+  
+  // Show the selected tab content
+  const selectedTab = document.getElementById(tabId);
+  if (selectedTab) {
+    selectedTab.classList.add('active');
+  }
+  
+  // Add active class to the clicked tab
+  event.currentTarget.classList.add('active');
+}
+
+// Accordion toggle function
+function toggleAccordion(header) {
+  const content = header.nextElementSibling;
+  const icon = header.querySelector('.accordion-icon');
+  
+  // Toggle collapsed/expanded states
+  header.classList.toggle('collapsed');
+  content.classList.toggle('expanded');
+  
+  // Rotate icon
+  if (header.classList.contains('collapsed')) {
+    icon.style.transform = 'rotate(0deg)';
+  } else {
+    icon.style.transform = 'rotate(180deg)';
+  }
+}
+</script>
