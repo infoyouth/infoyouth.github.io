@@ -1,0 +1,255 @@
+---
+layout: page
+# Categories with Glass Card Design
+---
+
+{% include lang.html %}
+
+<style>
+.category-section {
+  margin-bottom: 3rem;
+}
+
+.category-section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.category-card-enhanced {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid var(--card-border-color);
+  border-radius: 1rem;
+  padding: 2rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+/* Light theme specific styling */
+[data-mode="light"] .category-card-enhanced {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 2px solid #e1e8ed;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* Dark theme specific styling */
+[data-mode="dark"] .category-card-enhanced {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.category-card-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.category-card-enhanced:hover::before {
+  transform: scaleX(1);
+}
+
+.category-card-enhanced:hover {
+  transform: translateY(-8px);
+  border-color: #667eea;
+}
+
+/* Light theme hover */
+[data-mode="light"] .category-card-enhanced:hover {
+  box-shadow: 0 12px 24px rgba(102, 126, 234, 0.15), 0 8px 16px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+}
+
+/* Dark theme hover */
+[data-mode="dark"] .category-card-enhanced:hover {
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.3);
+  border-color: rgba(102, 126, 234, 0.5);
+}
+
+.category-icon {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.topic-emoji {
+  font-size: 3.5rem;
+  display: inline-block;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Light theme emoji enhancement */
+[data-mode="light"] .topic-emoji {
+  filter: drop-shadow(0 2px 8px rgba(102, 126, 234, 0.2));
+}
+
+.category-card-enhanced:hover .topic-emoji {
+  transform: scale(1.15) rotate(-8deg);
+}
+
+[data-mode="light"] .category-card-enhanced:hover .topic-emoji {
+  filter: drop-shadow(0 4px 12px rgba(102, 126, 234, 0.3));
+}
+
+.category-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--heading-color);
+  text-align: center;
+  letter-spacing: -0.3px;
+}
+
+/* Light theme text enhancement */
+[data-mode="light"] .category-name {
+  background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.category-description {
+  font-size: 0.95rem;
+  color: var(--text-muted-color);
+  text-align: center;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+[data-mode="light"] .category-description {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.topic-badge {
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #667eea;
+  margin-top: 1rem;
+  transition: color 0.3s ease;
+}
+
+[data-mode="light"] .topic-badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.category-card-enhanced:hover .topic-badge {
+  color: #764ba2;
+}
+
+@media (max-width: 768px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .topic-emoji {
+    font-size: 3rem;
+  }
+}
+</style>
+
+{% comment %} Define category icons and descriptions {% endcomment %}
+{% assign category_data = "C Programming:🔤:Master C fundamentals in 18 comprehensive lessons,CPP Programming:➕:Object-oriented C++ mastery in 29 detailed chapters,Python:🐍:Python essentials with 21 progressive tutorials,Go:🔵:Modern Go programming across 13 in-depth modules,Java:☕:Complete Java from basics to advanced in 28 lessons,Angular:🅰️:Modern web development with Angular in 15 modules,DevOps:🚀:CI/CD Docker Kubernetes & more in 14 chapters,Bash Shell Scripting:🐚:Automate with Bash in 12 practical lessons" | split: "," %}
+
+{% comment %} Get all categories sorted by latest post date {% endcomment %}
+{% assign all_categories = site.categories %}
+{% assign parent_categories = "" | split: "" %}
+
+{% comment %} Build array of categories with their latest post dates {% endcomment %}
+{% assign category_dates = "" | split: "" %}
+{% for category in all_categories %}
+  {% assign category_name = category | first %}
+  {% assign posts = category | last %}
+  {% assign latest_post = posts | first %}
+  
+  {% if latest_post.categories[0] %}
+    {% unless parent_categories contains latest_post.categories[0] %}
+      {% assign parent_categories = parent_categories | push: latest_post.categories[0] %}
+    {% endunless %}
+  {% endif %}
+  
+  {% if latest_post.categories[1] %}
+    {% assign entry = category_name | append: "|" | append: latest_post.date %}
+    {% assign category_dates = category_dates | push: entry %}
+  {% endif %}
+{% endfor %}
+
+{% comment %} Sort by date (Jekyll sorts strings, so we reverse to get newest first) {% endcomment %}
+{% assign sorted_category_dates = category_dates | sort | reverse %}
+
+{% comment %} Display categories by parent, sorted by latest post {% endcomment %}
+{% for parent in parent_categories %}
+  <div class="category-section">
+    <h2 class="category-section-title">{{ parent }}</h2>
+    
+    <div class="category-grid">
+      {% assign displayed_categories = "" | split: "" %}
+      
+      {% for entry in sorted_category_dates %}
+        {% assign parts = entry | split: "|" %}
+        {% assign category_name = parts[0] %}
+        
+        {% assign category_posts = site.categories[category_name] %}
+        {% assign first_post = category_posts | first %}
+        
+        {% if first_post.categories[0] == parent and first_post.categories[1] %}
+          {% assign actual_category = first_post.categories[1] %}
+          
+          {% unless displayed_categories contains actual_category %}
+            {% assign displayed_categories = displayed_categories | push: actual_category %}
+            {% assign posts_size = site.categories[actual_category] | size %}
+            
+            {% comment %} Find matching icon and description {% endcomment %}
+            {% assign emoji = "📁" %}
+            {% assign description = posts_size | append: " informative articles" %}
+            
+            {% for data_item in category_data %}
+              {% assign data_parts = data_item | split: ":" %}
+              {% if data_parts[0] == actual_category %}
+                {% assign emoji = data_parts[1] %}
+                {% assign description = data_parts[2] %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+            
+            <a href="/categories/{{ actual_category | slugify | url_encode }}/" class="category-card-enhanced">
+              <div class="category-icon">
+                <div class="topic-emoji">{{ emoji }}</div>
+              </div>
+              <h3 class="category-name">{{ actual_category }}</h3>
+              <p class="category-description">{{ description }}</p>
+              <div class="topic-badge">{{ posts_size }} articles →</div>
+            </a>
+          {% endunless %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endfor %}

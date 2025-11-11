@@ -105,98 +105,13 @@ layout: default
   <section class="categories-section" style="padding: 4rem 0;">
     <div class="container">
       <h2 class="section-title"><span class="gradient-text">🎓 Start Your Learning Journey</span></h2>
-      
-      <!-- Responsive instruction text -->
-      <p class="categories-instruction">
-        <span class="desktop-only">✨ Explore our comprehensive learning paths below</span>
-        <span class="mobile-only">✨ Swipe to discover more →</span>
+      <p class="categories-instruction" style="text-align: center; margin-bottom: 2rem;">
+        ✨ Explore our comprehensive programming tutorials organized by topic
       </p>
-      
-      <div class="categories-scroll-wrapper">
-        <div class="categories-grid-scroll" x-data="{ hoveredCard: null }">
-        
-          <!-- C Programming -->
-          <a href="/categories/c-programming/" 
-             class="category-card-enhanced ripple"
-             @mouseenter="hoveredCard = 'c'"
-             @mouseleave="hoveredCard = null">
-            <div class="category-icon">
-              <div class="topic-emoji icon-bounce">🔧</div>
-            </div>
-            <h3 class="category-name">C Programming</h3>
-            <p class="category-description">Master the fundamentals with 18 comprehensive lessons</p>
-            <div class="topic-badge" style="margin-top: 1rem; color: #667eea;">Start Learning →</div>
-          </a>
-
-          <!-- C++ Programming -->
-          <a href="/categories/cpp-programming/" 
-             class="category-card-enhanced ripple"
-             @mouseenter="hoveredCard = 'cpp'"
-             @mouseleave="hoveredCard = null">
-            <div class="category-icon">
-              <div class="topic-emoji icon-bounce">⚙️</div>
-            </div>
-            <h3 class="category-name">C++ Mastery</h3>
-            <p class="category-description">Advanced OOP concepts in 29 detailed tutorials</p>
-            <div class="topic-badge" style="margin-top: 1rem; color: #667eea;">Start Learning →</div>
-          </a>
-
-          <!-- Java Programming -->
-          <a href="/categories/java-programming/" 
-             class="category-card-enhanced ripple"
-             @mouseenter="hoveredCard = 'java'"
-             @mouseleave="hoveredCard = null">
-            <div class="category-icon">
-              <div class="topic-emoji icon-bounce">☕</div>
-            </div>
-            <h3 class="category-name">Complete Java</h3>
-            <p class="category-description">From basics to advanced with 28 lessons</p>
-            <div class="topic-badge" style="margin-top: 1rem; color: #667eea;">Start Learning →</div>
-          </a>
-
-          <!-- Angular Framework -->
-          <a href="/categories/angular/" 
-             class="category-card-enhanced ripple"
-             @mouseenter="hoveredCard = 'angular'"
-             @mouseleave="hoveredCard = null">
-            <div class="category-icon">
-              <div class="topic-emoji icon-bounce">🅰️</div>
-            </div>
-            <h3 class="category-name">Angular Framework</h3>
-            <p class="category-description">Modern web development in 15 modules</p>
-            <div class="topic-badge" style="margin-top: 1rem; color: #667eea;">Start Learning →</div>
-          </a>
-
-          <!-- DevOps -->
-          <a href="/categories/devops/" 
-             class="category-card-enhanced ripple"
-             @mouseenter="hoveredCard = 'devops'"
-             @mouseleave="hoveredCard = null">
-            <div class="category-icon">
-              <div class="topic-emoji icon-bounce">🚀</div>
-            </div>
-            <h3 class="category-name">DevOps</h3>
-            <p class="category-description">CI/CD, Docker, Kubernetes & more in 14 chapters</p>
-            <div class="topic-badge" style="margin-top: 1rem; color: #667eea;">Start Learning →</div>
-          </a>
-
-          <!-- Shell Scripting -->
-          <a href="/categories/bash-shell-scripting/" 
-             class="category-card-enhanced ripple"
-             @mouseenter="hoveredCard = 'shell'"
-             @mouseleave="hoveredCard = null">
-            <div class="category-icon">
-              <div class="topic-emoji icon-bounce">🐚</div>
-            </div>
-            <h3 class="category-name">Shell Scripting</h3>
-            <p class="category-description">Automate with Bash in 12 practical lessons</p>
-            <div class="topic-badge" style="margin-top: 1rem; color: #667eea;">Start Learning →</div>
-          </a>
-
-        </div>
-      </div>
-      <div style="text-align: center; margin-top: 2rem;">
-        <a href="/categories/" class="btn btn-outline">View All Categories</a>
+      <div style="text-align: center;">
+        <a href="/categories/" class="magnetic-btn ripple" style="background: linear-gradient(135deg, rgba(118, 75, 162, 0.8), rgba(102, 126, 234, 0.8)); padding: 1rem 2.5rem; font-size: 1.1rem;">
+          📚 Browse All Categories
+        </a>
       </div>
     </div>
   </section>
