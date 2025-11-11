@@ -92,14 +92,14 @@ monetization:
 adsense:
   enabled: true # Set to true when approved
   client_id: ca-pub-8844965520305488
-  auto_ads: true # Enable auto ad placement
+  auto_ads: false # Disable auto ad placement (too intrusive)
   
   # Support/Donations
-  support_enabled: false # Enable support section
-  support_message: "If you find this content helpful, consider supporting my work!"
+  support_enabled: true # Enable support section
+  support_message: "If you find this content helpful, consider supporting our work!"
   kofi_username: # your-kofi-username
   paypal_username: # your-paypal-username
-  github_sponsors: false # Enable GitHub Sponsors button
+  github_sponsors: true # Enable GitHub Sponsors button
 
 # Page views settings
 pageviews:
