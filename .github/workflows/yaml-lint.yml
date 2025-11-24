@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: 🛠️ Checkout Repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: 📝 Run YAML Linter
         id: yaml-lint
