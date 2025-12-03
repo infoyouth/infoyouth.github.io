@@ -105,10 +105,10 @@ jobs:
       TODAY: ${{ needs.pre-check.outputs.today }}
     steps:
       - name: 🔍 Checkout Main Repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: 🔐 Checkout Private Content Repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: infoyouth/course-content-action
           ref: main
