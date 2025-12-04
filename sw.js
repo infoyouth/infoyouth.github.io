@@ -7,9 +7,10 @@ const OFFLINE_URL = '/offline.html';
 // Files to cache immediately
 const PRECACHE_URLS = [
   '/',
-  '/assets/css/jekyll-theme-chirpy.css',
+  '/assets/css/jekyll-theme-chirpy.min.css',
   '/assets/js/dist/app.min.js',
-  '/assets/images/logo.png',
+  '/assets/img/favicons/android-chrome-192x192.png',
+  '/manifest.json',
   OFFLINE_URL
 ];
 
