@@ -42,12 +42,10 @@
       "separateMinorPatch": true
     },
     {
-      "matchUpdateTypes": ["patch", "minor"],
-      "separateMultipleMajor": true
+      "matchUpdateTypes": ["patch", "minor"]
     },
     {
       "matchUpdateTypes": ["major"],
-      "separateMultipleMajor": true,
       "prPriority": -1
     }
   ],
