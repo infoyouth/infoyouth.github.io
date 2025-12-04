@@ -1,0 +1,24 @@
+name: "🤖 Renovate Dependencies"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 18 * * 0" # Every Sunday at 23:30 IST (18:00 UTC)
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  renovate:
+    name: "🧹 Scan & Update deps"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "📥 Checkout repository"
+        uses: actions/checkout@v4
+
+      - name: "🤖 Run Renovate bot"
+        uses: renovatebot/github-action@v40.3.3
+        with:
+          configurationFile: renovate.json
+          token: ${{ secrets.RENOVATE_TOKEN }}
