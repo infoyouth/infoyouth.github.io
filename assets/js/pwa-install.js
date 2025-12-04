@@ -1,5 +1,19 @@
 // PWA Install Prompt Handler
 // Handles "Add to Home Screen" functionality
+// 
+// TRACKING EVENTS (viewable in Google Analytics & Microsoft Clarity):
+// 1. pwa_prompt_shown - User is eligible to install (prompt available)
+// 2. pwa_install_button_clicked - User clicked the install button
+// 3. pwa_install_accepted - User accepted the installation
+// 4. pwa_install_dismissed - User dismissed the installation prompt
+// 5. pwa_installed - App successfully installed (most important metric!)
+//
+// To view in Google Analytics:
+// - Go to: Reports > Engagement > Events
+// - Look for events starting with "pwa_"
+//
+// To view in Microsoft Clarity:
+// - Go to: Recordings > filter by custom events "pwa_installed"
 
 let deferredPrompt;
 let installButton;
@@ -160,6 +174,14 @@ window.addEventListener('beforeinstallprompt', (e) => {
   }
   
   console.log('PWA install prompt ready');
+  
+  // Track that prompt was shown (user is eligible to install)
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'pwa_prompt_shown', {
+      event_category: 'engagement',
+      event_label: 'PWA Install Prompt Shown'
+    });
+  }
 });
 
 // Install App
@@ -168,12 +190,34 @@ async function installApp() {
     return;
   }
   
+  // Track install button click
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'pwa_install_button_clicked', {
+      event_category: 'engagement',
+      event_label: 'PWA Install Button Clicked'
+    });
+  }
+  
   // Show the install prompt
   deferredPrompt.prompt();
   
   // Wait for user response
   const { outcome } = await deferredPrompt.userChoice;
   console.log(`User response: ${outcome}`);
+  
+  // Track user's choice
+  if (typeof gtag !== 'undefined') {
+    gtag('event', `pwa_install_${outcome}`, {
+      event_category: 'engagement',
+      event_label: `PWA Install ${outcome === 'accepted' ? 'Accepted' : 'Dismissed'}`,
+      event_value: outcome === 'accepted' ? 1 : 0
+    });
+  }
+  
+  // Track with Clarity
+  if (typeof clarity !== 'undefined') {
+    clarity('event', `pwa_install_${outcome}`);
+  }
   
   // Hide install button
   if (installButton) {
@@ -188,13 +232,39 @@ async function installApp() {
 window.addEventListener('appinstalled', () => {
   console.log('PWA installed successfully!');
   
-  // Track with analytics (if available)
+  // Gather installation metadata
+  const installData = {
+    timestamp: new Date().toISOString(),
+    userAgent: navigator.userAgent,
+    platform: navigator.platform,
+    language: navigator.language,
+    screenResolution: `${window.screen.width}x${window.screen.height}`,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    referrer: document.referrer || 'direct'
+  };
+  
+  // Track with Google Analytics (if available)
   if (typeof gtag !== 'undefined') {
     gtag('event', 'pwa_installed', {
       event_category: 'engagement',
-      event_label: 'PWA Installation'
+      event_label: 'PWA Installation',
+      event_value: 1,
+      user_agent: installData.userAgent,
+      platform: installData.platform,
+      language: installData.language
     });
   }
+  
+  // Track with Microsoft Clarity (if available)
+  if (typeof clarity !== 'undefined') {
+    clarity('event', 'pwa_installed', {
+      platform: installData.platform,
+      timestamp: installData.timestamp
+    });
+  }
+  
+  // Log to console for debugging (visible in browser console)
+  console.table(installData);
   
   // Hide install button
   if (installButton) {

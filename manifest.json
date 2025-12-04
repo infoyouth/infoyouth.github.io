@@ -38,21 +38,21 @@
       "short_name": "C Course",
       "description": "Master C fundamentals",
       "url": "/categories/c-programming/",
-      "icons": [{ "src": "/assets/images/logo.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/assets/img/favicons/web-app-manifest-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "Java Programming",
       "short_name": "Java Course",
       "description": "Complete Java tutorials",
       "url": "/categories/java-programming/",
-      "icons": [{ "src": "/assets/images/logo.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/assets/img/favicons/web-app-manifest-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "DevOps",
       "short_name": "DevOps",
       "description": "CI/CD & Cloud tutorials",
       "url": "/categories/devops/",
-      "icons": [{ "src": "/assets/images/logo.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/assets/img/favicons/web-app-manifest-192x192.png", "sizes": "192x192" }]
     }
   ]
 }
