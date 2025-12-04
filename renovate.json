@@ -1,0 +1,58 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "enabled": true,
+  "platform": "github",
+  "username": "renovate[bot]",
+  "onboarding": true,
+  "requireConfig": "optional",
+  "autodiscover": false,
+  "extends": [
+    "config:recommended",
+    ":semanticCommits",
+    ":separateMultipleMajorReleases",
+    ":timezone(Asia/Kolkata)",
+    ":labels(renovate,dependencies)",
+    ":prHourlyLimitNone",
+    ":prConcurrentLimit10"
+  ],
+  "schedule": ["after 10pm on sunday"],
+  "dependencyDashboard": true,
+  "dependencyDashboardAutoclose": true,
+  "rangeStrategy": "bump",
+  "rebaseWhen": "behind-base-branch",
+  "packageRules": [
+    {
+      "matchManagers": ["bundler"],
+      "separateMajorMinor": true,
+      "labels": ["ruby", "jekyll", "dependencies"],
+      "commitMessagePrefix": "chore(ruby): ",
+      "separateMinorPatch": true
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "separateMajorMinor": true,
+      "labels": ["ci", "dependencies"],
+      "commitMessagePrefix": "chore(ci): ",
+      "separateMinorPatch": true
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "labels": ["dev", "dependencies"],
+      "automerge": false,
+      "separateMinorPatch": true
+    },
+    {
+      "matchUpdateTypes": ["patch", "minor"],
+      "separateMultipleMajor": true
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "separateMultipleMajor": true,
+      "prPriority": -1
+    }
+  ],
+  "enabledManagers": ["bundler", "github-actions"],
+  "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
+  "prCreation": "not-pending",
+  "separateMajorMinor": true
+}
