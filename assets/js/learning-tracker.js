@@ -225,12 +225,41 @@
     }
 
     setupUI() {
-      this.injectCheckboxes();
-      this.injectProgressBars();
-      this.addPostTitleIndicators();
-      this.setupEventListeners();
-      this.trackScrollProgress();
-      this.updateStreak();
+      try {
+        this.injectCheckboxes();
+      } catch (e) {
+        console.error('[Learning Tracker] Error injecting checkboxes:', e);
+      }
+      
+      try {
+        this.injectProgressBars();
+      } catch (e) {
+        console.error('[Learning Tracker] Error injecting progress bars:', e);
+      }
+      
+      try {
+        this.addPostTitleIndicators();
+      } catch (e) {
+        console.error('[Learning Tracker] Error adding post indicators:', e);
+      }
+      
+      try {
+        this.setupEventListeners();
+      } catch (e) {
+        console.error('[Learning Tracker] Error setting up listeners:', e);
+      }
+      
+      try {
+        this.trackScrollProgress();
+      } catch (e) {
+        console.error('[Learning Tracker] Error tracking scroll:', e);
+      }
+      
+      try {
+        this.updateStreak();
+      } catch (e) {
+        console.error('[Learning Tracker] Error updating streak:', e);
+      }
     }
 
     addPostTitleIndicators() {
