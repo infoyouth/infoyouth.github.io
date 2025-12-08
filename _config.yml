@@ -96,7 +96,7 @@ monetization:
 
 # Google AdSense (must be at root level for Jekyll)
 adsense:
-  enabled: true # Set to true when approved
+  enabled: false # Set to true when approved
   client_id: ca-pub-8844965520305488
   auto_ads: false # Disable auto ad placement (too intrusive)
   
