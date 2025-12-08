@@ -1,12 +1,10 @@
 <!-- Learning Progress Tracker Integration -->
-<!-- This include adds learning progress tracking functionality to posts and categories -->
-
-{% if page.layout == 'post' or page.layout == 'category' %}
-<!-- Load Learning Tracker Assets -->
+<!-- Load Learning Tracker Assets Globally -->
 <link rel="stylesheet" href="{{ '/assets/css/learning-tracker.css' | relative_url }}">
-<script defer src="{{ '/assets/js/learning-tracker.js' | relative_url }}"></script>
+<script defer src="{{ '/assets/js/learning-tracker.js' | relative_url }}">
 
 <!-- Initialize with Jekyll data -->
+{% if page.layout == 'post' or page.layout == 'category' %}
 <script>
   // Pass Jekyll post/category data to the tracker
   window.learningTrackerData = {
@@ -15,8 +13,7 @@
       title: '{{ page.title | escape }}',
       categories: [{% for cat in page.categories %}'{{ cat | escape }}'{% unless forloop.last %},{% endunless %}{% endfor %}],
       url: '{{ page.url | absolute_url }}'
-    },
-    {% if page.layout == 'category' %}
+    }{% if page.layout == 'category' %},
     categoryData: {
       name: '{{ page.category | default: page.title }}',
       posts: [
@@ -30,8 +27,7 @@
         }{% unless forloop.last %},{% endunless %}
         {% endfor %}
       ]
-    }
-    {% endif %}
+    }{% endif %}
   };
 </script>
 {% endif %}
