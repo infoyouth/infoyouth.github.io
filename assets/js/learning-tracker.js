@@ -282,21 +282,32 @@
 
       const postId = this.getPostId();
       const progress = this.storage.getPostProgress(postId);
+      const scrollProgress = progress.scrollProgress || 0;
+
+      // Determine if checkbox should be enabled (>80% scroll or already completed)
+      const isEnabled = progress.completed || scrollProgress >= 80;
 
       // Create checkbox container
       const checkboxContainer = document.createElement('div');
       checkboxContainer.className = 'learning-checkbox-container';
       checkboxContainer.innerHTML = `
-        <label class="learning-checkbox-label">
+        <label class="learning-checkbox-label ${!isEnabled ? 'disabled' : ''}" 
+               title="${!isEnabled ? 'Scroll through at least 80% of the post to mark as complete' : ''}">
           <input type="checkbox" 
                  class="learning-checkbox" 
                  data-post-id="${postId}"
-                 ${progress.completed ? 'checked' : ''}>
+                 ${progress.completed ? 'checked' : ''}
+                 ${!isEnabled ? 'disabled' : ''}>
           <span class="checkbox-custom"></span>
           <span class="checkbox-text">
             ${progress.completed ? '✅ Completed' : '📝 Mark as Complete'}
           </span>
         </label>
+        ${!isEnabled ? `
+          <small class="scroll-hint">
+            📖 Scroll through the post to unlock completion
+          </small>
+        ` : ''}
         ${progress.completedAt ? `
           <small class="completion-date">
             Completed on ${new Date(progress.completedAt).toLocaleDateString()}
@@ -395,12 +406,21 @@
             scrollProgress: scrollProgress
           });
 
-          // Auto-mark as complete if scrolled to 90%
-          if (scrollProgress >= 90) {
+          // Enable checkbox if scrolled to 80% or more
+          if (scrollProgress >= 80) {
             const checkbox = document.querySelector('.learning-checkbox');
-            if (checkbox && !checkbox.checked) {
-              checkbox.checked = true;
-              this.handleCheckboxChange({ target: checkbox });
+            const label = document.querySelector('.learning-checkbox-label');
+            const hint = document.querySelector('.scroll-hint');
+            
+            if (checkbox && checkbox.disabled) {
+              checkbox.disabled = false;
+              if (label) {
+                label.classList.remove('disabled');
+                label.removeAttribute('title');
+              }
+              if (hint) {
+                hint.style.display = 'none';
+              }
             }
           }
         }, 500);

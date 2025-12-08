@@ -77,6 +77,47 @@
   font-size: 0.85rem;
 }
 
+/* Disabled State */
+.learning-checkbox-label.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.learning-checkbox-label.disabled .checkbox-custom {
+  border-color: #999;
+  background: rgba(150, 150, 150, 0.1);
+}
+
+.learning-checkbox-label.disabled:hover .checkbox-custom {
+  transform: none;
+  box-shadow: none;
+}
+
+.learning-checkbox:disabled ~ .checkbox-custom {
+  cursor: not-allowed;
+}
+
+/* Scroll Hint */
+.scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 2.5rem;
+  color: #f39c12;
+  font-size: 0.85rem;
+  font-weight: 500;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
 /* Category Progress Bar */
 .category-progress-bar {
   margin: 2rem 0;
