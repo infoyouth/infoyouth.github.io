@@ -74,7 +74,7 @@ analytics:
     id: # fill in your Matomo ID
     domain: # fill in your Matomo domain
   cloudflare:
-    id: # fill in your Cloudflare Web Analytics token
+    id: db7841f08c764c1ea53312703d4914b8 # Cloudflare Web Analytics token
   fathom:
     id: # fill in your Fathom Site ID
 
@@ -96,7 +96,7 @@ monetization:
 
 # Google AdSense (must be at root level for Jekyll)
 adsense:
-  enabled: true # Set to true when approved
+  enabled: false # Set to true when approved
   client_id: ca-pub-8844965520305488
   auto_ads: false # Disable auto ad placement (too intrusive)
   
