@@ -1,0 +1,17 @@
+<!-- OneSignal Push Notifications -->
+{% if site.onesignal.enabled and site.onesignal.app_id %}
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "{{ site.onesignal.app_id }}",
+      safari_web_id: "{{ site.onesignal.safari_web_id }}",
+      notifyButton: {
+        enable: true,
+      },
+      allowLocalhostAsSecureOrigin: true,
+    });
+  });
+</script>
+{% endif %}
