@@ -1,7 +1,9 @@
 <!-- Brevo Newsletter Signup Form -->
 <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
 
-<div class="newsletter-signup" style="margin: 2rem 0; padding: 1.5rem; background-color: var(--sidebar-bg); border-radius: 0.5rem; border: 1px solid var(--btn-border-color);">
+<div class="newsletter-signup" style="margin: 3rem 0; padding: 2.5rem; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); position: relative; overflow: hidden;">
+  <div style="position: absolute; top: -150px; left: -150px; width: 300px; height: 300px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2)); border-radius: 50%; filter: blur(100px);"></div>
+  <div style="position: relative; z-index: 1;">
   <div id="sib-form-container" class="sib-form-container">
     <div id="error-message" class="sib-form-message-panel" style="font-size:14px; font-family: inherit; color:#661d1d; background-color:#ffeded; border-radius:0.5rem; border:1px solid #ff4949; padding:1rem; margin-bottom:1rem; display:none;">
       <span>Something went wrong. Please try again or contact us at info.youthinno@gmail.com</span>
@@ -14,8 +16,8 @@
     <div id="sib-container">
       <form id="sib-form" method="POST" action="https://78db98e5.sibforms.com/serve/MUIFAMlGknpMUcgi3b2ItGHVZ48SkwrpYw_hK8XR3fe56_SaQ3ETibPkq_7hSUUjd1K8Of1nANJgiq99PO1P9ZHfPx5RNLBCd0rNgbxgLJrnARY2nufOM749U70d5iw9f-347UGK-L2jlOZ8Svfc4vh6dddX2jmq6TvZwAIDmsDqaFSrNwBfJeVpsV8EIhi1Qy2Zn3HteNq2fFxL9g==" data-type="subscription">
         
-        <h3 style="margin-top:0; margin-bottom:0.5rem; font-size:1.5rem;">📧 Newsletter</h3>
-        <p style="margin-bottom:1.5rem; color: var(--text-muted-color); font-size:0.95rem;">Subscribe to our newsletter and stay updated with the latest tutorials and resources.</p>
+        <h3 style="margin-top:0; margin-bottom:0.5rem; font-size:1.8rem; font-weight:700; text-align:center;">📧 Subscribe to Newsletter</h3>
+        <p style="margin-bottom:2rem; color: var(--text-muted-color); font-size:1rem; text-align:center; max-width:500px; margin-left:auto; margin-right:auto;">Get premium tutorials and insights delivered to your inbox</p>
         
         <div class="form-group" style="margin-bottom:1rem;">
           <label for="EMAIL" style="display:block; margin-bottom:0.5rem; font-weight:600; font-size:0.9rem;">Email Address</label>
@@ -27,7 +29,9 @@
             autocomplete="email" 
             placeholder="your.email@example.com" 
             required 
-            style="width:100%; padding:0.75rem; border:1px solid var(--btn-border-color); border-radius:0.375rem; background-color:var(--main-bg); color:var(--text-color); font-size:0.95rem;"
+            style="width:100%; padding:1rem 1.25rem; border:1px solid rgba(255, 255, 255, 0.2); border-radius:0.75rem; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); color:var(--text-color); font-size:1rem; transition: all 0.3s ease;"
+            onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'"
+            onblur="this.style.borderColor='rgba(255, 255, 255, 0.2)'; this.style.boxShadow='none'"
           />
           <label class="entry__error entry__error--primary" style="font-size:0.85rem; color:#661d1d; margin-top:0.25rem; display:none;"></label>
         </div>
@@ -56,20 +60,21 @@
         <button 
           class="sib-form-block__button" 
           type="submit"
-          style="width:100%; padding:0.75rem 1.5rem; background-color:var(--btn-bg); color:#fff; border:none; border-radius:0.375rem; font-weight:600; font-size:1rem; cursor:pointer; transition:opacity 0.2s;"
-          onmouseover="this.style.opacity='0.9'" 
-          onmouseout="this.style.opacity='1'"
+          style="width:100%; padding:0.75rem 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color:#ffffff; border:none; border-radius:0.5rem; font-weight:600; font-size:1rem; cursor:pointer; transition:all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); margin-top:0.5rem;"
+          onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)';" 
+          onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)';"
         >
           <svg class="icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512" style="display:none; width:1rem; height:1rem; margin-right:0.5rem;">
             <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
           </svg>
-          Subscribe
+          🚀 Subscribe Now
         </button>
         
         <input type="text" name="email_address_check" value="" class="input--hidden" style="display:none;">
         <input type="hidden" name="locale" value="en">
       </form>
     </div>
+  </div>
   </div>
 </div>
 
