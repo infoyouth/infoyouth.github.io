@@ -82,6 +82,12 @@ analytics:
 clarity:
   id: tmlftkmf8p
 
+# OneSignal Push Notifications
+onesignal:
+  enabled: true # Set to true after getting App ID
+  app_id: cb75ddc9-7ca1-414e-b721-f76cabdfae7e
+  safari_web_id: # Your Safari Web ID (optional, for Safari support)
+
 # Monetization Settings
 monetization:
   # Affiliate Programs
