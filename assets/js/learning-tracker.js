@@ -236,7 +236,9 @@
     addPostTitleIndicators() {
       // Find all post links in category pages, archives, home page
       const postLinks = document.querySelectorAll('a[href*="/posts/"]');
+      console.log(`[Learning Tracker] Found ${postLinks.length} post links`);
       
+      let indicatorsAdded = 0;
       postLinks.forEach(link => {
         const href = link.getAttribute('href');
         if (!href) return;
@@ -258,8 +260,11 @@
           indicator.textContent = ' ✓';
           indicator.title = 'Completed';
           link.appendChild(indicator);
+          indicatorsAdded++;
+          console.log(`[Learning Tracker] Added indicator for: ${postId}`);
         }
       });
+      console.log(`[Learning Tracker] Added ${indicatorsAdded} completion indicators`);
     }
 
     injectCheckboxes() {
