@@ -227,9 +227,35 @@
     setupUI() {
       this.injectCheckboxes();
       this.injectProgressBars();
+      this.addPostTitleIndicators();
       this.setupEventListeners();
       this.trackScrollProgress();
       this.updateStreak();
+    }
+
+    addPostTitleIndicators() {
+      // Find all post links in category pages, archives, home page
+      const postLinks = document.querySelectorAll('a[href*="/posts/"]');
+      
+      postLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        
+        // Extract post ID from URL
+        const postId = href.replace(/^.*\/posts\//, '').replace(/\/$/, '').replace(/\//g, '-');
+        const progress = this.storage.getPostProgress(postId);
+        
+        if (progress && progress.completed) {
+          // Check if indicator already exists
+          if (!link.querySelector('.post-completed-indicator')) {
+            const indicator = document.createElement('span');
+            indicator.className = 'post-completed-indicator';
+            indicator.textContent = ' ✓';
+            indicator.title = 'Completed';
+            link.appendChild(indicator);
+          }
+        }
+      });
     }
 
     injectCheckboxes() {
@@ -305,7 +331,7 @@
         </label>
         ${!isEnabled ? `
           <small class="scroll-hint">
-            📖 Scroll through the post to unlock completion
+            📖 Read through the post to unlock completion
           </small>
         ` : ''}
         ${progress.completedAt ? `
@@ -355,6 +381,9 @@
           'value': isCompleted ? 1 : 0
         });
       }
+      
+      // Update post title indicators throughout the site
+      this.addPostTitleIndicators();
     }
 
     injectProgressBars() {
