@@ -245,15 +245,19 @@
         const postId = href.replace(/^.*\/posts\//, '').replace(/\/$/, '').replace(/\//g, '-');
         const progress = this.storage.getPostProgress(postId);
         
+        // Remove existing indicator first
+        const existingIndicator = link.querySelector('.post-completed-indicator');
+        if (existingIndicator) {
+          existingIndicator.remove();
+        }
+        
+        // Add indicator if completed
         if (progress && progress.completed) {
-          // Check if indicator already exists
-          if (!link.querySelector('.post-completed-indicator')) {
-            const indicator = document.createElement('span');
-            indicator.className = 'post-completed-indicator';
-            indicator.textContent = ' ✓';
-            indicator.title = 'Completed';
-            link.appendChild(indicator);
-          }
+          const indicator = document.createElement('span');
+          indicator.className = 'post-completed-indicator';
+          indicator.textContent = ' ✓';
+          indicator.title = 'Completed';
+          link.appendChild(indicator);
         }
       });
     }
