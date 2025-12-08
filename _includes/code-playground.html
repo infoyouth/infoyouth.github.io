@@ -72,13 +72,19 @@ if (!window.playgroundInitializerLoaded) {
       var code = decodePlaygroundHTML(encodedCode);
       var delay = 1500 + (index * 400);
       
+      // Map language to proper file extension
+      var fileExtension = language;
+      if (language === 'typescript') fileExtension = 'ts';
+      else if (language === 'javascript') fileExtension = 'js';
+      else if (language === 'cpp') fileExtension = 'cpp';
+      
       setTimeout(function() {
         try {
           iframe.contentWindow.postMessage({
             eventType: 'populateCode',
             language: language,
             files: [{
-              name: 'main.' + language,
+              name: 'main.' + fileExtension,
               content: code
             }]
           }, '*');
