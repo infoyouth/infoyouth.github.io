@@ -626,10 +626,16 @@
     }
   }
 
-  // Initialize tracker
-  const tracker = new ProgressTracker();
-  
-  // Expose to global scope for external access
-  window.learningTracker = tracker;
+  // Initialize tracker with error handling
+  try {
+    const tracker = new ProgressTracker();
+    
+    // Expose to global scope for external access
+    window.learningTracker = tracker;
+    console.log('[Learning Tracker] ✅ Successfully initialized');
+  } catch (error) {
+    console.error('[Learning Tracker] ❌ Initialization failed:', error);
+    console.error('[Learning Tracker] Stack trace:', error.stack);
+  }
 
 })();
