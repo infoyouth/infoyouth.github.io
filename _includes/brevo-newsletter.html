@@ -1,0 +1,95 @@
+<!-- Brevo Newsletter Signup Form -->
+<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+
+<div class="newsletter-signup" style="margin: 2rem 0; padding: 1.5rem; background-color: var(--sidebar-bg); border-radius: 0.5rem; border: 1px solid var(--btn-border-color);">
+  <div id="sib-form-container" class="sib-form-container">
+    <div id="error-message" class="sib-form-message-panel" style="font-size:14px; font-family: inherit; color:#661d1d; background-color:#ffeded; border-radius:0.5rem; border:1px solid #ff4949; padding:1rem; margin-bottom:1rem; display:none;">
+      <span>Something went wrong. Please try again or contact us at info.youthinno@gmail.com</span>
+    </div>
+    
+    <div id="success-message" class="sib-form-message-panel" style="font-size:14px; font-family: inherit; color:#085229; background-color:#e7faf0; border-radius:0.5rem; border:1px solid #13ce66; padding:1rem; margin-bottom:1rem; display:none;">
+      <span>🎉 Welcome aboard! Check your email to confirm your subscription.</span>
+    </div>
+    
+    <div id="sib-container">
+      <form id="sib-form" method="POST" action="https://78db98e5.sibforms.com/serve/MUIFAMlGknpMUcgi3b2ItGHVZ48SkwrpYw_hK8XR3fe56_SaQ3ETibPkq_7hSUUjd1K8Of1nANJgiq99PO1P9ZHfPx5RNLBCd0rNgbxgLJrnARY2nufOM749U70d5iw9f-347UGK-L2jlOZ8Svfc4vh6dddX2jmq6TvZwAIDmsDqaFSrNwBfJeVpsV8EIhi1Qy2Zn3HteNq2fFxL9g==" data-type="subscription">
+        
+        <h3 style="margin-top:0; margin-bottom:0.5rem; font-size:1.5rem;">📧 Newsletter</h3>
+        <p style="margin-bottom:1.5rem; color: var(--text-muted-color); font-size:0.95rem;">Subscribe to our newsletter and stay updated with the latest tutorials and resources.</p>
+        
+        <div class="form-group" style="margin-bottom:1rem;">
+          <label for="EMAIL" style="display:block; margin-bottom:0.5rem; font-weight:600; font-size:0.9rem;">Email Address</label>
+          <input 
+            class="input" 
+            type="email" 
+            id="EMAIL" 
+            name="EMAIL" 
+            autocomplete="email" 
+            placeholder="your.email@example.com" 
+            required 
+            style="width:100%; padding:0.75rem; border:1px solid var(--btn-border-color); border-radius:0.375rem; background-color:var(--main-bg); color:var(--text-color); font-size:0.95rem;"
+          />
+          <label class="entry__error entry__error--primary" style="font-size:0.85rem; color:#661d1d; margin-top:0.25rem; display:none;"></label>
+        </div>
+        
+        <div class="form-group" style="margin-bottom:1rem;">
+          <label style="display:flex; align-items:start; cursor:pointer;">
+            <input type="checkbox" id="OPT_IN" name="OPT_IN" value="1" required style="margin-top:0.25rem; margin-right:0.5rem;" />
+            <span style="font-size:0.85rem; color: var(--text-muted-color);">
+              I agree to receive newsletters and accept the <a href="/about/#privacy" style="color:var(--link-color); text-decoration:underline;">data privacy statement</a>.
+            </span>
+          </label>
+          <label class="entry__error entry__error--primary" style="font-size:0.85rem; color:#661d1d; margin-top:0.25rem; display:none;"></label>
+        </div>
+        
+        <div class="form-group" style="margin-bottom:1rem;">
+          <script>
+            function handleCaptchaResponse() {
+              var event = new Event('captchaChange');
+              document.getElementById('sib-captcha').dispatchEvent(event);
+            }
+          </script>
+          <div class="g-recaptcha sib-visible-recaptcha" id="sib-captcha" data-sitekey="6LeCFiUsAAAAAMsE0UJzXv_wIFKIC-cH5HqCSdLa" data-callback="handleCaptchaResponse"></div>
+          <label class="entry__error entry__error--primary" style="font-size:0.85rem; color:#661d1d; margin-top:0.25rem; display:none;"></label>
+        </div>
+        
+        <button 
+          class="sib-form-block__button" 
+          type="submit"
+          style="width:100%; padding:0.75rem 1.5rem; background-color:var(--btn-bg); color:#fff; border:none; border-radius:0.375rem; font-weight:600; font-size:1rem; cursor:pointer; transition:opacity 0.2s;"
+          onmouseover="this.style.opacity='0.9'" 
+          onmouseout="this.style.opacity='1'"
+        >
+          <svg class="icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512" style="display:none; width:1rem; height:1rem; margin-right:0.5rem;">
+            <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
+          </svg>
+          Subscribe
+        </button>
+        
+        <input type="text" name="email_address_check" value="" class="input--hidden" style="display:none;">
+        <input type="hidden" name="locale" value="en">
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
+  window.LOCALE = 'en';
+  window.EMAIL_INVALID_MESSAGE = "Oops! Please check your email address and try again.";
+  window.SMS_INVALID_MESSAGE = "Oops! Please check your email address and try again.";
+  window.REQUIRED_ERROR_MESSAGE = "Please enter your email address";
+  window.GENERIC_INVALID_MESSAGE = "Oops! Please check your email address and try again.";
+  window.translation = {
+    common: {
+      selectedList: '{quantity} list selected',
+      selectedLists: '{quantity} lists selected',
+      selectedOption: '{quantity} selected',
+      selectedOptions: '{quantity} selected',
+    }
+  };
+  var AUTOHIDE = Boolean(0);
+</script>
+
+<script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?hl=en"></script>
