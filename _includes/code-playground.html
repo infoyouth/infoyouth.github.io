@@ -38,7 +38,7 @@
       height="{{ playground_height }}px" 
       src="https://onecompiler.com/embed/{{ include.language }}?hideLanguageSelection=true&hideNew=true&hideTitle=true&theme={{ playground_theme }}&listenToEvents=true"
       data-language="{{ include.language }}"
-      data-code="{{ include.code | escape }}">
+      data-code="{{ include.code | xml_escape }}">
     </iframe>
   </div>
 </details>
