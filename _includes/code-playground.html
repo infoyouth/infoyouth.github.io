@@ -78,10 +78,6 @@ if (!window.playgroundInitializerLoaded) {
       return;
     }
     
-    console.log('🔍 DEBUG: Code length:', code.length);
-    console.log('🔍 DEBUG: Has newlines:', code.indexOf('\n') !== -1);
-    console.log('🔍 DEBUG: First 100 chars:', code.substring(0, 100));
-    
     // Map language to proper file extension
     var fileExtension = language;
     if (language === 'typescript') fileExtension = 'ts';
