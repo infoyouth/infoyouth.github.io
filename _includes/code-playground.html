@@ -31,14 +31,14 @@
     🚀 Try this Live → Click to open interactive {{ include.language | upcase }} playground
   </summary>
   <div style="padding: 0;">
+    <script type="application/json" class="playground-code">{{ include.code | jsonify }}</script>
     <iframe 
       class="onecompiler-iframe"
       frameborder="0" 
       width="100%" 
       height="{{ playground_height }}px" 
       src="https://onecompiler.com/embed/{{ include.language }}?hideLanguageSelection=true&hideNew=true&hideTitle=true&theme={{ playground_theme }}&listenToEvents=true"
-      data-language="{{ include.language }}"
-      data-code="{{ include.code | xml_escape }}">
+      data-language="{{ include.language }}">
     </iframe>
   </div>
 </details>
@@ -48,16 +48,8 @@
 if (!window.playgroundInitializerLoaded) {
   window.playgroundInitializerLoaded = true;
   
-  // Decode HTML entities
-  function decodePlaygroundHTML(text) {
-    var textarea = document.createElement('textarea');
-    textarea.innerHTML = text;
-    return textarea.value;
-  }
-  
   // Send code to a specific iframe
   function sendCodeToIframe(iframe) {
-    var encodedCode = iframe.getAttribute('data-code');
     var language = iframe.getAttribute('data-language');
     var initialized = iframe.getAttribute('data-initialized');
     
@@ -66,12 +58,29 @@ if (!window.playgroundInitializerLoaded) {
       return;
     }
     
-    if (!encodedCode || !language) {
+    // Get code from script tag (stored as JSON)
+    var codeScript = iframe.previousElementSibling;
+    if (!codeScript || codeScript.type !== 'application/json') {
+      console.error('Playground code script tag not found');
+      return;
+    }
+    
+    var code;
+    try {
+      code = JSON.parse(codeScript.textContent);
+    } catch (e) {
+      console.error('Failed to parse playground code JSON:', e);
+      return;
+    }
+    
+    if (!code || !language) {
       console.warn('Playground missing code or language');
       return;
     }
     
-    var code = decodePlaygroundHTML(encodedCode);
+    console.log('🔍 DEBUG: Code length:', code.length);
+    console.log('🔍 DEBUG: Has newlines:', code.indexOf('\n') !== -1);
+    console.log('🔍 DEBUG: First 100 chars:', code.substring(0, 100));
     
     // Map language to proper file extension
     var fileExtension = language;
