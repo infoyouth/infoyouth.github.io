@@ -44,37 +44,67 @@
 </details>
 
 <script>
-// Load the code playground initializer only once
-if (!window.playgroundInitializerLoaded) {
-  window.playgroundInitializerLoaded = true;
+(function() {
+  // Define functions only once
+  if (!window.playgroundInitializerLoaded) {
+    window.playgroundInitializerLoaded = true;
   
   // Send code to a specific iframe
   function sendCodeToIframe(iframe) {
+    console.log('━'.repeat(60));
+    console.log('📤 sendCodeToIframe CALLED');
+    console.log('━'.repeat(60));
+    
     var language = iframe.getAttribute('data-language');
     var initialized = iframe.getAttribute('data-initialized');
     
+    console.log('Step 1: Check iframe attributes');
+    console.log('  - Language:', language);
+    console.log('  - Already initialized:', initialized);
+    console.log('  - Iframe loaded:', iframe.contentWindow ? 'yes' : 'no');
+    
     // Skip if already initialized
     if (initialized === 'true') {
+      console.log('  ⏩ SKIPPED: Already initialized');
+      console.log('━'.repeat(60));
       return;
     }
     
     // Get code from script tag (stored as JSON)
+    console.log('Step 2: Find code script tag');
     var codeScript = iframe.previousElementSibling;
+    console.log('  - Previous sibling exists:', !!codeScript);
+    
+    if (codeScript) {
+      console.log('  - Previous sibling tag:', codeScript.tagName);
+      console.log('  - Previous sibling type:', codeScript.type);
+      console.log('  - Previous sibling class:', codeScript.className);
+    }
+    
     if (!codeScript || codeScript.type !== 'application/json') {
-      console.error('Playground code script tag not found');
+      console.error('  ❌ ERROR: Script tag not found or wrong type');
+      console.log('━'.repeat(60));
       return;
     }
     
+    console.log('Step 3: Parse JSON code');
     var code;
     try {
       code = JSON.parse(codeScript.textContent);
+      console.log('  ✓ JSON parsed successfully');
+      console.log('  - Code length:', code.length + ' characters');
+      console.log('  - First line:', code.split('\\n')[0]);
+      console.log('  - Last line:', code.split('\\n').slice(-1)[0]);
     } catch (e) {
-      console.error('Failed to parse playground code JSON:', e);
+      console.error('  ❌ JSON parse error:', e.message);
+      console.log('  - Raw content preview:', codeScript.textContent.substring(0, 100));
+      console.log('━'.repeat(60));
       return;
     }
     
     if (!code || !language) {
-      console.warn('Playground missing code or language');
+      console.warn('  ⚠️ Missing code or language');
+      console.log('━'.repeat(60));
       return;
     }
     
@@ -84,37 +114,100 @@ if (!window.playgroundInitializerLoaded) {
     else if (language === 'javascript') fileExtension = 'js';
     else if (language === 'cpp') fileExtension = 'cpp';
     
-    // Send code to iframe
+    console.log('Step 4: Prepare postMessage');
+    var message = {
+      eventType: 'populateCode',
+      language: language,
+      files: [{
+        name: 'main.' + fileExtension,
+        content: code
+      }]
+    };
+    console.log('  - Event type:', message.eventType);
+    console.log('  - Language:', message.language);
+    console.log('  - File name:', message.files[0].name);
+    console.log('  - Content length:', message.files[0].content.length);
+    
+    console.log('Step 5: Send postMessage to OneCompiler iframe');
     try {
-      iframe.contentWindow.postMessage({
-        eventType: 'populateCode',
-        language: language,
-        files: [{
-          name: 'main.' + fileExtension,
-          content: code
-        }]
-      }, '*');
+      console.log('  - Iframe contentWindow exists:', !!iframe.contentWindow);
+      console.log('  - Sending message...');
+      
+      iframe.contentWindow.postMessage(message, '*');
+      
       iframe.setAttribute('data-initialized', 'true');
-      console.log('✓ Populated playground (' + language + ')');
+      console.log('  ✅ SUCCESS: postMessage sent to OneCompiler');
+      console.log('  ✅ Iframe marked as initialized');
+      
+      // Visual confirmation
+      iframe.style.border = '5px solid #00ff00';
+      setTimeout(function() {
+        iframe.style.border = '';
+      }, 3000);
+      
     } catch (e) {
-      console.error('✗ Failed to populate playground:', e);
+      console.error('  ❌ EXCEPTION during postMessage:', e);
+      console.error('  - Error name:', e.name);
+      console.error('  - Error message:', e.message);
+      iframe.style.border = '5px solid #ff0000';
     }
+    
+    console.log('━'.repeat(60));
+    console.log('sendCodeToIframe COMPLETE');
+    console.log('━'.repeat(60));
   }
   
   // Initialize playgrounds - attach listeners to details elements
   function initPlaygrounds() {
     var playgrounds = document.querySelectorAll('.code-playground');
-    console.log('Found ' + playgrounds.length + ' playground(s)');
+    console.log('🎮 Playground Init: Found ' + playgrounds.length + ' playground(s)');
     
-    playgrounds.forEach(function(details) {
+    // Comprehensive debug logging
+    console.log('='.repeat(60));
+    console.log('PLAYGROUND DEBUG REPORT');
+    console.log('='.repeat(60));
+    console.log('Time:', new Date().toISOString());
+    console.log('URL:', window.location.href);
+    console.log('User Agent:', navigator.userAgent);
+    console.log('Playgrounds found:', playgrounds.length);
+    console.log('Document ready state:', document.readyState);
+    console.log('Window loaded:', window.performance ? 'yes' : 'unknown');
+    console.log('='.repeat(60));
+    
+    playgrounds.forEach(function(details, index) {
+      console.log('---');
+      console.log('Playground #' + index + ':');
       var iframe = details.querySelector('.onecompiler-iframe');
-      if (!iframe) return;
+      var codeScript = details.querySelector('.playground-code');
+      
+      console.log('  - Has iframe:', !!iframe);
+      console.log('  - Has code script:', !!codeScript);
+      console.log('  - Details open:', details.open);
+      
+      if (iframe) {
+        console.log('  - Iframe src:', iframe.src);
+        console.log('  - Iframe language:', iframe.getAttribute('data-language'));
+      }
+      
+      if (codeScript) {
+        console.log('  - Code script type:', codeScript.type);
+        var code = JSON.parse(codeScript.textContent);
+        console.log('  - Code length:', code.length);
+        console.log('  - Code preview:', code.substring(0, 50) + '...');
+      }
+      
+      if (!iframe) {
+        console.warn('  ❌ No iframe found in playground #' + index);
+        return;
+      }
       
       // Listen for when details is opened
       details.addEventListener('toggle', function() {
+        console.log('📍 Playground #' + index + ' TOGGLE EVENT - open=' + details.open);
         if (details.open) {
-          // Wait a bit for iframe to be visible and loaded
+          console.log('📍 Playground #' + index + ' opened, will send code in 1s');
           setTimeout(function() {
+            console.log('📍 Playground #' + index + ' timeout complete, calling sendCodeToIframe');
             sendCodeToIframe(iframe);
           }, 1000);
         }
@@ -122,21 +215,31 @@ if (!window.playgroundInitializerLoaded) {
       
       // If already open, initialize immediately
       if (details.open) {
+        console.log('📍 Playground #' + index + ' already open, will initialize in 1.5s');
         setTimeout(function() {
           sendCodeToIframe(iframe);
         }, 1500);
       }
     });
+    
+    console.log('='.repeat(60));
+    console.log('Playground setup complete. Click to open a playground.');
+    console.log('='.repeat(60));
   }
   
-  // Run on DOM ready and page load
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPlaygrounds);
-  } else {
-    initPlaygrounds();
+    // Store functions globally
+    window.initPlaygrounds = initPlaygrounds;
+    window.sendCodeToIframe = sendCodeToIframe;
   }
-  window.addEventListener('load', function() {
-    setTimeout(initPlaygrounds, 500);
-  });
-}
+  
+  // Always run initialization (for each playground included)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      window.initPlaygrounds();
+    });
+  } else {
+    // DOM already ready, init immediately
+    window.initPlaygrounds();
+  }
+})();
 </script>
