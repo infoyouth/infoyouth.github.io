@@ -104,6 +104,90 @@ layout: default
   <!-- Featured Learning Paths Section -->
   <section class="categories-section" style="padding: 4rem 0;">
     <div class="container">
+      <!-- Learning Tracker Feature Banner -->
+      <div class="learning-tracker-banner" style="
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        border: 2px solid rgba(102, 126, 234, 0.3);
+        border-radius: 1rem;
+        padding: 1.5rem 2rem;
+        margin-bottom: 2.5rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        animation: fadeInUp 0.8s ease-out;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      ">
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent); animation: shimmer 3s infinite;"></div>
+        <div style="position: relative; z-index: 1;">
+          <div style="font-size: 2.5rem; margin-bottom: 0.5rem; animation: bounce 2s infinite;">✨</div>
+          <h3 style="
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+          ">
+            Track Your Learning Progress!
+          </h3>
+          <p style="font-size: 1rem; margin-bottom: 1rem; opacity: 0.9;">
+            📊 Mark lessons complete • 🎯 Track your progress • 🏆 Build your learning streak
+          </p>
+          <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; font-size: 0.9rem;">
+            <span style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 0.25rem 0.75rem; border-radius: 1rem; font-weight: 600;">✓ Auto-Save Progress</span>
+            <span style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6; padding: 0.25rem 0.75rem; border-radius: 1rem; font-weight: 600;">📱 Works Offline</span>
+            <span style="background: rgba(249, 115, 22, 0.2); color: #f97316; padding: 0.25rem 0.75rem; border-radius: 1rem; font-weight: 600;">🔥 Stay Motivated</span>
+          </div>
+        </div>
+      </div>
+      
+      <style>
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+        
+        @keyframes bounce {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+        
+        .learning-tracker-banner:hover {
+          border-color: rgba(102, 126, 234, 0.5);
+          box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
+          transform: translateY(-2px);
+          transition: all 0.3s ease;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+          .learning-tracker-banner {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15));
+            border-color: rgba(102, 126, 234, 0.4);
+          }
+        }
+      </style>
+      
       <h2 class="section-title"><span class="gradient-text">🎓 Start Your Learning Journey</span></h2>
       <p class="categories-instruction" style="text-align: center; margin-bottom: 2rem;">
         ✨ Explore our comprehensive programming tutorials organized by topic
@@ -291,3 +375,5 @@ layout: default
   }
 }
 </script>
+
+{% include learning-tracker.html %}

@@ -238,12 +238,6 @@
       }
       
       try {
-        this.addPostTitleIndicators();
-      } catch (e) {
-        console.error('[Learning Tracker] Error adding post indicators:', e);
-      }
-      
-      try {
         this.setupEventListeners();
       } catch (e) {
         console.error('[Learning Tracker] Error setting up listeners:', e);
@@ -259,6 +253,25 @@
         this.updateStreak();
       } catch (e) {
         console.error('[Learning Tracker] Error updating streak:', e);
+      }
+      
+      // Add indicators with a delay to ensure all content is loaded
+      // Also re-run after a short delay for dynamically loaded content
+      try {
+        this.addPostTitleIndicators();
+        
+        // Re-run after a delay to catch any dynamically loaded content
+        setTimeout(() => {
+          console.log('[Learning Tracker] Running delayed indicator check...');
+          this.addPostTitleIndicators();
+        }, 500);
+        
+        setTimeout(() => {
+          console.log('[Learning Tracker] Running final indicator check...');
+          this.addPostTitleIndicators();
+        }, 1500);
+      } catch (e) {
+        console.error('[Learning Tracker] Error adding post indicators:', e);
       }
     }
 
@@ -279,8 +292,9 @@
           return;
         }
         
-        // Extract post ID from URL
-        const postId = href.replace(/^.*\/posts\//, '').replace(/\/$/, '').replace(/\//g, '-');
+        // Extract post ID from URL (must match format used in getPostId)
+        // URL like "/posts/python-basics/" should become "posts-python-basics"
+        const postId = href.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '-');
         const progress = this.storage.getPostProgress(postId);
         
         // Remove existing indicator first
@@ -293,14 +307,28 @@
         if (progress && progress.completed) {
           const indicator = document.createElement('span');
           indicator.className = 'post-completed-indicator';
-          indicator.textContent = ' ✓';
+          indicator.textContent = '✓ ';
           indicator.title = 'Completed';
-          link.appendChild(indicator);
+          indicator.style.marginRight = '0.3rem';
+          indicator.style.color = '#10b981';
+          indicator.style.fontWeight = 'bold';
+          indicator.style.fontSize = '1.1em';
+          indicator.style.display = 'inline-block';
+          
+          // Prepend indicator at the start of the link for maximum visibility
+          // This works consistently across all layouts
+          link.insertBefore(indicator, link.firstChild);
+          
           indicatorsAdded++;
-          console.log(`[Learning Tracker] Added indicator for: ${postId}`);
+          console.log(`[Learning Tracker] ✅ Added indicator for: ${postId}`, {
+            href: href,
+            linkText: link.textContent,
+            parentElement: link.parentElement?.tagName,
+            hasIndicator: !!link.querySelector('.post-completed-indicator')
+          });
         }
       });
-      console.log(`[Learning Tracker] Added ${indicatorsAdded} completion indicators`);
+      console.log(`[Learning Tracker] 📊 Summary: Added ${indicatorsAdded} completion indicators`);
     }
 
     injectCheckboxes() {
@@ -322,25 +350,45 @@
       const categoryCards = categoryGrid.querySelectorAll('.category-card-enhanced');
       
       categoryCards.forEach(card => {
+        // Check if indicator already exists to prevent duplicates
+        if (card.querySelector('.learning-progress-indicator')) {
+          return;
+        }
+        
         const categoryLink = card.getAttribute('href');
         if (!categoryLink) return;
 
         const category = this.extractCategoryFromUrl(categoryLink);
+        
+        // Count actual posts in this category from the DOM
+        const categorySlug = category.toLowerCase().replace(/\s+/g, '-');
+        const categoryPageLinks = document.querySelectorAll(`a[href*="/categories/${categorySlug}"]`);
+        
+        // Get all post links that belong to this category
+        // We'll count from localStorage which posts are completed for this category
+        const allPostLinks = document.querySelectorAll('a[href*="/posts/"]');
+        let totalPosts = 0;
+        let completedPosts = 0;
+        
+        // For now, we can't easily determine which posts belong to which category from the main page
+        // So we'll just show the stored progress if it exists
         const progress = this.storage.getCategoryProgress(category);
         
-        // Add progress indicator to card
-        const progressIndicator = document.createElement('div');
-        progressIndicator.className = 'learning-progress-indicator';
-        progressIndicator.innerHTML = `
-          <div class="progress-bar-mini">
-            <div class="progress-fill" style="width: ${this.calculateCategoryProgress(progress)}%"></div>
-          </div>
-          <span class="progress-text">
-            ${progress.completedPosts} / ${progress.totalPosts} completed
-          </span>
-        `;
-        
-        card.appendChild(progressIndicator);
+        // Only show indicator if we have meaningful data
+        if (progress.totalPosts > 0 || progress.completedPosts > 0) {
+          const progressIndicator = document.createElement('div');
+          progressIndicator.className = 'learning-progress-indicator';
+          progressIndicator.innerHTML = `
+            <div class="progress-bar-mini">
+              <div class="progress-fill" style="width: ${this.calculateCategoryProgress(progress)}%"></div>
+            </div>
+            <span class="progress-text">
+              ${progress.completedPosts} / ${progress.totalPosts} completed
+            </span>
+          `;
+          
+          card.appendChild(progressIndicator);
+        }
       });
     }
 
@@ -437,6 +485,37 @@
       if (!categoryTitle) return;
 
       const category = this.getCurrentCategory();
+      
+      // Count actual posts on this category page
+      const postLinks = document.querySelectorAll('.content a[href*="/posts/"]');
+      const postIds = [];
+      let completedCount = 0;
+      
+      postLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        
+        const postId = href.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '-');
+        if (!postIds.includes(postId)) {
+          postIds.push(postId);
+          const progress = this.storage.getPostProgress(postId);
+          if (progress.completed) {
+            completedCount++;
+          }
+        }
+      });
+      
+      // Update category progress with actual counts
+      const totalPosts = postIds.length;
+      if (totalPosts > 0) {
+        this.storage.setCategoryProgress(category, {
+          totalPosts: totalPosts,
+          completedPosts: completedCount,
+          inProgressPosts: totalPosts - completedCount,
+          posts: postIds
+        });
+      }
+      
       const progress = this.storage.getCategoryProgress(category);
       const percentage = this.calculateCategoryProgress(progress);
 
@@ -568,6 +647,38 @@
           this.clearProgress();
         }
       });
+      
+      // Watch for DOM changes and re-add indicators for dynamically loaded content
+      const observer = new MutationObserver((mutations) => {
+        let shouldUpdate = false;
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+            // Check if any added nodes contain post links
+            mutation.addedNodes.forEach((node) => {
+              if (node.nodeType === 1) { // Element node
+                const hasPostLinks = node.querySelector && node.querySelector('a[href*="/posts/"]');
+                const isPostLink = node.tagName === 'A' && node.getAttribute('href')?.includes('/posts/');
+                if (hasPostLinks || isPostLink) {
+                  shouldUpdate = true;
+                }
+              }
+            });
+          }
+        });
+        
+        if (shouldUpdate) {
+          console.log('[Learning Tracker] DOM changed, re-adding indicators...');
+          setTimeout(() => this.addPostTitleIndicators(), 100);
+        }
+      });
+      
+      // Observe the entire document for changes
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+      
+      console.log('[Learning Tracker] MutationObserver setup complete');
     }
 
     exportProgress() {
