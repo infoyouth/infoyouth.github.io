@@ -1,0 +1,414 @@
+/* Learning Progress Tracker Styles */
+
+/* Checkbox Container */
+.learning-checkbox-container {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+  border-left: 4px solid #667eea;
+  border-radius: 0.5rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Custom Checkbox */
+.learning-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.learning-checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox-custom {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #667eea;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.learning-checkbox:checked ~ .checkbox-custom {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-color: #764ba2;
+}
+
+.learning-checkbox:checked ~ .checkbox-custom::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.learning-checkbox-label:hover .checkbox-custom {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.checkbox-text {
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.learning-checkbox:checked ~ .checkbox-text {
+  color: #667eea;
+}
+
+.completion-date {
+  margin-left: 2.5rem;
+  color: var(--text-muted-color);
+  font-size: 0.85rem;
+}
+
+/* Disabled State */
+.learning-checkbox-label.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.learning-checkbox-label.disabled .checkbox-custom {
+  border-color: #999;
+  background: rgba(150, 150, 150, 0.1);
+}
+
+.learning-checkbox-label.disabled:hover .checkbox-custom {
+  transform: none;
+  box-shadow: none;
+}
+
+.learning-checkbox:disabled ~ .checkbox-custom {
+  cursor: not-allowed;
+}
+
+/* Scroll Hint */
+.scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 2.5rem;
+  color: #f39c12;
+  font-size: 0.85rem;
+  font-weight: 500;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Category Progress Bar */
+.category-progress-bar {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.progress-percentage {
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.progress-bar-track {
+  height: 12px;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 6px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.3), 
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.progress-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted-color);
+}
+
+.reset-progress-btn {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+  border-radius: 0.5rem;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.reset-progress-btn:hover {
+  background: rgba(102, 126, 234, 0.1);
+  border-color: #667eea;
+  transform: translateY(-2px);
+}
+
+/* Mini Progress Indicator on Category Cards */
+.learning-progress-indicator {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.progress-bar-mini {
+  height: 6px;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar-mini .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 3px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-text {
+  font-size: 0.85rem;
+  color: var(--text-muted-color);
+}
+
+/* Celebration Animation */
+.celebration-animation {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
+  z-index: 9999;
+  animation: celebrate 2s ease-out;
+  pointer-events: none;
+}
+
+@keyframes celebrate {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1) translateY(-100px);
+  }
+}
+
+/* Progress Stats Widget */
+.progress-stats-widget {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.stat-card-mini {
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+  border-radius: 0.75rem;
+  text-align: center;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.stat-card-mini .stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-card-mini .stat-label {
+  font-size: 0.85rem;
+  color: var(--text-muted-color);
+  margin-top: 0.25rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .learning-checkbox-container {
+    padding: 0.75rem;
+  }
+
+  .learning-checkbox-label {
+    font-size: 1rem;
+  }
+
+  .category-progress-bar {
+    padding: 1rem;
+  }
+
+  .progress-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .progress-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .reset-progress-btn {
+    width: 100%;
+  }
+
+  .celebration-animation {
+    font-size: 3rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .learning-checkbox-container {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  }
+
+  .checkbox-custom {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .category-progress-bar {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  }
+
+  .reset-progress-btn {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .stat-card-mini {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  }
+}
+
+/* Accessibility */
+.learning-checkbox:focus ~ .checkbox-custom {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+.reset-progress-btn:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Animation for progress bar loading */
+@keyframes load-progress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: var(--progress-width);
+  }
+}
+
+.progress-bar-fill.animate {
+  animation: load-progress 1s ease-out;
+}
+
+/* Post Title Completion Indicators */
+.post-completed-indicator {
+  display: inline-block;
+  color: #10b981;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-right: 0.3rem;
+  animation: fadeInScale 0.3s ease-out;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Style for post links with completion indicator */
+a:has(.post-completed-indicator) {
+  position: relative;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .post-completed-indicator {
+    color: #34d399;
+  }
+}
