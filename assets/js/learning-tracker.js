@@ -264,13 +264,20 @@
 
     addPostTitleIndicators() {
       // Find all post links in category pages, archives, home page
-      const postLinks = document.querySelectorAll('a[href*="/posts/"]');
+      // EXCLUDE TOC links to prevent interference with tocbot
+      const postLinks = document.querySelectorAll('a[href*="/posts/"]:not(#toc a):not(#toc-popup a):not(.toc-link)');
       console.log(`[Learning Tracker] Found ${postLinks.length} post links`);
       
       let indicatorsAdded = 0;
       postLinks.forEach(link => {
         const href = link.getAttribute('href');
         if (!href) return;
+        
+        // Skip if link is inside TOC (additional safety check)
+        if (link.closest('#toc, #toc-popup, #toc-popup-content')) {
+          console.log(`[Learning Tracker] Skipping TOC link: ${href}`);
+          return;
+        }
         
         // Extract post ID from URL
         const postId = href.replace(/^.*\/posts\//, '').replace(/\/$/, '').replace(/\//g, '-');
