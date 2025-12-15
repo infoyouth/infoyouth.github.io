@@ -76,7 +76,7 @@ jobs:
           bundle exec rubocop
 
       - name: 📤 Upload Site Artifact
-        uses: upload-pages-artifact@v4.0.0
+        uses: actions/upload-pages-artifact@v4.0.0
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
 
@@ -145,8 +145,7 @@ jobs:
             
             🔗 **Read Now:** [${{ steps.extract_info.outputs.post_title }}](${{ steps.extract_info.outputs.post_url }})
             
-            🚀 **Deployment:** Successful ✅
-            🌐 **Live Site:** [infoyouth.github.io](https://infoyouth.github.io)
+            🌐 **Read it:** [infoyouth.github.io](https://infoyouth.github.io)
           include_image: 'true'
           username: 'Youth Innovations Blog'
           custom_image_url: 'https://raw.githubusercontent.com/infoyouth/infoyouth.github.io/main/assets/img/favicons/favicon-48x48.png'
