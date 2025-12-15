@@ -1,4 +1,4 @@
-name: "🚧 Build Test and Deploy"
+name: "�� Build Test and Deploy"
 
 on:
   push:
@@ -55,7 +55,7 @@ jobs:
         env:
           JEKYLL_ENV: "production"
 
-      - name: � Cache HTMLProofer
+      - name: 📦 Cache HTMLProofer
         uses: actions/cache@v5
         with:
           path: tmp/.htmlproofer
@@ -76,7 +76,7 @@ jobs:
           bundle exec rubocop
 
       - name: 📤 Upload Site Artifact
-        uses: actions/upload-pages-artifact@v4.0.0
+        uses: upload-pages-artifact@v4.0.0
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
 
@@ -89,6 +89,66 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/main'
     steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4.0.5
+
+      - name: 📊 Detect New Blog Post
+        id: extract_info
+        if: success()
+        run: |
+          # Find only NEW posts (A=added, not M=modified)
+          POST_FILE=$(git diff --name-status HEAD~1 HEAD | grep '^A.*_posts/.*\.md$' | awk '{print $2}' | head -n 1)
+          
+          if [ -z "$POST_FILE" ] || [ ! -f "$POST_FILE" ]; then
+            echo "has_new_post=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          echo "🎉 Found new post: $POST_FILE"
+          
+          # Extract metadata
+          TITLE=$(grep -m1 '^title:' "$POST_FILE" | sed 's/title: *"\(.*\)".*/\1/')
+          DESC=$(grep -m1 '^description:' "$POST_FILE" | sed 's/description: *"\(.*\)".*/\1/')
+          CATS=$(awk '/^categories:/,/^[^ ]/{if(/^  - /)print}' "$POST_FILE" | sed 's/  - //' | paste -sd, - | sed 's/,/, /g')
+          
+          # Build URL: remove date prefix and .md extension
+          SLUG=$(basename "$POST_FILE" .md | sed 's/^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}-//')
+          URL="https://infoyouth.github.io/posts/${SLUG}/"
+          
+          # Set outputs
+          {
+            echo "post_title=${TITLE}"
+            echo "post_description=${DESC}"
+            echo "post_categories=${CATS}"
+            echo "post_url=${URL}"
+            echo "has_new_post=true"
+          } >> $GITHUB_OUTPUT
+
+      - name: 📢 Announce New Post to Discord
+        if: success() && steps.extract_info.outputs.has_new_post == 'true'
+        uses: cabrera-evil/discord-notify-action@v1.0.2
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: '🎉 New Blog Post Published!'
+          description: |
+            ✨ **${{ steps.extract_info.outputs.post_title }}**
+            
+            ${{ steps.extract_info.outputs.post_description }}
+            
+            📚 **Categories:** ${{ steps.extract_info.outputs.post_categories }}
+            
+            🔗 **Read Now:** [${{ steps.extract_info.outputs.post_title }}](${{ steps.extract_info.outputs.post_url }})
+            
+            🚀 **Deployment:** Successful ✅
+            🌐 **Live Site:** [infoyouth.github.io](https://infoyouth.github.io)
+          include_image: 'true'
+          username: 'Youth Innovations Blog'
+          custom_image_url: 'https://raw.githubusercontent.com/infoyouth/infoyouth.github.io/main/assets/img/favicons/favicon-48x48.png'
+          repo_name: ${{ github.repository }}
+          repo_url: ${{ github.server_url }}/${{ github.repository }}
