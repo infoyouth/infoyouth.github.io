@@ -130,7 +130,22 @@ jobs:
             echo "has_new_post=true"
           } >> $GITHUB_OUTPUT
 
-      - name: 📢 Announce New Post to Discord
+      - name: 💎 Submit Sitemap to Search Engines
+        if: success() && steps.extract_info.outputs.has_new_post == 'true'
+        run: |
+          echo "📤 Notifying search engines about new content..."
+          
+          # Ping Google
+          GOOGLE_RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" "https://www.google.com/ping?sitemap=https://infoyouth.github.io/sitemap.xml")
+          echo "Google ping status: $GOOGLE_RESPONSE"
+          
+          # Ping Bing
+          BING_RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" "https://www.bing.com/ping?sitemap=https://infoyouth.github.io/sitemap.xml")
+          echo "Bing ping status: $BING_RESPONSE"
+          
+          echo "✅ Sitemap submitted to search engines"
+
+      - name: �📢 Announce New Post to Discord
         if: success() && steps.extract_info.outputs.has_new_post == 'true'
         uses: cabrera-evil/discord-notify-action@v1.0.2
         with:
@@ -144,8 +159,8 @@ jobs:
             📚 **Categories:** ${{ steps.extract_info.outputs.post_categories }}
             
             🔗 **Read Now:** [${{ steps.extract_info.outputs.post_title }}](${{ steps.extract_info.outputs.post_url }})
-            
-            🌐 **Read it:** [infoyouth.github.io](https://infoyouth.github.io)
+
+            🌐 **Live Site:** [infoyouth.github.io](https://infoyouth.github.io)
           include_image: 'true'
           username: 'Youth Innovations Blog'
           custom_image_url: 'https://raw.githubusercontent.com/infoyouth/infoyouth.github.io/main/assets/img/favicons/favicon-48x48.png'
