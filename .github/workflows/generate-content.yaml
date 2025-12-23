@@ -34,6 +34,7 @@ permissions:
 env:
   GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
   GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+  OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
 
 jobs:
   # Pre-check job: Fast fail if no content needed today
