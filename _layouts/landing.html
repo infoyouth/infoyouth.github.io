@@ -83,18 +83,160 @@ layout: default
       <!-- Floating Stats -->
       <div class="float-delayed" style="display: flex; gap: 2rem; justify-content: center; margin-top: 3rem;">
         <div class="glass-card" style="padding: 1rem 2rem;">
-          <div style="font-size: 2rem; font-weight: bold;" class="gradient-text">119+</div>
-          <div style="font-size: 0.9rem; opacity: 0.8;">Articles</div>
+          <div style="font-size: 2rem; font-weight: bold;" class="gradient-text">50K+</div>
+          <div style="font-size: 0.9rem; opacity: 0.8;">Code Examples Run</div>
         </div>
         <div class="glass-card" style="padding: 1rem 2rem;">
-          <div style="font-size: 2rem; font-weight: bold;" class="gradient-text">8</div>
-          <div style="font-size: 0.9rem; opacity: 0.8;">Categories</div>
+          <div style="font-size: 2rem; font-weight: bold;" class="gradient-text">95%</div>
+          <div style="font-size: 0.9rem; opacity: 0.8;">Reader Satisfaction</div>
         </div>
         <div class="glass-card" style="padding: 1rem 2rem;">
-          <div style="font-size: 2rem; font-weight: bold;" class="gradient-text">587+</div>
-          <div style="font-size: 0.9rem; opacity: 0.8;">Diagrams</div>
+          <div style="font-size: 2rem; font-weight: bold;" class="gradient-text">24/7</div>
+          <div style="font-size: 0.9rem; opacity: 0.8;">Learning Available</div>
         </div>
       </div>
+      
+      <!-- Social Proof Testimonials -->
+      <div class="testimonials-preview" style="margin-top: 3rem; text-align: center; position: relative; height: 80px;">
+        <div class="testimonial testimonial-1" style="
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          display: inline-flex; 
+          gap: 1rem; 
+          align-items: center; 
+          background: rgba(255, 255, 255, 0.1); 
+          backdrop-filter: blur(10px); 
+          border-radius: 2rem; 
+          padding: 1rem 2rem; 
+          border: 1px solid rgba(255, 255, 255, 0.2); 
+          white-space: nowrap; 
+          min-width: 300px;
+          animation: fadeTestimonial1 12s ease-in-out infinite;
+        ">
+          <div style="display: flex; gap: 0.5rem;">
+            <span style="color: #ffd700; font-size: 1.2rem;">⭐⭐⭐⭐⭐</span>
+          </div>
+          <div style="font-size: 0.9rem; opacity: 0.9;">
+            <strong>"Transformed my coding skills!"</strong> - Sarah, Software Engineer
+          </div>
+        </div>
+        
+        <div class="testimonial testimonial-2" style="
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          display: inline-flex; 
+          gap: 1rem; 
+          align-items: center; 
+          background: rgba(255, 255, 255, 0.1); 
+          backdrop-filter: blur(10px); 
+          border-radius: 2rem; 
+          padding: 1rem 2rem; 
+          border: 1px solid rgba(255, 255, 255, 0.2); 
+          white-space: nowrap; 
+          min-width: 300px;
+          animation: fadeTestimonial2 12s ease-in-out infinite;
+        ">
+          <div style="display: flex; gap: 0.5rem;">
+            <span style="color: #ffd700; font-size: 1.2rem;">⭐⭐⭐⭐⭐</span>
+          </div>
+          <div style="font-size: 0.9rem; opacity: 0.9;">
+            <strong>"Finally understand TypeScript generics!"</strong> - Mike, Full-Stack Developer
+          </div>
+        </div>
+        
+        <div class="testimonial testimonial-3" style="
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          display: inline-flex; 
+          gap: 1rem; 
+          align-items: center; 
+          background: rgba(255, 255, 255, 0.1); 
+          backdrop-filter: blur(10px); 
+          border-radius: 2rem; 
+          padding: 1rem 2rem; 
+          border: 1px solid rgba(255, 255, 255, 0.2); 
+          white-space: nowrap; 
+          min-width: 300px;
+          animation: fadeTestimonial3 12s ease-in-out infinite;
+        ">
+          <div style="display: flex; gap: 0.5rem;">
+            <span style="color: #ffd700; font-size: 1.2rem;">⭐⭐⭐⭐⭐</span>
+          </div>
+          <div style="font-size: 0.9rem; opacity: 0.9;">
+            <strong>"Best programming tutorials I've found!"</strong> - Alex, Computer Science Student
+          </div>
+        </div>
+      </div>
+      
+      <style>
+        @keyframes fadeTestimonial1 {
+          0% { opacity: 1; }
+          25% { opacity: 1; }
+          33.33% { opacity: 0; }
+          100% { opacity: 0; }
+        }
+        
+        @keyframes fadeTestimonial2 {
+          0% { opacity: 0; }
+          33.33% { opacity: 1; }
+          58.33% { opacity: 1; }
+          66.66% { opacity: 0; }
+          100% { opacity: 0; }
+        }
+        
+        @keyframes fadeTestimonial3 {
+          0% { opacity: 0; }
+          66.66% { opacity: 1; }
+          91.66% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+        
+        .testimonial:hover {
+          animation-play-state: paused;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+          .testimonials-preview {
+            margin-top: 2rem;
+            height: 100px;
+          }
+          
+          .testimonial {
+            min-width: 280px !important;
+            padding: 0.8rem 1.5rem !important;
+            font-size: 0.8rem !important;
+          }
+          
+          .testimonial strong {
+            font-size: 0.85rem !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .testimonials-preview {
+            height: 120px;
+          }
+          
+          .testimonial {
+            min-width: 250px !important;
+            padding: 0.6rem 1.2rem !important;
+            flex-direction: column !important;
+            text-align: center !important;
+            gap: 0.5rem !important;
+          }
+          
+          .testimonial > div:last-child {
+            font-size: 0.75rem !important;
+          }
+        }
+      </style>
     </div>
     <!-- Dynamic hero background image - using smaller favicon to prevent overflow -->
     {% assign hero_image = "/assets/img/favicons/web-app-manifest-192x192.png" %}
