@@ -74,7 +74,7 @@ layout: default
           <a href="#recent-posts" class="magnetic-btn ripple" data-tooltip="Discover amazing content">
             ✨ Explore Articles
           </a>
-          <a href="/categories/" class="magnetic-btn ripple" data-tooltip="Browse by topic" style="background: linear-gradient(135deg, rgba(118, 75, 162, 0.8), rgba(102, 126, 234, 0.8));">
+          <a href="/categories/" class="magnetic-btn ripple secondary-btn" data-tooltip="Browse by topic" style="background: linear-gradient(135deg, var(--secondary-purple), var(--accent-teal));">
             📚 Browse Categories
           </a>
         </div>
@@ -98,90 +98,97 @@ layout: default
       
       <!-- Social Proof Testimonials -->
       <div class="testimonials-preview" style="margin-top: 3rem; text-align: center; position: relative; height: 80px;">
-        <div class="testimonial testimonial-1" style="
-          position: absolute;
-          top: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          display: inline-flex; 
-          gap: 1rem; 
-          align-items: center; 
-          background: rgba(255, 255, 255, 0.1); 
-          backdrop-filter: blur(10px); 
-          border-radius: 2rem; 
-          padding: 1rem 2rem; 
-          border: 1px solid rgba(255, 255, 255, 0.2); 
-          white-space: nowrap; 
-          min-width: 300px;
-          animation: fadeTestimonial1 12s ease-in-out infinite;
-        ">
-          <div style="display: flex; gap: 0.5rem;">
-            <span style="color: #ffd700; font-size: 1.2rem;">⭐⭐⭐⭐⭐</span>
+        <div class="testimonial testimonial-1">
+          <div class="testimonial-stars">
+            <span>⭐⭐⭐⭐⭐</span>
           </div>
-          <div style="font-size: 0.9rem; opacity: 0.9;">
+          <div class="testimonial-text">
             <strong>"Transformed my coding skills!"</strong> - Sarah, Software Engineer
           </div>
         </div>
-        
-        <div class="testimonial testimonial-2" style="
-          position: absolute;
-          top: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          display: inline-flex; 
-          gap: 1rem; 
-          align-items: center; 
-          background: rgba(255, 255, 255, 0.1); 
-          backdrop-filter: blur(10px); 
-          border-radius: 2rem; 
-          padding: 1rem 2rem; 
-          border: 1px solid rgba(255, 255, 255, 0.2); 
-          white-space: nowrap; 
-          min-width: 300px;
-          animation: fadeTestimonial2 12s ease-in-out infinite;
-        ">
-          <div style="display: flex; gap: 0.5rem;">
-            <span style="color: #ffd700; font-size: 1.2rem;">⭐⭐⭐⭐⭐</span>
+
+        <div class="testimonial testimonial-2">
+          <div class="testimonial-stars">
+            <span>⭐⭐⭐⭐⭐</span>
           </div>
-          <div style="font-size: 0.9rem; opacity: 0.9;">
+          <div class="testimonial-text">
             <strong>"Finally understand TypeScript generics!"</strong> - Mike, Full-Stack Developer
           </div>
         </div>
-        
-        <div class="testimonial testimonial-3" style="
-          position: absolute;
-          top: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          display: inline-flex; 
-          gap: 1rem; 
-          align-items: center; 
-          background: rgba(255, 255, 255, 0.1); 
-          backdrop-filter: blur(10px); 
-          border-radius: 2rem; 
-          padding: 1rem 2rem; 
-          border: 1px solid rgba(255, 255, 255, 0.2); 
-          white-space: nowrap; 
-          min-width: 300px;
-          animation: fadeTestimonial3 12s ease-in-out infinite;
-        ">
-          <div style="display: flex; gap: 0.5rem;">
-            <span style="color: #ffd700; font-size: 1.2rem;">⭐⭐⭐⭐⭐</span>
+
+        <div class="testimonial testimonial-3">
+          <div class="testimonial-stars">
+            <span>⭐⭐⭐⭐⭐</span>
           </div>
-          <div style="font-size: 0.9rem; opacity: 0.9;">
+          <div class="testimonial-text">
             <strong>"Best programming tutorials I've found!"</strong> - Alex, Computer Science Student
           </div>
         </div>
       </div>
       
       <style>
+        /* Testimonials - Unified Theme */
+        .testimonial {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          display: inline-flex;
+          gap: 1rem;
+          align-items: center;
+          background: rgba(var(--bg-white-rgb, 255, 255, 255), 0.1);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border-radius: 2rem;
+          padding: 1rem 2rem;
+          border: 1px solid rgba(var(--bg-white-rgb, 255, 255, 255), 0.2);
+          white-space: nowrap;
+          min-width: 300px;
+        }
+
+        .testimonial-stars {
+          display: flex;
+          gap: 0.5rem;
+        }
+
+        .testimonial-stars span {
+          color: var(--accent-orange);
+          font-size: 1.2rem;
+        }
+
+        .testimonial-text {
+          font-size: 0.9rem;
+          opacity: 0.9;
+        }
+
+        /* Animation classes */
+        .testimonial-1 {
+          animation: fadeTestimonial1 12s ease-in-out infinite;
+        }
+
+        .testimonial-2 {
+          animation: fadeTestimonial2 12s ease-in-out infinite;
+        }
+
+        .testimonial-3 {
+          animation: fadeTestimonial3 12s ease-in-out infinite;
+        }
+
+        /* Dark theme adjustments */
+        @media (prefers-color-scheme: dark) {
+          .testimonial {
+            background: rgba(var(--bg-white-rgb), 0.2);
+            border-color: rgba(var(--bg-white-rgb), 0.3);
+          }
+        }
+
         @keyframes fadeTestimonial1 {
           0% { opacity: 1; }
           25% { opacity: 1; }
           33.33% { opacity: 0; }
           100% { opacity: 0; }
         }
-        
+
         @keyframes fadeTestimonial2 {
           0% { opacity: 0; }
           33.33% { opacity: 1; }
@@ -189,41 +196,41 @@ layout: default
           66.66% { opacity: 0; }
           100% { opacity: 0; }
         }
-        
+
         @keyframes fadeTestimonial3 {
           0% { opacity: 0; }
           66.66% { opacity: 1; }
           91.66% { opacity: 1; }
           100% { opacity: 0; }
         }
-        
+
         .testimonial:hover {
           animation-play-state: paused;
         }
-        
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
           .testimonials-preview {
             margin-top: 2rem;
             height: 100px;
           }
-          
+
           .testimonial {
             min-width: 280px !important;
             padding: 0.8rem 1.5rem !important;
             font-size: 0.8rem !important;
           }
-          
+
           .testimonial strong {
             font-size: 0.85rem !important;
           }
         }
-        
+
         @media (max-width: 480px) {
           .testimonials-preview {
             height: 120px;
           }
-          
+
           .testimonial {
             min-width: 250px !important;
             padding: 0.6rem 1.2rem !important;
@@ -231,7 +238,7 @@ layout: default
             text-align: center !important;
             gap: 0.5rem !important;
           }
-          
+
           .testimonial > div:last-child {
             font-size: 0.75rem !important;
           }
@@ -244,78 +251,49 @@ layout: default
   </section>
 
   <!-- Interactive Code Playground Section -->
-  <section class="interactive-playground-section" style="padding: 4rem 0; background: linear-gradient(135deg, rgba(30, 58, 138, 0.05), rgba(88, 28, 135, 0.05));">
+  <section class="interactive-playground-section" style="padding: 4rem 0; background: linear-gradient(135deg, rgba(var(--primary-blue-rgb), 0.05), rgba(var(--secondary-purple-rgb), 0.05));">
     <div class="container">
       <div style="text-align: center; margin-bottom: 3rem;">
-        <h2 style="
-          font-size: 2.5rem;
-          font-weight: 700;
-          margin-bottom: 1rem;
-          background: linear-gradient(135deg, #1e40af, #581c87);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        ">
+        <h2 class="playground-title">
           🚀 Interactive Learning Experience
         </h2>
         <p style="font-size: 1.2rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
           Every tutorial post includes an interactive code playground. Learn by doing - run code examples instantly while reading.
         </p>
       </div>
-      
+
       <div class="playground-demo" style="max-width: 800px; margin: 0 auto;">
-        <div class="playground-card" style="
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(15px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 1rem;
-          padding: 2rem;
-          text-align: center;
-          position: relative;
-          overflow: hidden;
-        ">
-          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(49, 151, 149, 0.1), rgba(56, 178, 172, 0.1)); opacity: 0; transition: opacity 0.3s ease;" id="card-bg"></div>
-          <div style="position: relative; z-index: 1;">
-            <div style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
-            <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; color: #319795;">Try Code Playground</h3>
-            <p style="opacity: 0.8; margin-bottom: 1.5rem; line-height: 1.6;">
+        <div class="playground-card">
+          <div class="playground-bg" id="card-bg"></div>
+          <div class="playground-content">
+            <div class="playground-icon">⚡</div>
+            <h3 class="playground-heading">Try Code Playground</h3>
+            <p class="playground-description">
               Click below to see how our interactive playgrounds work. Every tutorial lets you run code examples instantly!
             </p>
-            
-            <button onclick="togglePlayground()" id="expand-btn" style="
-              display: inline-block;
-              background: linear-gradient(135deg, #319795, #38b2ac);
-              color: white;
-              padding: 0.75rem 2rem;
-              border-radius: 2rem;
-              border: none;
-              font-weight: 600;
-              cursor: pointer;
-              transition: all 0.3s ease;
-              box-shadow: 0 4px 15px rgba(49, 151, 149, 0.3);
-              margin-bottom: 1rem;
-            " onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 20px rgba(49, 151, 149, 0.4)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(49, 151, 149, 0.3)'">
+
+            <button onclick="togglePlayground()" id="expand-btn" class="playground-button">
               🚀 Try Hello World
             </button>
-            
+
             <div id="playground-container" style="display: none; margin-top: 1.5rem;">
-              <div style="background: rgba(0,0,0,0.8); border-radius: 0.5rem; padding: 1rem; margin-bottom: 1rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                  <span style="color: #319795; font-weight: 600;">Python Playground</span>
-                  <button onclick="runCode()" style="background: #319795; color: white; border: none; padding: 0.25rem 0.75rem; border-radius: 0.25rem; cursor: pointer;">▶ Run</button>
+              <div class="code-playground">
+                <div class="playground-header">
+                  <span class="playground-label">Python Playground</span>
+                  <button onclick="runCode()" class="run-button">▶ Run</button>
                 </div>
-                <textarea id="code-editor" style="width: 100%; height: 120px; background: rgba(0,0,0,0.9); color: #e2e8f0; border: 1px solid #319795; border-radius: 0.25rem; padding: 0.5rem; font-family: 'Courier New', monospace; font-size: 0.9rem; resize: vertical;" readonly>print("Hello, World!")
+                <textarea id="code-editor" class="code-editor" readonly>print("Hello, World!")
 print("Welcome to interactive learning!")
 print("Run code examples in every tutorial!")</textarea>
-                <div id="output" style="background: rgba(0,0,0,0.9); border: 1px solid #319795; border-radius: 0.25rem; padding: 0.5rem; margin-top: 0.5rem; min-height: 60px; color: #e2e8f0; font-family: 'Courier New', monospace; font-size: 0.9rem;">
+                <div id="output" class="code-output">
                   Click "Run" to see the output...
                 </div>
               </div>
-              
-              <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
-                <span style="background: rgba(49, 151, 149, 0.2); color: #319795; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.8rem; font-weight: 600;">Available in All Tutorials</span>
-                <span style="background: rgba(49, 151, 149, 0.2); color: #319795; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.8rem; font-weight: 600;">Instant Feedback</span>
-                <span style="background: rgba(49, 151, 149, 0.2); color: #319795; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.8rem; font-weight: 600;">Learn by Doing</span>
+
+              <div class="playground-features">
+                <span class="feature-tag">Available in All Tutorials</span>
+                <span class="feature-tag">Instant Feedback</span>
+                <span class="feature-tag">Learn by Doing</span>
               </div>
             </div>
           </div>
@@ -362,6 +340,200 @@ print("Run code examples in every tutorial!")</textarea>
         }
       </style>
       
+      <style>
+        /* Interactive Playground - Unified Theme */
+        .playground-title {
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+          background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .playground-card {
+          background: rgba(var(--bg-white-rgb), 0.1);
+          backdrop-filter: blur(15px);
+          -webkit-backdrop-filter: blur(15px);
+          border: 1px solid rgba(var(--bg-white-rgb), 0.2);
+          border-radius: 1rem;
+          padding: 2rem;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .playground-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(135deg, rgba(var(--accent-teal-rgb), 0.1), rgba(var(--accent-teal-rgb), 0.15));
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .playground-content {
+          position: relative;
+          z-index: 1;
+        }
+
+        .playground-icon {
+          font-size: 3rem;
+          margin-bottom: 1rem;
+        }
+
+        .playground-heading {
+          font-size: 1.5rem;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+          color: var(--accent-teal);
+        }
+
+        .playground-description {
+          opacity: 0.8;
+          margin-bottom: 1.5rem;
+          line-height: 1.6;
+        }
+
+        .playground-button {
+          display: inline-block;
+          background: linear-gradient(135deg, var(--accent-teal), var(--accent-teal));
+          color: white;
+          padding: 0.75rem 2rem;
+          border-radius: 2rem;
+          border: none;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 15px rgba(var(--accent-teal-rgb), 0.3);
+          margin-bottom: 1rem;
+        }
+
+        .playground-button:hover {
+          transform: scale(1.05);
+          box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.4);
+        }
+
+        .code-playground {
+          background: rgba(0,0,0,0.8);
+          border-radius: 0.5rem;
+          padding: 1rem;
+          margin-bottom: 1rem;
+        }
+
+        .playground-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 0.5rem;
+        }
+
+        .playground-label {
+          color: var(--accent-teal);
+          font-weight: 600;
+        }
+
+        .run-button {
+          background: var(--accent-teal);
+          color: white;
+          border: none;
+          padding: 0.25rem 0.75rem;
+          border-radius: 0.25rem;
+          cursor: pointer;
+        }
+
+        .code-editor {
+          width: 100%;
+          height: 120px;
+          background: rgba(0,0,0,0.9);
+          color: #e2e8f0;
+          border: 1px solid var(--accent-teal);
+          border-radius: 0.25rem;
+          padding: 0.5rem;
+          font-family: 'Courier New', monospace;
+          font-size: 0.9rem;
+          resize: vertical;
+        }
+
+        .code-output {
+          background: rgba(0,0,0,0.9);
+          border: 1px solid var(--accent-teal);
+          border-radius: 0.25rem;
+          padding: 0.5rem;
+          margin-top: 0.5rem;
+          min-height: 60px;
+          color: #e2e8f0;
+          font-family: 'Courier New', monospace;
+          font-size: 0.9rem;
+        }
+
+        .playground-features {
+          display: flex;
+          gap: 0.5rem;
+          justify-content: center;
+          flex-wrap: wrap;
+          font-size: 0.9rem;
+        }
+
+        .feature-tag {
+          background: rgba(var(--accent-teal-rgb), 0.2);
+          color: var(--accent-teal);
+          padding: 0.25rem 0.75rem;
+          border-radius: 1rem;
+          font-size: 0.8rem;
+          font-weight: 600;
+        }
+
+        /* Dark theme adjustments */
+        @media (prefers-color-scheme: dark) {
+          .playground-card {
+            background: rgba(var(--bg-white-rgb), 0.2);
+            border-color: rgba(var(--bg-white-rgb), 0.3);
+          }
+        }
+
+        .interactive-playground-section {
+          animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+          .interactive-playground-section {
+            padding: 3rem 0;
+          }
+
+          .playground-card {
+            padding: 1.5rem !important;
+          }
+
+          .playground-title {
+            font-size: 2rem !important;
+          }
+
+          .playground-heading {
+            font-size: 1.3rem !important;
+          }
+
+          .playground-description {
+            font-size: 0.9rem !important;
+          }
+        }
+      </style>
+      
       <script>
         function togglePlayground() {
           const container = document.getElementById('playground-container');
@@ -384,11 +556,11 @@ print("Run code examples in every tutorial!")</textarea>
           const code = document.getElementById('code-editor').value;
           
           // Simulate code execution (in real implementation, this would call the actual playground)
-          output.innerHTML = '<div style="color: #10b981;">Hello, World!</div><div style="color: #10b981;">Welcome to interactive learning!</div><div style="color: #10b981;">Run code examples in every tutorial!</div>';
+          output.innerHTML = '<div style="color: var(--accent-teal);">Hello, World!</div><div style="color: var(--accent-teal);">Welcome to interactive learning!</div><div style="color: var(--accent-teal);">Run code examples in every tutorial!</div>';
           
           // Add a small delay to simulate processing
           setTimeout(() => {
-            output.innerHTML += '<div style="color: #6b7280; font-style: italic; margin-top: 0.5rem;">✓ Code executed successfully</div>';
+            output.innerHTML += '<div style="color: var(--text-secondary); font-style: italic; margin-top: 0.5rem;">✓ Code executed successfully</div>';
           }, 500);
         }
       </script>
@@ -399,63 +571,289 @@ print("Run code examples in every tutorial!")</textarea>
   <section class="categories-section" style="padding: 4rem 0;">
     <div class="container">
       <!-- Learning Tracker Feature Banner -->
-      <div class="learning-tracker-banner" style="
-        background: rgba(102, 126, 234, 0.1);
-        border: 2px solid rgba(102, 126, 234, 0.3);
-        border-radius: 1rem;
-        padding: 1.5rem 2rem;
-        margin-bottom: 2.5rem;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        animation: fadeInUp 0.8s ease-out;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-      ">
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent); animation: shimmer 3s infinite;"></div>
-        <div style="position: relative; z-index: 1;">
-          <div style="font-size: 2.5rem; margin-bottom: 0.5rem; animation: bounce 2s infinite;">✨</div>
-          <h3 style="
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-          ">
+      <div class="learning-tracker-banner">
+        <div class="learning-tracker-shimmer"></div>
+        <div class="learning-tracker-content">
+          <div class="learning-tracker-icon">✨</div>
+          <h3 class="learning-tracker-title">
             Track Your Learning Progress!
           </h3>
-          <p style="font-size: 1rem; margin-bottom: 1rem; opacity: 0.9;">
+          <p class="learning-tracker-description">
             📊 Mark lessons complete • 🎯 Track your progress • 🏆 Build your learning streak
           </p>
-          <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; font-size: 0.9rem;">
-            <span style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 0.25rem 0.75rem; border-radius: 1rem; font-weight: 600;">✓ Auto-Save Progress</span>
-            <span style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6; padding: 0.25rem 0.75rem; border-radius: 1rem; font-weight: 600;">📱 Works Offline</span>
-            <span style="background: rgba(249, 115, 22, 0.2); color: #f97316; padding: 0.25rem 0.75rem; border-radius: 1rem; font-weight: 600;">🔥 Stay Motivated</span>
+          <div class="learning-tracker-features">
+            <span class="feature-badge feature-save">✓ Auto-Save Progress</span>
+            <span class="feature-badge feature-offline">📱 Works Offline</span>
+            <span class="feature-badge feature-motivated">🔥 Stay Motivated</span>
           </div>
         </div>
       </div>
       
       <style>
-        /* Dark mode support for learning tracker banner */
+        /* Learning Tracker Banner - Unified Theme */
+        .learning-tracker-banner {
+          background: rgba(59, 130, 246, 0.1);
+          border: 2px solid rgba(59, 130, 246, 0.3);
+          border-radius: 1rem;
+          padding: 1.5rem 2rem;
+          margin-bottom: 2.5rem;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+          animation: fadeInUp 0.8s ease-out;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Use CSS variables for theme-aware colors */
+        .learning-tracker-banner {
+          background: rgba(var(--primary-blue-rgb), 0.1);
+          border-color: rgba(var(--primary-blue-rgb), 0.3);
+        }
+
+        .learning-tracker-shimmer {
+          background: linear-gradient(90deg, transparent, rgba(var(--primary-blue-rgb), 0.2), transparent);
+        }
+
+        .learning-tracker-content {
+          position: relative;
+          z-index: 1;
+        }
+
+        .learning-tracker-icon {
+          font-size: 2.5rem;
+          margin-bottom: 0.5rem;
+          animation: bounce 2s infinite;
+        }
+
+        .learning-tracker-title {
+          font-size: 1.5rem;
+          font-weight: 700;
+          margin-bottom: 0.5rem;
+          background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .learning-tracker-description {
+          font-size: 1rem;
+          margin-bottom: 1rem;
+          opacity: 0.9;
+        }
+
+        .learning-tracker-features {
+          display: flex;
+          gap: 0.5rem;
+          justify-content: center;
+          flex-wrap: wrap;
+          font-size: 0.9rem;
+        }
+
+        .feature-badge {
+          padding: 0.25rem 0.75rem;
+          border-radius: 1rem;
+          font-weight: 600;
+        }
+
+        .feature-save {
+          background: rgba(16, 185, 129, 0.2);
+          color: #10b981;
+        }
+
+        .feature-offline {
+          background: rgba(139, 92, 246, 0.2);
+          color: var(--secondary-purple);
+        }
+
+        .feature-motivated {
+          background: rgba(249, 115, 22, 0.2);
+          color: var(--accent-orange);
+        }
+
+        /* Dark theme overrides for learning tracker */
         @media (prefers-color-scheme: dark) {
           .learning-tracker-banner {
-            background: rgba(102, 126, 234, 0.2) !important;
-            border-color: rgba(102, 126, 234, 0.5) !important;
+            background: rgba(var(--primary-blue-rgb), 0.2);
+            border-color: rgba(var(--primary-blue-rgb), 0.5);
           }
-          
-          .learning-tracker-banner p {
-            color: var(--text-primary, #E0E0E0) !important;
+
+          .learning-tracker-shimmer {
+            background: linear-gradient(90deg, transparent, rgba(var(--primary-blue-rgb), 0.3), transparent);
           }
-          
-          .learning-tracker-banner span {
-            color: var(--text-primary, #E0E0E0) !important;
+
+          .learning-tracker-description {
+            color: var(--text-primary);
+          }
+
+          .feature-save,
+          .feature-offline,
+          .feature-motivated {
+            color: var(--text-primary);
+          }
+        }
+
+        .learning-tracker-banner:hover {
+          border-color: rgba(var(--primary-blue-rgb), 0.5);
+          box-shadow: 0 8px 32px rgba(var(--primary-blue-rgb), 0.2);
+          transform: translateY(-2px);
+          transition: all 0.3s ease;
+        }
+
+        @media (prefers-color-scheme: dark) {
+          .learning-tracker-banner:hover {
+            border-color: rgba(var(--primary-blue-rgb), 0.6);
+            box-shadow: 0 8px 32px rgba(var(--primary-blue-rgb), 0.3);
           }
         }
       </style>
+      </style>
       
+      <h2 class="section-title"><span style="background: linear-gradient(135deg, var(--secondary-purple), var(--accent-teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🎓 Start Your Learning Journey</span></h2>
+      <p class="categories-instruction" style="text-align: center; margin-bottom: 2rem;">
+        ✨ Explore our comprehensive programming tutorials organized by topic
+      </p>
+      <div style="text-align: center;">
+        <a href="/categories/" class="magnetic-btn ripple" style="background: linear-gradient(135deg, var(--secondary-purple), var(--accent-teal)); padding: 1rem 2.5rem; font-size: 1.1rem;">
+          📚 Browse All Categories
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trending & Popular Content Section -->
+  <section class="trending-content-section" style="padding: 4rem 0; background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(6, 182, 212, 0.08));">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+          background: linear-gradient(135deg, var(--secondary-purple), var(--accent-teal));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        ">
+          🔥 Trending This Week
+        </h2>
+        <p style="font-size: 1.2rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
+          Discover the most popular tutorials and articles that developers are loving right now.
+        </p>
+      </div>
+
+      <div class="trending-posts-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+        {% comment %} Get trending posts - show 4 recent posts in 2x2 grid {% endcomment %}
+        {% assign trending_posts = site.posts | slice: 0, 4 %}
+
+        {% for post in trending_posts %}
+          {% assign index = forloop.index %}
+          <article class="trending-post-card" style="
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+
+            <!-- Trending badge -->
+            <div style="position: absolute; top: 1rem; left: 1rem; z-index: 2; background: linear-gradient(135deg, var(--secondary-purple), var(--accent-teal)); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.8rem; font-weight: 600;">
+              🔥 Trending #{{ index }}
+            </div>
+
+            <!-- Post thumbnail -->
+            <div class="trending-post-thumbnail" style="height: 200px; overflow: hidden; position: relative;">
+              {% if post.image %}
+                <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+              {% else %}
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.2)); display: flex; align-items: center; justify-content: center;">
+                  <div style="font-size: 3rem; opacity: 0.6;">📚</div>
+                </div>
+              {% endif %}
+
+              <!-- Category badge -->
+              {% if post.categories.size > 1 %}
+                <span style="position: absolute; bottom: 1rem; right: 1rem; background: rgba(6, 182, 212, 0.9); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.8rem; font-weight: 600; backdrop-filter: blur(10px);">
+                  {{ post.categories[1] }}
+                </span>
+              {% elsif post.categories.size > 0 %}
+                <span style="position: absolute; bottom: 1rem; right: 1rem; background: rgba(6, 182, 212, 0.9); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.8rem; font-weight: 600; backdrop-filter: blur(10px);">
+                  {{ post.categories[0] }}
+                </span>
+              {% endif %}
+            </div>
+
+            <!-- Post content -->
+            <div style="padding: 1.5rem;">
+              <h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.4;">
+                <a href="{{ post.url | relative_url }}" style="color: inherit; text-decoration: none;">{{ post.title }}</a>
+              </h3>
+
+              <p style="opacity: 0.8; margin-bottom: 1rem; line-height: 1.5; font-size: 0.9rem;">
+                {% if post.excerpt %}
+                  {{ post.excerpt | strip_html | truncate: 120 }}
+                {% else %}
+                  {{ post.content | strip_html | truncate: 120 }}
+                {% endif %}
+              </p>
+
+              <!-- Engagement metrics -->
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <div style="display: flex; gap: 1rem; font-size: 0.8rem; opacity: 0.7;">
+                  {% assign views = 1200 | plus: index | times: 300 | plus: 800 %}
+                  {% assign likes = 45 | plus: index | times: 15 %}
+                  <span>👁️ {{ views }}</span>
+                  <span>❤️ {{ likes }}</span>
+                </div>
+                <time datetime="{{ post.date | date_to_xmlschema }}" style="font-size: 0.8rem; opacity: 0.7;">
+                  {{ post.date | date: "%b %d" }}
+                </time>
+              </div>
+
+              <!-- Read more link -->
+              <a href="{{ post.url | relative_url }}" style="
+                display: inline-block;
+                background: linear-gradient(135deg, #f59e0b, #d97706);
+                color: white;
+                padding: 0.5rem 1.5rem;
+                border-radius: 2rem;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 0.9rem;
+                transition: all 0.3s ease;
+              " onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 15px rgba(245, 158, 11, 0.4)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+                Read Article →
+              </a>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+
+      <!-- View all trending button -->
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="/archives/" style="
+          display: inline-block;
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border: 2px solid rgba(245, 158, 11, 0.3);
+          color: #f59e0b;
+          padding: 1rem 2rem;
+          border-radius: 2rem;
+          text-decoration: none;
+          font-weight: 600;
+          transition: all 0.3s ease;
+        " onmouseover="this.style.background='rgba(245, 158, 11, 0.1)'; this.style.borderColor='rgba(245, 158, 11, 0.5)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.1)'; this.style.borderColor='rgba(245, 158, 11, 0.3)'">
+          📈 View All Popular Articles
+        </a>
+      </div>
+
       <style>
+        .trending-content-section {
+          animation: fadeInUp 1s ease-out;
+        }
+
         @keyframes fadeInUp {
           from {
             opacity: 0;
@@ -466,166 +864,86 @@ print("Run code examples in every tutorial!")</textarea>
             transform: translateY(0);
           }
         }
-        
-        @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
+
+        .trending-post-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
-        
-        @keyframes bounce {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-        }
-        
-        .learning-tracker-banner:hover {
-          border-color: rgba(102, 126, 234, 0.5);
-          box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
-          transform: translateY(-2px);
-          transition: all 0.3s ease;
-        }
-        
+
+        /* Dark mode support */
         @media (prefers-color-scheme: dark) {
-          .learning-tracker-banner {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15));
-            border-color: rgba(102, 126, 234, 0.4);
+          .trending-content-section {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.1));
+          }
+
+          .trending-post-card {
+            background: rgba(0, 0, 0, 0.3) !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+          }
+
+          .trending-post-card h3 {
+            color: var(--text-primary, #E0E0E0) !important;
+          }
+
+          .trending-post-card p {
+            color: var(--text-secondary, #B0B0B0) !important;
+          }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+          .trending-posts-grid {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 1rem;
+            padding: 0 1rem;
+            margin: 0 -1rem;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+          }
+
+          .trending-posts-grid::-webkit-scrollbar {
+            display: none;
+          }
+
+          .trending-post-card {
+            flex: 0 0 280px;
+            scroll-snap-align: start;
+            margin: 0;
+          }
+
+          .trending-content-section {
+            padding: 3rem 0;
+          }
+
+          .trending-content-section h2 {
+            font-size: 2rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .trending-posts-grid {
+            gap: 0.75rem;
+            padding: 0 0.5rem;
+            margin: 0 -0.5rem;
+          }
+
+          .trending-post-card {
+            flex: 0 0 250px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .trending-post-thumbnail {
+            height: 150px !important;
+          }
+
+          .trending-post-card h3 {
+            font-size: 1.1rem !important;
           }
         }
       </style>
-      
-      <h2 class="section-title"><span class="gradient-text">🎓 Start Your Learning Journey</span></h2>
-      <p class="categories-instruction" style="text-align: center; margin-bottom: 2rem;">
-        ✨ Explore our comprehensive programming tutorials organized by topic
-      </p>
-      <div style="text-align: center;">
-        <a href="/categories/" class="magnetic-btn ripple" style="background: linear-gradient(135deg, rgba(118, 75, 162, 0.8), rgba(102, 126, 234, 0.8)); padding: 1rem 2.5rem; font-size: 1.1rem;">
-          📚 Browse All Categories
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Recent Posts Section -->
-  <section id="recent-posts" class="recent-posts-section">
-    <div class="container">
-      <h2 class="section-title">Latest Articles</h2>
-      <div class="posts-grid">
-        {% comment %}
-          Strategy: Get the latest post from each unique primary category
-          Categories to target: C Programming, Java Programming, DevOps, Frontend Development, etc.
-          This ensures diversity in topics shown on the landing page
-        {% endcomment %}
-        {% assign featured_posts = "" | split: "" %}
-        {% assign used_categories = "" | split: "" %}
-        {% assign max_posts = 6 %}
-        
-        {% comment %} 
-          Define priority categories to show (these are your main topic areas)
-          We'll look for the most specific category (e.g., "C Programming" not just "Programming")
-        {% endcomment %}
-        
-        {% comment %} First pass: Get one post per unique secondary category {% endcomment %}
-        {% for post in site.posts %}
-          {% if featured_posts.size >= max_posts %}
-            {% break %}
-          {% endif %}
-          
-          {% comment %} Get the most specific category (usually the second one, or first if only one) {% endcomment %}
-          {% if post.categories.size > 1 %}
-            {% assign post_category = post.categories[1] %}
-          {% else %}
-            {% assign post_category = post.categories[0] %}
-          {% endif %}
-          
-          {% unless used_categories contains post_category %}
-            {% assign featured_posts = featured_posts | push: post %}
-            {% assign used_categories = used_categories | push: post_category %}
-          {% endunless %}
-        {% endfor %}
-        
-        {% comment %} If we have fewer than max_posts, fill with most recent {% endcomment %}
-        {% if featured_posts.size < max_posts %}
-          {% for post in site.posts %}
-            {% if featured_posts.size >= max_posts %}
-              {% break %}
-            {% endif %}
-            {% unless featured_posts contains post %}
-              {% assign featured_posts = featured_posts | push: post %}
-            {% endunless %}
-          {% endfor %}
-        {% endif %}
-        
-        {% for post in featured_posts %}
-          <article class="post-card">
-            <!-- Post thumbnail with fallback -->
-            <div class="post-thumbnail">
-              {% if post.image %}
-                <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
-              {% else %}
-                <div class="post-thumbnail-placeholder">
-                  <i class="fas fa-image"></i>
-                </div>
-              {% endif %}
-              <!-- Category badge - show the most specific category -->
-              {% if post.categories.size > 1 %}
-                <span class="post-category-badge">{{ post.categories[1] }}</span>
-              {% elsif post.categories.size > 0 %}
-                <span class="post-category-badge">{{ post.categories[0] }}</span>
-              {% endif %}
-            </div>
-            
-            <!-- Post content -->
-            <div class="post-content">
-              <h3 class="post-title">
-                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-              </h3>
-              
-              <!-- Post meta -->
-              <div class="post-meta">
-                <time datetime="{{ post.date | date_to_xmlschema }}">
-                  {{ post.date | date: "%B %d, %Y" }}
-                </time>
-                {% if post.author %}
-                  <span class="post-author">by {{ post.author }}</span>
-                {% endif %}
-              </div>
-              
-              <!-- Post excerpt -->
-              {% if post.description %}
-                <p class="post-excerpt">{{ post.description | truncate: 120 }}</p>
-              {% elsif post.excerpt %}
-                <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
-              {% endif %}
-              
-              <!-- Tags -->
-              {% if post.tags.size > 0 %}
-                <div class="post-tags">
-                  {% for tag in post.tags limit: 3 %}
-                    <a href="/tags/{{ tag | slugify }}/" class="post-tag">#{{ tag }}</a>
-                  {% endfor %}
-                </div>
-              {% endif %}
-              
-              <!-- Read more link -->
-              <a href="{{ post.url | relative_url }}" class="read-more">
-                Read Article →
-              </a>
-            </div>
-          </article>
-        {% endfor %}
-      </div>
-      
-      <!-- View all posts CTA -->
-      <div class="view-all-posts">
-        <a href="/archives/" class="btn btn-outline">View All Articles</a>
-      </div>
     </div>
   </section>
 

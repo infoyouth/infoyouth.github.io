@@ -33,23 +33,37 @@ img[alt="avatar"] {
 }
 
 /* ============================================
-   CSS VARIABLES
+   CSS VARIABLES - UNIFIED THEME PALETTE
    ============================================ */
 
 :root {
-  --primary-color: #4CAF50;
-  --primary-dark: #388E3C;
-  --primary-light: #81C784;
-  --secondary-color: #2196F3;
-  --secondary-dark: #1976D2;
-  --secondary-light: #64B5F6;
-  --accent-color: #FF5722;
-  --accent-dark: #E64A19;
-  --text-primary: #212121;
-  --text-secondary: #757575;
-  --text-light: #FFFFFF;
-  --bg-light: #FAFAFA;
-  --bg-white: #FFFFFF;
+  /* Unified Brand Colors - Light Theme */
+  --primary-blue: #3B82F6;      /* Bright blue - trust, technology */
+  --primary-blue-rgb: 59, 130, 246;
+  --secondary-purple: #8B5CF6;  /* Electric purple - innovation */
+  --secondary-purple-rgb: 139, 92, 246;
+  --accent-teal: #06B6D4;       /* Modern teal - growth, learning */
+  --accent-teal-rgb: 6, 182, 212;
+  --accent-orange: #F59E0B;     /* Warm orange - highlights */
+  --accent-orange-rgb: 245, 158, 11;
+
+  /* Background colors for glass effects */
+  --bg-white-rgb: 255, 255, 255;
+
+  /* Legacy variables for compatibility */
+  --primary-color: var(--primary-blue);
+  --primary-dark: #2563EB;      /* Darker blue */
+  --primary-light: #60A5FA;     /* Lighter blue */
+  --secondary-color: var(--secondary-purple);
+  --secondary-dark: #7C3AED;    /* Darker purple */
+  --secondary-light: #A78BFA;   /* Lighter purple */
+  --accent-color: var(--accent-teal);
+  --accent-dark: #0891B2;       /* Darker teal */
+  --text-primary: #1F2937;      /* Dark gray */
+  --text-secondary: #6B7280;    /* Medium gray */
+  --text-light: #FFFFFF;        /* White */
+  --bg-light: #F9FAFB;          /* Light gray background */
+  --bg-white: #FFFFFF;          /* Pure white */
   --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
   --shadow-md: 0 4px 8px rgba(0,0,0,0.12);
   --shadow-lg: 0 8px 16px rgba(0,0,0,0.15);
@@ -59,42 +73,63 @@ img[alt="avatar"] {
   --max-width: 1200px;
 }
 
-/* Dark mode variables */
+/* Dark mode variables - Unified Theme */
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-primary: #E0E0E0;
-    --text-secondary: #B0B0B0;
-    --bg-light: #1A1A1A;
-    --bg-white: #2D2D2D;
-    --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
-    --shadow-md: 0 4px 8px rgba(0,0,0,0.4);
-    --shadow-lg: 0 8px 16px rgba(0,0,0,0.5);
-    --shadow-xl: 0 12px 24px rgba(0,0,0,0.6);
+    /* Dark Theme Variants - Slightly deeper for better contrast */
+    --primary-blue: #2563EB;      /* Darker blue for dark backgrounds */
+    --primary-blue-rgb: 37, 99, 235;
+    --secondary-purple: #7C3AED;  /* Muted purple for dark harmony */
+    --secondary-purple-rgb: 124, 58, 237;
+    --accent-teal: #06B6D4;       /* Keep same - works well on dark */
+    --accent-teal-rgb: 6, 182, 212;
+    --accent-orange: #F59E0B;     /* Keep same - excellent on dark */
+    --accent-orange-rgb: 245, 158, 11;
+
+    /* Dark background colors for glass effects */
+    --bg-white-rgb: 31, 41, 55;
+
+    /* Legacy dark theme variables */
+    --primary-color: var(--primary-blue);
+    --primary-dark: #1D4ED8;      /* Even darker blue */
+    --primary-light: #3B82F6;     /* Lighter blue for accents */
+    --secondary-color: var(--secondary-purple);
+    --secondary-dark: #6D28D9;    /* Darker purple */
+    --secondary-light: #8B5CF6;   /* Lighter purple for accents */
+    --accent-color: var(--accent-teal);
+    --accent-dark: #0891B2;       /* Keep same darker teal */
+
+    /* Text and background colors */
+    --text-primary: #F3F4F6;      /* Light gray text */
+    --text-secondary: #D1D5DB;    /* Medium light gray */
+    --text-light: #FFFFFF;        /* Pure white */
+    --bg-light: #111827;          /* Dark blue-gray background */
+    --bg-white: #1F2937;          /* Darker blue-gray for cards */
+
+    /* Enhanced shadows for dark theme */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.4);
+    --shadow-md: 0 4px 8px rgba(0,0,0,0.5);
+    --shadow-lg: 0 8px 16px rgba(0,0,0,0.6);
+    --shadow-xl: 0 12px 24px rgba(0,0,0,0.7);
   }
 
-  /* Adjust hero gradient for dark mode */
+  /* Dark theme hero gradient */
   .hero-section {
-    background: linear-gradient(135deg, 
-      rgba(102, 126, 234, 0.3), 
-      rgba(118, 75, 162, 0.3));
+    background: linear-gradient(135deg,
+      rgba(37, 99, 235, 0.3),
+      rgba(124, 58, 237, 0.3));
   }
 
-  /* Glass cards need darker base in dark mode */
+  /* Dark theme glass cards */
   .glass-card {
-    background: rgba(0, 0, 0, 0.4) !important;
+    background: rgba(31, 41, 55, 0.6) !important;
     border-color: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(20px) saturate(180%);
   }
 
   .glass-card:hover {
-    background: rgba(0, 0, 0, 0.5) !important;
-    border-color: rgba(255, 255, 255, 0.2) !important;
-  }
-
-  /* Ensure text remains visible in dark mode */
-  .glass-card div:first-child,
-  .glass-card div:last-child {
-    color: #E0E0E0 !important;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+    background: rgba(31, 41, 55, 0.7) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
   }
 
   /* Category cards - dark mode glassmorphism */
@@ -1861,5 +1896,136 @@ button:focus {
   
   .category-card-enhanced .category-description {
     color: #94a3b8 !important;
+  }
+}
+
+/* ==========================================================================
+   Enhanced Sidebar Icons - More Colorful & Distinctive
+   ========================================================================== */
+
+/* Sidebar navigation icons - make them more colorful and clear */
+.sidebar .nav-link .fa-home {
+  color: var(--primary-blue, #3B82F6) !important;
+  filter: drop-shadow(0 0 2px rgba(59, 130, 246, 0.3));
+}
+
+.sidebar .nav-link .fa-lightbulb {
+  color: var(--accent-teal, #06B6D4) !important;
+  filter: drop-shadow(0 0 2px rgba(6, 182, 212, 0.3));
+}
+
+.sidebar .nav-link .fa-stream {
+  color: var(--secondary-purple, #8B5CF6) !important;
+  filter: drop-shadow(0 0 2px rgba(139, 92, 246, 0.3));
+}
+
+.sidebar .nav-link .fa-tags {
+  color: var(--accent-orange, #F59E0B) !important;
+  filter: drop-shadow(0 0 2px rgba(245, 158, 11, 0.3));
+}
+
+.sidebar .nav-link .fa-archive {
+  color: #10B981 !important; /* Emerald green */
+  filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.3));
+}
+
+.sidebar .nav-link .fa-envelope {
+  color: #EF4444 !important; /* Red */
+  filter: drop-shadow(0 0 2px rgba(239, 68, 68, 0.3));
+}
+
+/* Social media icons in sidebar bottom */
+.sidebar .sidebar-bottom .fa-github {
+  color: #333 !important;
+  background: linear-gradient(45deg, #333, #666);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 3px rgba(51, 51, 51, 0.5));
+}
+
+.sidebar .sidebar-bottom .fa-x-twitter {
+  color: #000 !important;
+  background: linear-gradient(45deg, #000, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5));
+}
+
+.sidebar .sidebar-bottom .fa-envelope {
+  color: #EA4335 !important; /* Gmail red */
+  filter: drop-shadow(0 0 2px rgba(234, 67, 53, 0.4));
+}
+
+/* RSS Feed Icon - Make it more distinctive */
+.sidebar .sidebar-bottom .fa-rss {
+  color: #FF6B35 !important; /* Vibrant orange */
+  filter: drop-shadow(0 0 4px rgba(255, 107, 53, 0.6));
+  animation: pulse-rss 2s infinite;
+}
+
+/* Theme toggle icon */
+.sidebar .sidebar-bottom .fa-adjust {
+  color: var(--primary-blue, #3B82F6) !important;
+  filter: drop-shadow(0 0 2px rgba(59, 130, 246, 0.4));
+}
+
+/* Hover effects for better interactivity */
+.sidebar .nav-link:hover .fas {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+.sidebar .sidebar-bottom a:hover .fab,
+.sidebar .sidebar-bottom a:hover .fas {
+  transform: scale(1.15);
+  transition: transform 0.2s ease;
+}
+
+/* Pulse animation for RSS icon */
+@keyframes pulse-rss {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Dark mode adjustments for sidebar icons */
+@media (prefers-color-scheme: dark) {
+  .sidebar .nav-link .fa-home {
+    color: #60A5FA !important; /* Lighter blue for dark mode */
+  }
+  
+  .sidebar .nav-link .fa-lightbulb {
+    color: #22D3EE !important; /* Lighter teal */
+  }
+  
+  .sidebar .nav-link .fa-stream {
+    color: #A78BFA !important; /* Lighter purple */
+  }
+  
+  .sidebar .nav-link .fa-tags {
+    color: #FBBF24 !important; /* Lighter orange */
+  }
+  
+  .sidebar .nav-link .fa-archive {
+    color: #34D399 !important; /* Lighter green */
+  }
+  
+  .sidebar .nav-link .fa-envelope {
+    color: #F87171 !important; /* Lighter red */
+  }
+  
+  .sidebar .sidebar-bottom .fa-rss {
+    color: #FF8C42 !important; /* Lighter orange for dark mode */
+  }
+  
+  .sidebar .sidebar-bottom .fa-envelope {
+    color: #F87171 !important; /* Lighter Gmail red */
   }
 }
