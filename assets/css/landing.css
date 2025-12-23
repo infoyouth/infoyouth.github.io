@@ -1900,8 +1900,204 @@ button:focus {
 }
 
 /* ==========================================================================
-   Enhanced Sidebar Icons - More Colorful & Distinctive
+   MOBILE FIXES - Code Playground, Trending Cards, Testimonials
    ========================================================================== */
+
+/* ===== MOBILE: Code Playground Button Clickability ===== */
+@media (max-width: 768px) {
+  .playground-button {
+    position: relative !important;
+    z-index: 10 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+    cursor: pointer !important;
+    min-height: 44px !important; /* iOS touch target minimum */
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* Ensure playground container doesn't interfere */
+  #playground-container {
+    position: relative !important;
+    z-index: 5 !important;
+  }
+  
+  /* Fix any overlay issues */
+  .interactive-playground-section::before,
+  .interactive-playground-section::after {
+    pointer-events: none !important;
+  }
+}
+
+/* ===== MOBILE: Trending Cards Horizontal Scroll ===== */
+@media (max-width: 768px) {
+  .trending-posts-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    grid-template-columns: none !important;
+    gap: 1rem !important;
+    overflow-x: auto !important;
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: var(--primary-blue, #3B82F6) transparent !important;
+    padding: 1rem 0.5rem !important;
+    margin: 0 -0.5rem !important;
+  }
+  
+  .trending-post-card {
+    flex: 0 0 280px !important;
+    min-width: 280px !important;
+    margin-right: 1rem !important;
+  }
+  
+  /* Custom scrollbar for trending cards */
+  .trending-posts-grid::-webkit-scrollbar {
+    height: 6px !important;
+  }
+  
+  .trending-posts-grid::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05) !important;
+    border-radius: 10px !important;
+  }
+  
+  .trending-posts-grid::-webkit-scrollbar-thumb {
+    background: var(--primary-blue, #3B82F6) !important;
+    border-radius: 10px !important;
+  }
+  
+  .trending-posts-grid::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-purple, #8B5CF6) !important;
+  }
+}
+
+/* ===== MOBILE: Testimonials Text Wrapping & Animation Fixes ===== */
+@media (max-width: 768px) {
+  .testimonial {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    hyphens: auto !important;
+    min-width: 280px !important;
+    max-width: 90vw !important;
+    padding: 1rem 1.5rem !important;
+  }
+  
+  .testimonial-text {
+    white-space: normal !important;
+    word-break: break-word !important;
+    line-height: 1.4 !important;
+    max-width: 100% !important;
+  }
+  
+  .testimonial strong {
+    display: block !important;
+    margin-bottom: 0.25rem !important;
+    word-break: break-word !important;
+  }
+  
+  /* Fix animation overlaps */
+  .testimonial-1,
+  .testimonial-2,
+  .testimonial-3 {
+    will-change: opacity !important;
+    backface-visibility: hidden !important;
+  }
+  
+  /* Ensure smooth transitions without overlap */
+  @keyframes fadeTestimonial1 {
+    0% { opacity: 1; transform: translateX(0); }
+    25% { opacity: 1; transform: translateX(0); }
+    33.33% { opacity: 0; transform: translateX(-10px); }
+    100% { opacity: 0; transform: translateX(-10px); }
+  }
+
+  @keyframes fadeTestimonial2 {
+    0% { opacity: 0; transform: translateX(10px); }
+    33.33% { opacity: 1; transform: translateX(0); }
+    58.33% { opacity: 1; transform: translateX(0); }
+    66.66% { opacity: 0; transform: translateX(-10px); }
+    100% { opacity: 0; transform: translateX(-10px); }
+  }
+
+  @keyframes fadeTestimonial3 {
+    0% { opacity: 0; transform: translateX(10px); }
+    66.66% { opacity: 1; transform: translateX(0); }
+    91.66% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(-10px); }
+  }
+}
+
+/* ===== MOBILE: Landing Text Positioning Fixes ===== */
+@media (max-width: 768px) {
+  /* Fix hero text overflow */
+  .hero-title {
+    font-size: 2.2rem !important;
+    line-height: 1.1 !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+  }
+  
+  .hero-tagline {
+    font-size: 1.1rem !important;
+    line-height: 1.3 !important;
+    word-break: break-word !important;
+  }
+  
+  .hero-description {
+    font-size: 0.95rem !important;
+    line-height: 1.4 !important;
+    word-break: break-word !important;
+    max-width: 100% !important;
+  }
+  
+  /* Fix floating stats cards */
+  .float-delayed {
+    flex-wrap: wrap !important;
+    gap: 0.75rem !important;
+    justify-content: center !important;
+  }
+  
+  .float-delayed .glass-card {
+    flex: 1 1 120px !important;
+    max-width: 140px !important;
+    min-width: 100px !important;
+  }
+  
+  /* Ensure proper text rendering */
+  .hero-section * {
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+  }
+}
+
+/* ===== MOBILE: Additional Touch & Accessibility Improvements ===== */
+@media (max-width: 768px) {
+  /* Improve touch targets */
+  .magnetic-btn,
+  .btn,
+  .playground-button {
+    min-height: 44px !important;
+    min-width: 44px !important;
+    padding: 12px 24px !important;
+  }
+  
+  /* Fix any potential text selection issues */
+  .testimonial {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+  }
+  
+  /* Ensure proper viewport handling */
+  .landing-page {
+    -webkit-text-size-adjust: 100% !important;
+    -ms-text-size-adjust: 100% !important;
+  }
+}
 
 /* Sidebar navigation icons - make them more colorful and clear */
 .sidebar .nav-link .fa-home {

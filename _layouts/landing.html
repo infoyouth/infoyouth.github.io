@@ -216,31 +216,64 @@ layout: default
           }
 
           .testimonial {
+            white-space: normal !important;
+            word-wrap: break-word !important;
+            hyphens: auto !important;
             min-width: 280px !important;
+            max-width: 90vw !important;
             padding: 0.8rem 1.5rem !important;
             font-size: 0.8rem !important;
           }
 
           .testimonial strong {
             font-size: 0.85rem !important;
+            display: block !important;
+            margin-bottom: 0.25rem !important;
+            word-break: break-word !important;
+          }
+
+          .testimonial-text {
+            white-space: normal !important;
+            word-break: break-word !important;
+            line-height: 1.4 !important;
+          }
+
+          /* Fix animation overlaps with subtle slide */
+          .testimonial-1 {
+            animation: fadeSlideTestimonial1 12s ease-in-out infinite;
+          }
+
+          .testimonial-2 {
+            animation: fadeSlideTestimonial2 12s ease-in-out infinite;
+          }
+
+          .testimonial-3 {
+            animation: fadeSlideTestimonial3 12s ease-in-out infinite;
           }
         }
 
-        @media (max-width: 480px) {
-          .testimonials-preview {
-            height: 120px;
+        /* Mobile-specific animations with slide effect */
+        @media (max-width: 768px) {
+          @keyframes fadeSlideTestimonial1 {
+            0% { opacity: 1; transform: translateX(0); }
+            25% { opacity: 1; transform: translateX(0); }
+            33.33% { opacity: 0; transform: translateX(-20px); }
+            100% { opacity: 0; transform: translateX(-20px); }
           }
 
-          .testimonial {
-            min-width: 250px !important;
-            padding: 0.6rem 1.2rem !important;
-            flex-direction: column !important;
-            text-align: center !important;
-            gap: 0.5rem !important;
+          @keyframes fadeSlideTestimonial2 {
+            0% { opacity: 0; transform: translateX(20px); }
+            33.33% { opacity: 1; transform: translateX(0); }
+            58.33% { opacity: 1; transform: translateX(0); }
+            66.66% { opacity: 0; transform: translateX(-20px); }
+            100% { opacity: 0; transform: translateX(-20px); }
           }
 
-          .testimonial > div:last-child {
-            font-size: 0.75rem !important;
+          @keyframes fadeSlideTestimonial3 {
+            0% { opacity: 0; transform: translateX(20px); }
+            66.66% { opacity: 1; transform: translateX(0); }
+            91.66% { opacity: 1; transform: translateX(0); }
+            100% { opacity: 0; transform: translateX(-20px); }
           }
         }
       </style>
