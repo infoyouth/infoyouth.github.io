@@ -48,8 +48,8 @@
 if (!window.playgroundInitializerLoaded) {
   window.playgroundInitializerLoaded = true;
   
-  // Send code to a specific iframe
-  function sendCodeToIframe(iframe) {
+  // Send code to a specific iframe with retry logic
+  function sendCodeToIframe(iframe, retryCount = 0) {
     var language = iframe.getAttribute('data-language');
     var initialized = iframe.getAttribute('data-initialized');
     
@@ -61,7 +61,7 @@ if (!window.playgroundInitializerLoaded) {
     // Get code from script tag (stored as JSON)
     var codeScript = iframe.previousElementSibling;
     if (!codeScript || codeScript.type !== 'application/json') {
-      console.error('Playground code script tag not found');
+      console.error('Playground code script tag not found for', language);
       return;
     }
     
@@ -69,12 +69,12 @@ if (!window.playgroundInitializerLoaded) {
     try {
       code = JSON.parse(codeScript.textContent);
     } catch (e) {
-      console.error('Failed to parse playground code JSON:', e);
+      console.error('Failed to parse playground code JSON for', language, ':', e);
       return;
     }
     
     if (!code || !language) {
-      console.warn('Playground missing code or language');
+      console.warn('Playground missing code or language for', language);
       return;
     }
     
@@ -86,55 +86,123 @@ if (!window.playgroundInitializerLoaded) {
     
     // Send code to iframe
     try {
-      iframe.contentWindow.postMessage({
+      var message = {
         eventType: 'populateCode',
         language: language,
         files: [{
           name: 'main.' + fileExtension,
           content: code
         }]
-      }, '*');
+      };
+      
+      iframe.contentWindow.postMessage(message, '*');
       iframe.setAttribute('data-initialized', 'true');
-      console.log('✓ Populated playground (' + language + ')');
+      console.log('✓ Successfully populated playground (' + language + ') after', retryCount, 'retries');
     } catch (e) {
-      console.error('✗ Failed to populate playground:', e);
+      console.error('✗ Failed to populate playground for', language, ':', e);
+      
+      // Retry with exponential backoff (up to 3 retries)
+      if (retryCount < 3) {
+        var delay = Math.pow(2, retryCount) * 1000; // 1s, 2s, 4s
+        console.log('🔄 Retrying playground population for', language, 'in', delay, 'ms (attempt', retryCount + 1, ')');
+        setTimeout(function() {
+          sendCodeToIframe(iframe, retryCount + 1);
+        }, delay);
+      } else {
+        console.error('❌ Giving up on playground population for', language, 'after 3 retries');
+      }
+    }
+  }
+  
+  // Check if iframe is ready to receive messages
+  function isIframeReady(iframe) {
+    try {
+      // Try to access iframe content to check if it's loaded
+      return iframe.contentWindow && iframe.contentWindow.postMessage;
+    } catch (e) {
+      return false;
     }
   }
   
   // Initialize playgrounds - attach listeners to details elements
   function initPlaygrounds() {
     var playgrounds = document.querySelectorAll('.code-playground');
-    console.log('Found ' + playgrounds.length + ' playground(s)');
+    console.log('🎮 Initializing', playgrounds.length, 'code playground(s)');
     
-    playgrounds.forEach(function(details) {
+    playgrounds.forEach(function(details, index) {
       var iframe = details.querySelector('.onecompiler-iframe');
-      if (!iframe) return;
+      if (!iframe) {
+        console.warn('No iframe found for playground', index);
+        return;
+      }
+      
+      var language = iframe.getAttribute('data-language');
+      console.log('Setting up playground for', language);
+      
+      // Listen for iframe load events
+      iframe.addEventListener('load', function() {
+        console.log('📦 Iframe loaded for', language, '- checking readiness...');
+        
+        // Wait a bit more for OneCompiler app to initialize
+        setTimeout(function() {
+          if (isIframeReady(iframe)) {
+            console.log('✅ Iframe ready for', language, '- sending code...');
+            sendCodeToIframe(iframe);
+          } else {
+            console.warn('⚠️ Iframe not ready for', language, '- will retry on toggle');
+          }
+        }, 500);
+      });
       
       // Listen for when details is opened
       details.addEventListener('toggle', function() {
         if (details.open) {
-          // Wait a bit for iframe to be visible and loaded
-          setTimeout(function() {
+          console.log('🔓 Playground opened for', language);
+          
+          // If iframe is already loaded and ready, send code immediately
+          if (isIframeReady(iframe) && iframe.getAttribute('data-initialized') !== 'true') {
+            console.log('🚀 Sending code immediately for', language);
             sendCodeToIframe(iframe);
-          }, 1000);
+          } else {
+            // Otherwise, wait for iframe to be ready (with longer delay for production)
+            console.log('⏳ Waiting for iframe readiness for', language);
+            setTimeout(function() {
+              if (isIframeReady(iframe)) {
+                sendCodeToIframe(iframe);
+              } else {
+                console.warn('Iframe still not ready for', language, '- will retry...');
+                // Try again with longer delay
+                setTimeout(function() {
+                  sendCodeToIframe(iframe);
+                }, 2000);
+              }
+            }, 1500); // Increased from 1000ms
+          }
         }
       });
       
-      // If already open, initialize immediately
+      // If already open, initialize immediately (with longer delay)
       if (details.open) {
+        console.log('Playground already open for', language, '- initializing...');
         setTimeout(function() {
-          sendCodeToIframe(iframe);
-        }, 1500);
+          if (isIframeReady(iframe)) {
+            sendCodeToIframe(iframe);
+          }
+        }, 2000); // Increased from 1500ms
       }
     });
   }
   
-  // Run on DOM ready and page load
+  // Run on DOM ready and page load with staggered initialization
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPlaygrounds);
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(initPlaygrounds, 100);
+    });
   } else {
-    initPlaygrounds();
+    setTimeout(initPlaygrounds, 100);
   }
+  
+  // Additional initialization on window load
   window.addEventListener('load', function() {
     setTimeout(initPlaygrounds, 500);
   });
