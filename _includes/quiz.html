@@ -1,0 +1,181 @@
+{% comment %}
+  Interactive Quiz Component - Enhanced
+  Usage: {% include quiz.html question="..." options="A,B,C" correct="0" explanation="..." %}
+{% endcomment %}
+
+{% assign quiz_id = "quiz-" | append: include.question | slugify | append: "-" | append: "now" | date: "%s" | append: "-" | append: 100 | rand %}
+{% assign options = include.options | split: "," %}
+
+<style>
+  .quiz-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    overflow: hidden;
+    background: #fff;
+    transition: transform 0.2s;
+  }
+  .quiz-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    font-weight: 600;
+  }
+  .quiz-option-btn {
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 12px 15px;
+    text-align: left;
+    transition: all 0.2s ease;
+    background: white;
+    color: #4a5568;
+    width: 100%;
+    position: relative;
+  }
+  .quiz-option-btn:hover:not(.disabled) {
+    border-color: #764ba2;
+    background: #f7fafc;
+    transform: translateX(5px);
+  }
+  .quiz-option-btn.correct {
+    border-color: #48bb78;
+    background-color: #f0fff4;
+    color: #2f855a;
+  }
+  .quiz-option-btn.wrong {
+    border-color: #f56565;
+    background-color: #fff5f5;
+    color: #c53030;
+    opacity: 0.7;
+  }
+  .quiz-options {
+    counter-reset: quiz-counter;
+  }
+  .quiz-option-label::before {
+    counter-increment: quiz-counter;
+    content: counter(quiz-counter, upper-alpha) ".";
+  }
+  .quiz-feedback-box {
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 15px;
+    animation: fadeIn 0.5s;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } 100% { transform: translateX(0); } }
+  .shake { animation: shake 0.4s ease-in-out; }
+  details > summary { list-style: none; cursor: pointer; outline: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .quiz-chevron { transform: rotate(180deg); }
+  .quiz-chevron { transition: transform 0.3s ease; }
+</style>
+
+<div class="quiz-card my-5" id="{{ quiz_id }}">
+  <details>
+    <summary class="quiz-header d-flex justify-content-between align-items-center">
+      <span><i class="fas fa-puzzle-piece me-2"></i> {{ include.question }}</span>
+      <i class="fas fa-chevron-down quiz-chevron"></i>
+    </summary>
+    
+    <div class="p-4">
+      <div class="quiz-options d-flex flex-column">
+        {% for option in options %}
+          <button type="button" class="quiz-option-btn" data-index="{{ forloop.index0 }}">
+            <span class="fw-bold me-2 quiz-option-label"></span> {{ option | strip }}
+            <i class="fas fa-check-circle float-end mt-1 d-none icon-correct"></i>
+            <i class="fas fa-times-circle float-end mt-1 d-none icon-wrong"></i>
+          </button>
+        {% endfor %}
+      </div>
+
+      <div class="quiz-feedback-box d-none">
+        <h5 class="feedback-title fw-bold mb-2"></h5>
+        <p class="feedback-msg mb-0"></p>
+        {% if include.explanation %}
+          <div class="explanation-box mt-3 pt-3 border-top">
+            <small class="text-muted text-uppercase fw-bold" style="font-size: 0.7rem;">Explanation</small>
+            <p class="mt-1 mb-0 text-muted small">{{ include.explanation }}</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </details>
+</div>
+
+<script>
+(function() {
+  const container = document.getElementById('{{ quiz_id }}');
+  const buttons = container.querySelectorAll('.quiz-option-btn');
+  const feedbackBox = container.querySelector('.quiz-feedback-box');
+  const feedbackTitle = container.querySelector('.feedback-title');
+  const feedbackMsg = container.querySelector('.feedback-msg');
+  const correctIndex = {{ include.correct }};
+  let attempts = 0;
+  let solved = false;
+
+  const messages = {
+    correct: {
+      first: ["🦄 Legendary!", "🌟 Outstanding!", "🚀 Genius Level!"],
+      second: ["👏 Great job!", "✅ Well done!", "👌 Spot on!"],
+      later: ["👍 You got it!", "🎓 Persistence pays off!", "🧠 Good focus!"]
+    },
+    wrong: ["🌱 Keep growing, try again!", "🤔 Not quite, think again!", "👀 Close, but give it another shot!"]
+  };
+
+  function getRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      if (solved || this.classList.contains('wrong')) return;
+
+      const selectedIndex = parseInt(this.getAttribute('data-index'));
+      attempts++;
+
+      if (selectedIndex === correctIndex) {
+        // Correct Answer
+        solved = true;
+        this.classList.add('correct');
+        this.querySelector('.icon-correct').classList.remove('d-none');
+        
+        // Disable all buttons
+        buttons.forEach(b => b.classList.add('disabled'));
+
+        // Determine Message
+        let title = "";
+        
+        if (attempts === 1) {
+          title = getRandom(messages.correct.first);
+          feedbackBox.style.backgroundColor = "#d1e7dd";
+          feedbackBox.style.color = "#0f5132";
+        } else if (attempts === 2) {
+          title = getRandom(messages.correct.second);
+          feedbackBox.style.backgroundColor = "#d1e7dd";
+          feedbackBox.style.color = "#0f5132";
+        } else {
+          title = getRandom(messages.correct.later);
+          feedbackBox.style.backgroundColor = "#fff3cd";
+          feedbackBox.style.color = "#664d03";
+        }
+
+        feedbackTitle.innerHTML = title;
+        feedbackMsg.innerHTML = "Correct! " + (attempts > 1 ? `It took you ${attempts} attempts.` : "First try!");
+        feedbackBox.classList.remove('d-none');
+
+      } else {
+        // Wrong Answer
+        this.classList.add('wrong');
+        this.querySelector('.icon-wrong').classList.remove('d-none');
+        container.classList.add('shake');
+        setTimeout(() => container.classList.remove('shake'), 500);
+
+        feedbackBox.classList.remove('d-none');
+        feedbackBox.style.backgroundColor = "#f8d7da";
+        feedbackBox.style.color = "#842029";
+        feedbackTitle.innerHTML = "Oops!";
+        feedbackMsg.innerHTML = getRandom(messages.wrong);
+      }
+    });
+  });
+})();
+</script>
