@@ -3,7 +3,7 @@
   Usage: {% include quiz.html question="..." options="A,B,C" correct="0" explanation="..." %}
 {% endcomment %}
 
-{% assign quiz_id = "quiz-" | append: include.question | slugify | append: "-" | append: "now" | date: "%s" | append: "-" | append: 100 | rand %}
+{% assign quiz_id = "quiz-" | append: include.question | slugify %}
 {% assign options = include.options | split: "," %}
 
 <style>
@@ -105,12 +105,17 @@
 
 <script>
 (function() {
-  const container = document.getElementById('{{ quiz_id }}');
+  const quizId = '{{ quiz_id }}';
+  const container = document.getElementById(quizId);
+  if (!container) {
+    console.error('Quiz container not found:', quizId);
+    return;
+  }
   const buttons = container.querySelectorAll('.quiz-option-btn');
   const feedbackBox = container.querySelector('.quiz-feedback-box');
   const feedbackTitle = container.querySelector('.feedback-title');
   const feedbackMsg = container.querySelector('.feedback-msg');
-  const correctIndex = {{ include.correct }};
+  const correctIndex = {{ include.correct | default: 0 }};
   let attempts = 0;
   let solved = false;
 
