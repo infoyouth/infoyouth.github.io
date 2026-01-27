@@ -198,7 +198,7 @@ jobs:
       - name: 🚀 Open Pull Request
         if: env.CONTENT_GENERATED == 'true'
         id: create_pull_request
-        uses: peter-evans/create-pull-request@v8.0.0
+        uses: peter-evans/create-pull-request@v8.1.0
         with:
           title: "📝 ${{ steps.set_pr_vars.outputs.topic_with_space }} - Comprehensive Notes with New Insights (${{ steps.set_pr_vars.outputs.current_datetime }}) 📥"
           body: "This PR includes generated notes created on ${{ steps.set_pr_vars.outputs.current_datetime }}."
