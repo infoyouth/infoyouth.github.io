@@ -45,9 +45,9 @@ social:
     # - https://www.linkedin.com/in/username
 
 algolia:
-  application_id: OAGHTXZ8RA
+  application_id: 25H95O7LRD
   index_name: ALOG_APP # You can replace that with whatever name you want
-  search_only_api_key: 579d5e684097267ed46ed7919053933d
+  search_only_api_key: 6a053526470c4973aad31f1886a40eba
 
 # Site Verification Settings
 webmaster_verifications:
@@ -63,6 +63,7 @@ webmaster_verifications:
 
 # Web Analytics Settings
 analytics:
+  provider: google
   google:
     id: G-C1RF8WYQN5 # fill in your Google Analytics ID
   goatcounter:
